@@ -51,4 +51,4 @@ VALUES
 
 -- ADMIN: All roles (1, 2, 3, 4)
 INSERT INTO [EmployeeRole] (employee_id, role_id) VALUES 
-(@AdminID, 1), (@AdminID, 2), (@AdminID, 3), (@AdminID, 4);
+(@AdminID, 1), (@AdminID, 2), (@AdminID, 3), (@AdminID, 4), (@ManagerID, 2), (@ReceptionistID, 3), (@TrainerID, 4);

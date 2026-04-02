@@ -1,6 +1,6 @@
 ﻿using Client.DataContext;
+using Client.Forms.Dashboard;
 using Client.Forms.Login;
-using Client.Forms.Main;
 using Client.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Client
 {
     public partial class frmLogin : Form
     {
-        SqlConnection connection = new SqlConnection();
+        private SqlConnection connection;
         public bool showPassword = false; 
         public frmLogin()
         {
@@ -67,22 +67,30 @@ namespace Client
                         cmd.Parameters.AddWithValue("@loginKey", loginKey);
 
                         SqlDataReader reader = cmd.ExecuteReader();
- 
+                        bool isUserInitialized = false;
+
                         while (reader.Read())
                         {
-                            User.EmployeeId = (Guid)reader["employee_id"];
-                            User.LoginKey = reader["login_key"].ToString();
-                            User.Password = reader["password"].ToString();
-                            User.Email = reader["email"].ToString();
-                            User.ImageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
-                            User.EmployeeName = reader["employee_name"].ToString();
-                            User.PhoneNumber = reader["phone_number"].ToString();
-                            User.DateOfBirth = (DateTime)reader["date_of_birth"];
-                            User.Salary = (int)reader["salary"];
-                            User.HireDate = (DateTime)reader["hire_date"];
-                            User.Status = (int)reader["status"];
-                            User.IsActive = (bool)reader["is_active"];
-                            User.Roles.Add(reader["role_name"].ToString());
+                            if (!isUserInitialized)
+                            {
+                                User.EmployeeId = (Guid)reader["employee_id"];
+                                User.LoginKey = reader["login_key"].ToString();
+                                User.Password = reader["password"].ToString();
+                                User.Email = reader["email"].ToString();
+                                User.ImageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
+                                User.EmployeeName = reader["employee_name"].ToString();
+                                User.PhoneNumber = reader["phone_number"].ToString();
+                                User.DateOfBirth = (DateTime)reader["date_of_birth"];
+                                User.Salary = (int)reader["salary"];
+                                User.HireDate = (DateTime)reader["hire_date"];
+                                User.Status = (int)reader["status"];
+                                User.IsActive = (bool)reader["is_active"];
+                                isUserInitialized = true;
+                             }
+                            if (reader["role_name"] != DBNull.Value)
+                            {
+                                User.Roles.Add(reader["role_name"].ToString());
+                            }
                         }
                     }
                     else
@@ -92,7 +100,7 @@ namespace Client
                     }
 
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    frmMain frm = new frmMain();
+                    Dashboard frm = new Dashboard();
                     this.Hide();
                     frm.ShowDialog();
                     txtLoginKey.Text = "";

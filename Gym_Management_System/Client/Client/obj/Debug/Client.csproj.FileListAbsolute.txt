@@ -19,4 +19,10 @@ D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Cl
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.exe
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.pdb
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.frmLogin.resources
-D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.Main.frmMain.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.Dashboard.Dashboard.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.EmployeeManage.frmEmployee.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.MemberManage.frmMember.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.PackageManage.frmPackage.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ReportManage.frmReport.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ScheduleBrowse.frmBrowse.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ScheduleManage.frmSchedule.resources
