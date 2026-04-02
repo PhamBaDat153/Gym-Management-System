@@ -1,0 +1,121 @@
+﻿using Client.DataContext;
+using Client.Forms.Login;
+using Client.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Client
+{
+    public partial class frmLogin : Form
+    {
+        SqlConnection connection = new SqlConnection(); // Biến kết nối cơ sở dữ liệu
+        public bool showPassword = false; // Biến để kiểm soát trạng thái hiển thị mật khẩu
+        public frmLogin()
+        {
+            InitializeComponent();
+        }
+
+        // Chức năng tìm lại mật khẩu
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Nút đăng nhập
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+            string loginKey = txtLoginKey.Text;
+            string password = txtPassword.Text;
+
+
+            try
+            {
+                //Kiểm tra thông tin đăng nhập có hợp lệ hay không
+                if (loginUtils.checkLoginInfoIsValid(loginKey, password))
+                {
+                    connection = GymManagementSystemContext.Connect();
+                    SqlCommand cmd = new SqlCommand("", connection);
+
+                    // Kiểm tra xem người dùng có tồn tại trong database hay không
+                    cmd.CommandText = "Select COUNT(*)" +
+                        " From dbo.Employee" +
+                        " Where is_active = 1 And login_key = '@loginkey' And password = '@password'";
+
+                    connection.Open();
+                    int cnt = (int)cmd.ExecuteScalar();
+
+                    if (cnt > 0)
+                    {
+                        cmd.CommandText = "Select Employee.*, Role.role_name " +
+                            "From dbo.Employee, dbo.EmployeeRole, dbo.Role" +
+                            "Where Employee.employee_id = EmployeeRole.employee_id and EmployeeRole.role_id = Role.role_id and Employee.login_key = '@loginKey '";
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+ 
+                        while (reader.Read())
+                        {
+                            User.EmployeeId = (Guid)reader["employee_id"];
+                            User.LoginKey = reader["login_key"].ToString();
+                            User.Password = reader["password"].ToString();
+                            User.Email = reader["email"].ToString();
+                            User.ImageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
+                            User.EmployeeName = reader["employee_name"].ToString();
+                            User.PhoneNumber = reader["phone_number"].ToString();
+                            User.DateOfBirth = (DateTime)reader["date_of_birth"];
+                            User.Salary = (int)reader["salary"];
+                            User.HireDate = (DateTime)reader["hire_date"];
+                            User.Status = (int)reader["status"];
+                            User.IsActive = (bool)reader["is_active"];
+                            User.Roles.Add(reader["role_name"].ToString());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thông tin đăng nhập không chính xác hoặc tài khoản đã bị vô hiệu hóa!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {   
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Khôn đăng nhập được dô lỗi hệ thống!! Lỗi" + ex,"Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút thoát ứng dụng
+        private void btnExitApplication_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // Ẩn hiện password
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            if (showPassword) { 
+                txtPassword.PasswordChar = '*';
+                showPassword = false;
+                btnShowPassword.Image = Properties.Resources.visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20;
+            }
+            else {
+                txtPassword.PasswordChar = '\0';
+                showPassword = true;
+                btnShowPassword.Image = Properties.Resources.visibility_off_16dp_000000_FILL0_wght400_GRAD0_opsz20;
+            }
+        }
+    }
+}

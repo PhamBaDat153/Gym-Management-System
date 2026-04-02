@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Client
+{
+    public partial class frmLogin : Form
+    {
+
+        public bool showPassword = false; // Biến để kiểm soát trạng thái hiển thị mật khẩu
+        public frmLogin()
+        {
+            InitializeComponent();
+        }
+
+        // Chức năng tìm lại mật khẩu
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Nút đăng nhập
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Nút thoát ứng dụng
+        private void btnExitApplication_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // Ẩn hiện password
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            if (showPassword) { 
+                txtPassword.PasswordChar = '*';
+                showPassword = false;
+            }
+            else {
+                txtPassword.PasswordChar = null;
+                showPassword = true;
+            }
+        }
+    }
+}

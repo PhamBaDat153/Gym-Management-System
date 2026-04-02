@@ -27,6 +27,12 @@
           <AssociatedConnUserName />
           <FullPath>Create_Database.sql</FullPath>
         </FileNode>
+        <FileNode Name="Create_dummy_user.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LILITH\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LILITH\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Create_dummy_user.sql</FullPath>
+        </FileNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">

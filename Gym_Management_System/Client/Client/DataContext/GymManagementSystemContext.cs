@@ -3,23 +3,23 @@ using System.Data.SqlClient;
 
 namespace Client.DataContext
 {
-    internal class GymManagementSystemContext
+    public static class GymManagementSystemContext
     {
-        private readonly string _connectionString;
+        private static readonly string _connectionString;
 
-        public GymManagementSystemContext()
+        static GymManagementSystemContext()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["GymManagementDb"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["GymManagementSystem"].ConnectionString;
         }
 
-        public SqlConnection CreateConnection()
+        public static SqlConnection Connect()
         {
-            return new SqlConnection(_connectiqonString);
+            return new SqlConnection(_connectionString);
         }
 
-        public bool TestConnection()
+        public static bool TestConnection()
         {
-            using (SqlConnection connection = CreateConnection())
+            using (SqlConnection connection = Connect())
             {
                 connection.Open();
                 return connection.State == System.Data.ConnectionState.Open;

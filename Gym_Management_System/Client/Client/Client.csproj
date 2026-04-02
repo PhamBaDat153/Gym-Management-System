@@ -41,6 +41,7 @@
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
     </Reference>
@@ -63,14 +64,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\GymManagementSystemContext.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\Login\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Login\loginUtils.cs" />
+    <Compile Include="Forms\Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeRole.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\MemberReport.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
+    <Compile Include="Models\Receipt.cs" />
+    <Compile Include="Models\RevenueReport.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\EmployeeStatus.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\SessionStatus.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Login\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -79,6 +106,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -93,6 +121,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-indoor-fashion-gym-background-illustration-picture-image_1594422.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\visibility_off_16dp_000000_FILL0_wght400_GRAD0_opsz20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

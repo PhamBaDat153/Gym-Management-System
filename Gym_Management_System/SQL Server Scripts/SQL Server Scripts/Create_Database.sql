@@ -1,5 +1,4 @@
 
-
 CREATE DATABASE GymManagementSystem;
 GO
 
@@ -17,7 +16,6 @@ DROP TABLE IF EXISTS [Package];
 DROP TABLE IF EXISTS [PaymentMethod];
 DROP TABLE IF EXISTS [SessionStatus];
 DROP TABLE IF EXISTS [EmployeeStatus];
-DROP TABLE IF EXISTS [Image];
 DROP TABLE IF EXISTS [Role];
 DROP TABLE IF EXISTS [MemberReport];
 DROP TABLE IF EXISTS [RevenueReport];
@@ -25,28 +23,23 @@ GO
 
 -- 3. Create Lookup/Independent Tables
 CREATE TABLE [Role] (
-    role_id INT PRIMARY KEY,
-    role_name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE [Image] (
-    image_id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    image_url VARCHAR(255) NOT NULL
+        role_id INT PRIMARY KEY, 
+        role_name VARCHAR(255) NOT NULL -- Receptionist, Manager, Admin, Trainer
 );
 
 CREATE TABLE [EmployeeStatus] (
     status_id INT PRIMARY KEY,
-    status NVARCHAR(50) NOT NULL
+    status NVARCHAR(50) NOT NULL -- Hoạt động, Nghỉ
 );
 
 CREATE TABLE [SessionStatus] (
     status_id INT PRIMARY KEY,
-    status NVARCHAR(50) NOT NULL
+    status NVARCHAR(50) NOT NULL -- Chưa diễn ra, Đang diễn ra, Đã hoàn thành
 );
 
 CREATE TABLE [PaymentMethod] (
     method_id INT PRIMARY KEY,
-    method_name NVARCHAR(255) NOT NULL
+    method_name NVARCHAR(255) NOT NULL -- Tiền mặt, Quẹt thẻ, Chuyển khoản
 );
 
 -- 4. Create Main Entity Tables
@@ -63,6 +56,7 @@ CREATE TABLE [Member] (
     member_id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     member_name NVARCHAR(255) NOT NULL,
     gender BIT NOT NULL,
+    date_of_birth DATE NOT NULL,
     age INT NOT NULL,
     phone_number VARCHAR(11) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -78,14 +72,14 @@ CREATE TABLE [Employee] (
     login_key VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    image_id UNIQUEIDENTIFIER NULL,
+    image_url VARCHAR(255) NULL,
     employee_name NVARCHAR(255) NOT NULL,
     phone_number VARCHAR(11) NOT NULL,
+    date_of_birth DATE NOT NULL,
     salary INT NOT NULL,
     hire_date DATE NOT NULL,
     status INT NOT NULL,
     is_active BIT NOT NULL,
-    CONSTRAINT FK_Employee_Image FOREIGN KEY (image_id) REFERENCES [Image](image_id),
     CONSTRAINT FK_Employee_Status FOREIGN KEY (status) REFERENCES [EmployeeStatus](status_id)
 );
 
