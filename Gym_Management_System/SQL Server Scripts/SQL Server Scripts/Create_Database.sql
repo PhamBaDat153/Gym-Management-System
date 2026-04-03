@@ -27,11 +27,6 @@ CREATE TABLE [Role] (
         role_name VARCHAR(255) NOT NULL -- Receptionist, Manager, Admin, Trainer
 );
 
-CREATE TABLE [EmployeeStatus] (
-    status_id INT PRIMARY KEY,
-    status NVARCHAR(50) NOT NULL -- Hoạt động, Nghỉ
-);
-
 CREATE TABLE [SessionStatus] (
     status_id INT PRIMARY KEY,
     status NVARCHAR(50) NOT NULL -- Chưa diễn ra, Đang diễn ra, Đã hoàn thành
@@ -78,9 +73,8 @@ CREATE TABLE [Employee] (
     date_of_birth DATE NOT NULL,
     salary INT NOT NULL,
     hire_date DATE NOT NULL,
-    status INT NOT NULL,
+    status BIT NOT NULL,
     is_active BIT NOT NULL,
-    CONSTRAINT FK_Employee_Status FOREIGN KEY (status) REFERENCES [EmployeeStatus](status_id)
 );
 
 -- 5. Create Junction/Relationship Tables

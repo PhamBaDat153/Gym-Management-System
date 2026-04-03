@@ -122,7 +122,6 @@
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\RevenueReport.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\EmployeeStatus.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\SessionStatus.cs" />
     <Compile Include="Models\User.cs" />
@@ -189,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\UserInfo\" />
+    <Folder Include="UserImages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\0684456b-aa2b-4631-86f7-93ceaf33303c.jpg" />

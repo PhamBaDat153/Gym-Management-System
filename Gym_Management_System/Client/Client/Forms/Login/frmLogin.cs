@@ -60,6 +60,8 @@ namespace Client
                     // Nếu tồn tại, lấy thông tin người dùng và các vai trò của họ
                     if (cnt > 0)
                     {
+                        User.Roles.Clear();
+
                         cmd.CommandText = "Select Employee.*, Role.role_name " +
                             "From dbo.Employee, dbo.EmployeeRole, dbo.Role " +
                             "Where Employee.employee_id = EmployeeRole.employee_id and EmployeeRole.role_id = Role.role_id and Employee.login_key = @loginKey";
@@ -83,10 +85,11 @@ namespace Client
                                 User.DateOfBirth = (DateTime)reader["date_of_birth"];
                                 User.Salary = (int)reader["salary"];
                                 User.HireDate = (DateTime)reader["hire_date"];
-                                User.Status = (int)reader["status"];
+                                User.Status = (bool)reader["status"];
                                 User.IsActive = (bool)reader["is_active"];
                                 isUserInitialized = true;
-                             }
+                            }
+
                             if (reader["role_name"] != DBNull.Value)
                             {
                                 User.Roles.Add(reader["role_name"].ToString());

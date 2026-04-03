@@ -31,6 +31,7 @@ namespace Client.Forms.Dashboard
             lblWelcome.Text = $"Chào mừng trở lại - {User.EmployeeName}!";
             pictureUser.SizeMode = PictureBoxSizeMode.Zoom;
 
+
             string imageUrl = User.ImageUrl;
             if (!string.IsNullOrWhiteSpace(imageUrl) && File.Exists(imageUrl))
             {

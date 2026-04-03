@@ -1,0 +1,753 @@
+﻿using Client.DataContext;
+using Client.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using BCrypt.Net;
+
+namespace Client.Forms.EmployeeManage
+{
+    public partial class frmEmployee : Form
+    {
+        private SqlConnection connection;
+        private String choosenEmployeeId;
+        public Employee choosenEmployee;
+        
+        public frmEmployee()
+        {
+            InitializeComponent();
+        }
+
+        // Phương thức load data từ database vào ListView
+        public void loadData(SqlCommand cmd)
+        {
+            List<Employee> employees = new List<Employee>();
+
+            try
+            {
+                connection = GymManagementSystemContext.Connect();
+                cmd.Connection = connection;
+                connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Employee employee = new Employee
+                    {
+                        EmployeeId = (Guid)reader["employee_id"],
+                        LoginKey = reader["login_key"].ToString(),
+                        Password = reader["password"].ToString(),
+                        Email = reader["email"].ToString(),
+                        ImageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString(),
+                        EmployeeName = reader["employee_name"].ToString(),
+                        PhoneNumber = reader["phone_number"].ToString(),
+                        DateOfBirth = (DateTime)reader["date_of_birth"],
+                        Salary = (int)reader["salary"],
+                        HireDate = (DateTime)reader["hire_date"],
+                        Status = (bool)reader["status"],
+                        IsActive = (bool)reader["is_active"],
+                        Roles = new List<Role>()
+                    };
+
+                    employees.Add(employee);
+                }
+
+                reader.Close();
+
+                foreach (Employee employee in employees)
+                {
+                    cmd.CommandText = "SELECT r.role_name " +
+                                      "FROM dbo.EmployeeRole er " +
+                                      "JOIN dbo.Role r ON er.role_id = r.role_id " +
+                                      "WHERE er.employee_id = @employeeId";
+
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@employeeId", employee.EmployeeId);
+
+                    SqlDataReader roleReader = cmd.ExecuteReader();
+                    List<Role> roles = new List<Role>();
+
+                    while (roleReader.Read())
+                    {
+                        roles.Add(new Role
+                        {
+                            RoleName = roleReader["role_name"].ToString()
+                        });
+                    }
+
+                    roleReader.Close();
+                    employee.Roles = roles;
+                }
+
+                connection.Close();
+
+                lvEmployee.Items.Clear();
+
+                foreach (Employee employee in employees)
+                {
+                    ListViewItem item = new ListViewItem(employee.EmployeeName);
+                    item.SubItems.Add(employee.Email);
+                    item.SubItems.Add(employee.PhoneNumber);
+                    item.SubItems.Add(employee.Roles.Any() ? employee.Roles.First().RoleName : "");
+                    item.SubItems.Add(employee.DateOfBirth.ToString("dd/MM/yyyy"));
+                    item.SubItems.Add(employee.HireDate.ToString("dd/MM/yyyy"));
+                    item.SubItems.Add(employee.Salary.ToString("N0"));
+                    item.SubItems.Add(employee.Status ? "Khả dụng" : "Không khả dụng");
+                    item.SubItems.Add(employee.IsActive ? "Đang hoạt động" : "Ngừng hoạt động");
+                    item.SubItems.Add(employee.EmployeeId.ToString());
+
+                    item.Tag = employee.EmployeeId;
+                    lvEmployee.Items.Add(item);
+                }
+
+                lvEmployee.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được danh sách nhân viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Tab Tìm kiếm
+        //Thêm role vào combobox
+        public void loadRoleToComboBox()
+        {
+            try
+            {
+                connection = GymManagementSystemContext.Connect();
+                SqlCommand cmd = new SqlCommand("", connection);
+                cmd.CommandText = "Select * from dbo.Role";
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Role role = new Role
+                    {
+                        RoleId = (int)reader["role_id"],
+                        RoleName = reader["role_name"].ToString()
+                    };
+                    cbxRole.Items.Add(role.RoleName);
+                    cbxRoleInfo.Items.Add(role.RoleName);
+                }
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được danh sách vai trò.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Sự kiện khi form được load   
+        private void frmEmployee_Load(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Employee");
+            loadData(cmd);
+            loadRoleToComboBox();
+            cbxRoleInfo.Visible = false;
+            label9.Visible = false;
+            label10.Visible = false;
+            label11.Visible = false;
+            txtLoginKey.Visible = false;
+            txtPassword.Visible = false;
+
+            if (User.Roles.Contains("Admin"))
+            {
+                cbxRoleInfo.Visible = true;
+                label9.Visible = true;
+                label10.Visible = true;
+                label11.Visible = true;
+                txtLoginKey.Visible = true;
+                txtPassword.Visible = true;
+            }
+        }
+
+        //Nút tìm kiếm nhân viên theo bộ lọc
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // Xây dựng câu truy vấn động dựa trên các điều kiện lọc
+            string query = "SELECT * FROM dbo.Employee";
+            List<string> conditions = new List<string>();
+            SqlCommand cmd = new SqlCommand();
+
+            // Thêm điều kiện lọc theo tên nhân viên
+            if (!string.IsNullOrWhiteSpace(txtEmployeeName.Text))
+            {
+                conditions.Add("employee_name LIKE @employeeName");
+                cmd.Parameters.AddWithValue("@employeeName", "%" + txtEmployeeName.Text.Trim() + "%");
+            }
+
+            // Thêm điều kiện lọc theo Số điện thoại
+            if (!string.IsNullOrWhiteSpace(txtPhoneNumber.Text))
+            {
+                conditions.Add("phone_number LIKE @phoneNumber");
+                cmd.Parameters.AddWithValue("@phoneNumber", "%" + txtPhoneNumber.Text.Trim() + "%");
+            }
+
+            // Thêm điều kiện lọc theo vai trò
+            if (cbxRole.SelectedItem != null)
+            {
+                conditions.Add(
+                    "(SELECT TOP 1 r.role_name " +
+                    " FROM dbo.EmployeeRole er " +
+                    " JOIN dbo.Role r ON er.role_id = r.role_id " +
+                    " WHERE er.employee_id = Employee.employee_id) = @roleName");
+
+                cmd.Parameters.AddWithValue("@roleName", cbxRole.SelectedItem.ToString());
+            }
+
+            // Thêm điều kiện lọc theo trạng thái nhân viên
+            if (cbIsAvailable.Checked)
+            {
+                conditions.Add("status = 1");
+            }
+            else if (cbUnAvailable.Checked)
+            {
+                conditions.Add("status = 0");
+            }
+
+            // Thêm điều kiện lọc theo trạng thái tài khoản
+            if (cbIsActive.Checked)
+            {
+                conditions.Add("is_active = 1");
+            }
+            else if (cbUnActive.Checked)
+            {
+                conditions.Add("is_active = 0");
+            }
+
+            // Kết hợp các điều kiện lọc vào câu truy vấn
+            if (conditions.Count > 0)
+            {
+                query += " WHERE " + string.Join(" AND ", conditions);
+            }
+
+            // Thực thi câu truy vấn và tải dữ liệu vào ListView
+            cmd.CommandText = query;
+            loadData(cmd);
+        }
+
+        private void cbIsAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbIsAvailable.Checked)
+            {
+                cbUnAvailable.Checked = false;
+            }
+        }
+
+        private void cbUnAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbUnAvailable.Checked)
+            {
+                cbIsAvailable.Checked = false;
+            }
+        }
+
+        private void cbIsActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbIsActive.Checked)
+            {
+                cbUnActive.Checked = false;
+            }
+        }
+
+        private void cbUnActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbUnActive.Checked)
+            {
+                cbIsActive.Checked = false;
+            }
+        }
+
+        // Nút làm mới bộ lọc
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            txtEmployeeName.Clear();
+            txtPhoneNumber.Clear();
+            cbxRole.SelectedIndex = -1;
+
+            cbIsAvailable.Checked = false;
+            cbUnAvailable.Checked = false;
+            cbIsActive.Checked = false;
+            cbUnActive.Checked = false;
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Employee");
+            loadData(cmd);
+        }
+
+        //Tab Thông tin
+        private void lvEmployee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvEmployee.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem selectedItem = lvEmployee.SelectedItems[0];
+            Guid employeeId = (Guid)selectedItem.Tag;
+            choosenEmployeeId = employeeId.ToString();
+
+            txtNameInfo.Text = selectedItem.SubItems[0].Text;
+            txtEmailInfo.Text = selectedItem.SubItems[1].Text;
+            txtPhoneNumberInfo.Text = selectedItem.SubItems[2].Text;
+            txtSalaryInfo.Text = selectedItem.SubItems[6].Text;
+            lblRole.Text = "Vai trò: " + selectedItem.SubItems[3].Text;
+            txtDOB.Text =selectedItem.SubItems[4].Text;
+            lblHireDate.Text = "Ngày vào làm: " + selectedItem.SubItems[5].Text;
+
+            cbInfoIsAvailable.Checked = selectedItem.SubItems[7].Text == "Khả dụng";
+            cbInfoUnAvailable.Checked = selectedItem.SubItems[7].Text == "Không khả dụng";
+            cbInfoIsActive.Checked = selectedItem.SubItems[8].Text == "Đang hoạt động";
+            cbInfoUnActive.Checked = selectedItem.SubItems[8].Text == "Ngừng hoạt động";
+
+            pictureEmployee.Image = null;
+
+            try
+            {
+                connection = GymManagementSystemContext.Connect();
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT image_url, login_key, password FROM dbo.Employee WHERE employee_id = @ID",
+                    connection);
+
+                cmd.Parameters.AddWithValue("@ID", employeeId);
+
+                connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string imageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
+                        txtLoginKey.Text = reader["login_key"].ToString();
+                        txtPassword.Text = reader["password"].ToString();
+
+                        if (!string.IsNullOrWhiteSpace(imageUrl) && System.IO.File.Exists(imageUrl))
+                        {
+                            pictureEmployee.Image = Image.FromFile(imageUrl);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được ảnh nhân viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (connection != null && connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            TabsCtr.SelectedTab = tabInformation;
+        }
+
+        private void cbInfoIsAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbInfoIsAvailable.Checked) 
+            {
+                cbInfoUnAvailable.Checked = false;
+            }
+        }
+
+        private void cbInfoUnAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbInfoUnAvailable.Checked)
+            {
+                cbInfoIsAvailable.Checked = false;
+            }
+        }
+
+        private void cbInfoIsActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbInfoIsActive.Checked)
+            {
+                cbInfoUnActive.Checked = false;
+            }
+        }
+
+        private void cbInfoUnActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbInfoUnActive.Checked)
+            {
+                cbInfoIsActive.Checked = false;
+            }
+        }
+
+        private bool TryGetSelectedRoleId(out int roleId)
+        {
+            roleId = 0;
+
+            if (cbxRoleInfo.SelectedItem == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                using (SqlCommand cmd = new SqlCommand("SELECT role_id FROM dbo.Role WHERE role_name = @roleName", conn))
+                {
+                    cmd.Parameters.AddWithValue("@roleName", cbxRoleInfo.SelectedItem.ToString());
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result == null || result == DBNull.Value)
+                    {
+                        return false;
+                    }
+
+                    roleId = Convert.ToInt32(result);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Phương thức làm mới tab thông tin
+        private void ClearInfoTab()
+        {
+            choosenEmployeeId = null;
+            choosenEmployee = null;
+
+            txtNameInfo.Clear();
+            txtEmailInfo.Clear();
+            txtPhoneNumberInfo.Clear();
+            txtSalaryInfo.Clear();
+            txtDOB.Clear();
+
+            lblRole.Text = "Vai trò: ";
+
+            lblHireDate.Text = "Ngày vào làm: ";
+
+            cbxRoleInfo.SelectedIndex = -1;
+
+            cbInfoIsAvailable.Checked = false;
+            cbInfoUnAvailable.Checked = false;
+            cbInfoIsActive.Checked = false;
+            cbInfoUnActive.Checked = false;
+
+            pictureEmployee.Image = Properties.Resources.defaultUser;
+            lvEmployee.SelectedItems.Clear();
+        }
+
+        // Phương thức kiểm tra tính hợp lệ của dữ liệu nhập vào tab thông tin
+        private bool ValidateInfoInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtLoginKey.Text))
+            {
+                MessageBox.Show("Login key không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginKey.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Password không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNameInfo.Text))
+            {
+                MessageBox.Show("Tên nhân viên không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNameInfo.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEmailInfo.Text))
+            {
+                MessageBox.Show("Email không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmailInfo.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPhoneNumberInfo.Text))
+            {
+                MessageBox.Show("Số điện thoại không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhoneNumberInfo.Focus();
+                return false;
+            }
+
+            int salary;
+            if (!int.TryParse(txtSalaryInfo.Text.Replace(",", ""), out salary) || salary < 0)
+            {
+                MessageBox.Show("Lương không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSalaryInfo.Focus();
+                return false;
+            }
+
+            if (!cbInfoIsAvailable.Checked && !cbInfoUnAvailable.Checked)
+            {
+                MessageBox.Show("Hãy chọn trạng thái nhân viên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!cbInfoIsActive.Checked && !cbInfoUnActive.Checked)
+            {
+                MessageBox.Show("Hãy chọn trạng thái tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (cbxRoleInfo.Visible && cbxRoleInfo.SelectedItem == null)
+            {
+                MessageBox.Show("Hãy chọn chức vụ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbxRoleInfo.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        // Nút thêm nhân viên mới
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (!ValidateInfoInput())
+            {
+                return;
+            }
+
+            int roleId;
+            if (!TryGetSelectedRoleId(out roleId))
+            {
+                MessageBox.Show("Không xác định được chức vụ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Guid employeeId = Guid.NewGuid();
+            bool status = cbInfoIsAvailable.Checked;
+            bool isActive = cbInfoIsActive.Checked;
+            int salary = int.Parse(txtSalaryInfo.Text.Replace(",", ""));
+
+            string loginKey = txtLoginKey.Text.Trim();
+
+            // Mã hóa mật khẩu trước khi lưu vào database
+            string password =  BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim());
+            DateTime dateOfBirth = DateTime.Parse(txtDOB.Text);
+            DateTime hireDate = DateTime.Today;
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand(
+                                "INSERT INTO dbo.Employee " +
+                                "(employee_id, login_key, password, email, image_url, employee_name, phone_number, date_of_birth, salary, hire_date, status, is_active) " +
+                                "VALUES " +
+                                "(@employeeId, @loginKey, @password, @email, @imageUrl, @employeeName, @phoneNumber, @dateOfBirth, @salary, @hireDate, @status, @isActive)", conn, tran))
+                            {
+                                cmd.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmd.Parameters.AddWithValue("@loginKey", loginKey);
+                                cmd.Parameters.AddWithValue("@password", password);
+                                cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@imageUrl", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@dateOfBirth", dateOfBirth);
+                                cmd.Parameters.AddWithValue("@salary", salary);
+                                cmd.Parameters.AddWithValue("@hireDate", hireDate);
+                                cmd.Parameters.AddWithValue("@status", status);
+                                cmd.Parameters.AddWithValue("@isActive", isActive);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (SqlCommand cmdRole = new SqlCommand(
+                                "INSERT INTO dbo.EmployeeRole (employee_id, role_id) VALUES (@employeeId, @roleId)", conn, tran))
+                            {
+                                cmdRole.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdRole.Parameters.AddWithValue("@roleId", roleId);
+                                cmdRole.ExecuteNonQuery();
+                            }
+
+                            tran.Commit();
+                        }
+                        catch
+                        {
+                            tran.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Thêm nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                loadData(new SqlCommand("SELECT * FROM dbo.Employee"));
+                ClearInfoTab();
+                TabsCtr.SelectedTab = tabSearch;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể thêm nhân viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Nút xóa nhân viên
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(choosenEmployeeId))
+            {
+                MessageBox.Show("Hãy chọn nhân viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Xác nhận xóa nhân viên này?", "Xóa nhân viên", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            Guid employeeId = Guid.Parse(choosenEmployeeId);
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand cmdRole = new SqlCommand(
+                                "DELETE FROM dbo.EmployeeRole WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmdRole.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdRole.ExecuteNonQuery();
+                            }
+
+                            using (SqlCommand cmdEmp = new SqlCommand(
+                                "DELETE FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmdEmp.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdEmp.ExecuteNonQuery();
+                            }
+
+                            tran.Commit();
+                        }
+                        catch
+                        {
+                            tran.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Xóa nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                loadData(new SqlCommand("SELECT * FROM dbo.Employee"));
+                ClearInfoTab();
+                TabsCtr.SelectedTab = tabSearch;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể xóa nhân viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút cập nhật thông tin nhân viên
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(choosenEmployeeId))
+            {
+                MessageBox.Show("Hãy chọn nhân viên cần cập nhật.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!ValidateInfoInput())
+            {
+                return;
+            }
+
+            int roleId;
+            if (!TryGetSelectedRoleId(out roleId))
+            {
+                MessageBox.Show("Không xác định được chức vụ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Guid employeeId = Guid.Parse(choosenEmployeeId);
+            bool status = cbInfoIsAvailable.Checked;
+            bool isActive = cbInfoIsActive.Checked;
+            int salary = int.Parse(txtSalaryInfo.Text.Replace(",", ""));
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand(
+                                "UPDATE dbo.Employee SET " +
+                                "employee_name = @employeeName, " +
+                                "email = @email, " +
+                                "phone_number = @phoneNumber, " +
+                                "salary = @salary, " +
+                                "status = @status, " +
+                                "is_active = @isActive " +
+                                "WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmd.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
+                                cmd.Parameters.AddWithValue("@salary", salary);
+                                cmd.Parameters.AddWithValue("@status", status);
+                                cmd.Parameters.AddWithValue("@isActive", isActive);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (SqlCommand cmdDeleteRole = new SqlCommand(
+                                "DELETE FROM dbo.EmployeeRole WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmdDeleteRole.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdDeleteRole.ExecuteNonQuery();
+                            }
+
+                            using (SqlCommand cmdInsertRole = new SqlCommand(
+                                "INSERT INTO dbo.EmployeeRole (employee_id, role_id) VALUES (@employeeId, @roleId)", conn, tran))
+                            {
+                                cmdInsertRole.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdInsertRole.Parameters.AddWithValue("@roleId", roleId);
+                                cmdInsertRole.ExecuteNonQuery();
+                            }
+
+                            tran.Commit();
+                        }
+                        catch
+                        {
+                            tran.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Cập nhật nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                loadData(new SqlCommand("SELECT * FROM dbo.Employee"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể cập nhật nhân viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút làm mới thông tin nhân viên
+        private void btnClearInfo_Click(object sender, EventArgs e)
+        {
+            ClearInfoTab();
+        }
+    }
+}

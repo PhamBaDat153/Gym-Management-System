@@ -9,7 +9,6 @@ DELETE FROM [EmployeeRole];
 -- Delete from main tables
 DELETE FROM [Employee];
 DELETE FROM [Role];
-DELETE FROM [EmployeeStatus];
 GO
 
 -----------------------------------------------------------
@@ -20,12 +19,6 @@ INSERT INTO [Role] (role_id, role_name) VALUES
 (2, 'Manager'), 
 (3, 'Receptionist'), 
 (4, 'Trainer');
-
------------------------------------------------------------
--- 2. INSERT EMPLOYEE STATUS
------------------------------------------------------------
-INSERT INTO [EmployeeStatus] (status_id, status) VALUES 
-(1, N'Hoạt động');
 
 -----------------------------------------------------------
 -- 3. DECLARE IDs FOR LINKING

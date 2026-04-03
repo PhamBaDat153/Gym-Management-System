@@ -43,35 +43,31 @@
             this.pictureUser = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelManage = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).BeginInit();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.btnEmployeeNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnReportNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnPackageNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnMemberNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnScheduleNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnBrowseNavigate);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(13, 119);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(191, 902);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(191, 1033);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btnEmployeeNavigate
             // 
             this.btnEmployeeNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmployeeNavigate.Location = new System.Drawing.Point(3, 3);
+            this.btnEmployeeNavigate.Location = new System.Drawing.Point(5, 5);
             this.btnEmployeeNavigate.Name = "btnEmployeeNavigate";
             this.btnEmployeeNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnEmployeeNavigate.TabIndex = 0;
@@ -83,7 +79,7 @@
             // 
             this.btnReportNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReportNavigate.Location = new System.Drawing.Point(3, 56);
+            this.btnReportNavigate.Location = new System.Drawing.Point(5, 58);
             this.btnReportNavigate.Name = "btnReportNavigate";
             this.btnReportNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnReportNavigate.TabIndex = 1;
@@ -95,7 +91,7 @@
             // 
             this.btnPackageNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPackageNavigate.Location = new System.Drawing.Point(3, 109);
+            this.btnPackageNavigate.Location = new System.Drawing.Point(5, 111);
             this.btnPackageNavigate.Name = "btnPackageNavigate";
             this.btnPackageNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnPackageNavigate.TabIndex = 2;
@@ -107,7 +103,7 @@
             // 
             this.btnMemberNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMemberNavigate.Location = new System.Drawing.Point(3, 162);
+            this.btnMemberNavigate.Location = new System.Drawing.Point(5, 164);
             this.btnMemberNavigate.Name = "btnMemberNavigate";
             this.btnMemberNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnMemberNavigate.TabIndex = 3;
@@ -119,7 +115,7 @@
             // 
             this.btnScheduleNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScheduleNavigate.Location = new System.Drawing.Point(3, 215);
+            this.btnScheduleNavigate.Location = new System.Drawing.Point(5, 217);
             this.btnScheduleNavigate.Name = "btnScheduleNavigate";
             this.btnScheduleNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnScheduleNavigate.TabIndex = 4;
@@ -131,7 +127,7 @@
             // 
             this.btnBrowseNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseNavigate.Location = new System.Drawing.Point(3, 268);
+            this.btnBrowseNavigate.Location = new System.Drawing.Point(5, 270);
             this.btnBrowseNavigate.Name = "btnBrowseNavigate";
             this.btnBrowseNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnBrowseNavigate.TabIndex = 5;
@@ -141,17 +137,16 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnLogout);
             this.panel1.Controls.Add(this.btnShowInfo);
             this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.pictureUser);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(210, 13);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(191, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1680, 100);
+            this.panel1.Padding = new System.Windows.Forms.Padding(2);
+            this.panel1.Size = new System.Drawing.Size(1711, 100);
             this.panel1.TabIndex = 1;
             // 
             // btnLogout
@@ -179,7 +174,7 @@
             // 
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(81, 43);
+            this.lblWelcome.Location = new System.Drawing.Point(83, 45);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(129, 16);
             this.lblWelcome.TabIndex = 2;
@@ -191,9 +186,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureUser.Image = global::Client.Properties.Resources.defaultUser;
-            this.pictureUser.Location = new System.Drawing.Point(3, 3);
+            this.pictureUser.Location = new System.Drawing.Point(5, 5);
             this.pictureUser.Name = "pictureUser";
-            this.pictureUser.Size = new System.Drawing.Size(69, 92);
+            this.pictureUser.Size = new System.Drawing.Size(69, 90);
             this.pictureUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureUser.TabIndex = 0;
             this.pictureUser.TabStop = false;
@@ -202,7 +197,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(78, 3);
+            this.label1.Location = new System.Drawing.Point(80, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(434, 32);
             this.label1.TabIndex = 1;
@@ -210,42 +205,20 @@
             // 
             // panelManage
             // 
-            this.panelManage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelManage.AutoSize = true;
             this.panelManage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelManage.Location = new System.Drawing.Point(210, 119);
+            this.panelManage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelManage.Location = new System.Drawing.Point(191, 100);
             this.panelManage.Name = "panelManage";
-            this.panelManage.Size = new System.Drawing.Size(1680, 902);
+            this.panelManage.Padding = new System.Windows.Forms.Padding(3);
+            this.panelManage.Size = new System.Drawing.Size(1711, 933);
             this.panelManage.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(13, 12);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(191, 100);
-            this.panel3.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(5, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(159, 36);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Trang chủ";
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelManage);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -261,9 +234,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -283,7 +255,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnShowInfo;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
     }
 }

@@ -18,7 +18,8 @@ namespace Client.Models
         public DateTime DateOfBirth { get; set; }
         public int Salary { get; set; }
         public DateTime HireDate { get; set; }
-        public int Status { get; set; }
+        public bool Status { get; set; }
         public bool IsActive { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }
