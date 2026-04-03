@@ -39,7 +39,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnShowInfo = new System.Windows.Forms.Button();
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.pictureUser = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelManage = new System.Windows.Forms.Panel();
@@ -139,7 +138,6 @@
             // 
             this.panel1.Controls.Add(this.btnLogout);
             this.panel1.Controls.Add(this.btnShowInfo);
-            this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.pictureUser);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -151,7 +149,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(253, 62);
+            this.btnLogout.Location = new System.Drawing.Point(261, 62);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(169, 33);
             this.btnLogout.TabIndex = 7;
@@ -161,7 +159,7 @@
             // 
             // btnShowInfo
             // 
-            this.btnShowInfo.Location = new System.Drawing.Point(78, 62);
+            this.btnShowInfo.Location = new System.Drawing.Point(86, 61);
             this.btnShowInfo.Name = "btnShowInfo";
             this.btnShowInfo.Size = new System.Drawing.Size(169, 33);
             this.btnShowInfo.TabIndex = 3;
@@ -169,16 +167,6 @@
             this.btnShowInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnShowInfo.UseVisualStyleBackColor = true;
             this.btnShowInfo.Click += new System.EventHandler(this.btnShowInfo_Click);
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(83, 45);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(129, 16);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = "Chào mừng trở lại - ...";
             // 
             // pictureUser
             // 
@@ -197,7 +185,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 5);
+            this.label1.Location = new System.Drawing.Point(80, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(434, 32);
             this.label1.TabIndex = 1;
@@ -250,7 +238,6 @@
         private System.Windows.Forms.Button btnMemberNavigate;
         private System.Windows.Forms.Button btnScheduleNavigate;
         private System.Windows.Forms.Button btnBrowseNavigate;
-        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.PictureBox pictureUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLogout;

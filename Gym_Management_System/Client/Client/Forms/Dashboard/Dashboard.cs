@@ -27,8 +27,7 @@ namespace Client.Forms.Dashboard
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            OpenChildForm(new frmEmployee());
-            lblWelcome.Text = $"Chào mừng trở lại - {User.EmployeeName}!";
+            OpenChildForm(new frmDefault());
             pictureUser.SizeMode = PictureBoxSizeMode.Zoom;
 
 
@@ -140,7 +139,10 @@ namespace Client.Forms.Dashboard
         // Nút xem thông tin cá nhân
         private void btnShowInfo_Click(object sender, EventArgs e)
         {
-            // Todo thêm sau
+            using (frmUserInfo form = new frmUserInfo())
+            {
+                form.ShowDialog(this);
+            }
         }
     }
 }

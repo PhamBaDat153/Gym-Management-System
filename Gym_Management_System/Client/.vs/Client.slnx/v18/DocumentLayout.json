@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Client\\Models\\User.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Models\\User.cs",
-              "RelativeToolTip": "Client\\Models\\User.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAtwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "frmUserInfo.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAIwCIAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-03T13:02:42.563Z",
+              "WhenOpened": "2026-04-03T14:11:42.036Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmUserInfo.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T13:55:02.954Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmDefault.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T13:46:15.152Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dashboard.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAIwB0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T13:39:11.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dashboard.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T13:39:04.669Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

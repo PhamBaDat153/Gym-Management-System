@@ -26,3 +26,5 @@ D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Cl
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ReportManage.frmReport.resources
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ScheduleBrowse.frmBrowse.resources
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.ScheduleManage.frmSchedule.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.Dashboard.frmDefault.resources
+D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.Dashboard.frmUserInfo.resources

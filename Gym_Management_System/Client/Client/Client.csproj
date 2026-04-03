@@ -70,6 +70,18 @@
     <Compile Include="Forms\Dashboard\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dashboard\frmDefault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dashboard\frmDefault.Designer.cs">
+      <DependentUpon>frmDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dashboard\frmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dashboard\frmUserInfo.Designer.cs">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EmployeeManage\frmEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +141,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Dashboard\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dashboard\frmDefault.resx">
+      <DependentUpon>frmDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dashboard\frmUserInfo.resx">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeManage\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
