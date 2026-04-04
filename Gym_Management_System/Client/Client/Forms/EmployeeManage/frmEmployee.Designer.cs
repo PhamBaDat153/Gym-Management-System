@@ -69,7 +69,7 @@
             this.cbInfoUnAvailable = new System.Windows.Forms.CheckBox();
             this.cbInfoIsAvailable = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtDOB = new System.Windows.Forms.TextBox();
+            this.txtDOB = new System.Windows.Forms.DateTimePicker();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtLoginKey = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -546,6 +546,8 @@
             // 
             // txtDOB
             // 
+            this.txtDOB.CustomFormat = "dd/MM/yyyy";
+            this.txtDOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtDOB.Location = new System.Drawing.Point(119, 347);
             this.txtDOB.Name = "txtDOB";
             this.txtDOB.Size = new System.Drawing.Size(188, 27);
@@ -823,6 +825,6 @@
         private System.Windows.Forms.TextBox txtLoginKey;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDOB;
+        private System.Windows.Forms.DateTimePicker txtDOB;
     }
 }

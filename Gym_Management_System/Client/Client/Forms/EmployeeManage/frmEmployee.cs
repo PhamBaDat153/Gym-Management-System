@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -23,6 +22,8 @@ namespace Client.Forms.EmployeeManage
         public frmEmployee()
         {
             InitializeComponent();
+            txtDOB.MaxDate = DateTime.Today.AddDays(-1);
+            txtDOB.Value = DateTime.Today.AddYears(-18);
             pictureEmployee.Click += pictureEmployee_Click;
             pictureEmployee.Cursor = Cursors.Hand;
         }
@@ -407,7 +408,10 @@ namespace Client.Forms.EmployeeManage
             txtPhoneNumberInfo.Text = selectedItem.SubItems[2].Text;
             txtSalaryInfo.Text = selectedItem.SubItems[6].Text;
       
-            txtDOB.Text =selectedItem.SubItems[4].Text;
+            if (DateTime.TryParseExact(selectedItem.SubItems[4].Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dateOfBirth))
+            {
+                txtDOB.Value = dateOfBirth;
+            }
             lblHireDate.Text = "Ngày vào làm: " + selectedItem.SubItems[5].Text;
 
             if (cbxRoleInfo.Items.Contains(selectedItem.SubItems[3].Text))
@@ -507,7 +511,7 @@ namespace Client.Forms.EmployeeManage
             txtEmailInfo.Clear();
             txtPhoneNumberInfo.Clear();
             txtSalaryInfo.Clear();
-            txtDOB.Clear();
+            txtDOB.Value = DateTime.Today.AddYears(-18);
             txtLoginKey.Clear();
             txtPassword.Clear();
 
@@ -576,20 +580,7 @@ namespace Client.Forms.EmployeeManage
                 return false;
             }
 
-            DateTime dateOfBirth;
-            if (string.IsNullOrWhiteSpace(txtDOB.Text))
-            {
-                MessageBox.Show("Ngày sinh không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDOB.Focus();
-                return false;
-            }
-
-            if (!DateTime.TryParseExact(txtDOB.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth))
-            {
-                MessageBox.Show("Ngày sinh phải đúng định dạng dd/MM/yyyy.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDOB.Focus();
-                return false;
-            }
+            DateTime dateOfBirth = txtDOB.Value.Date;
 
             if (dateOfBirth.Date >= DateTime.Today)
             {
@@ -661,7 +652,7 @@ namespace Client.Forms.EmployeeManage
             string loginKey = txtLoginKey.Text.Trim();
 
             string password = txtPassword.Text.Trim();
-            DateTime dateOfBirth = DateTime.ParseExact(txtDOB.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime dateOfBirth = txtDOB.Value.Date;
             DateTime hireDate = DateTime.Today;
 
             try
@@ -876,7 +867,7 @@ namespace Client.Forms.EmployeeManage
                                 cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
-                                cmd.Parameters.AddWithValue("@dateOfBirth", DateTime.ParseExact(txtDOB.Text.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture));
+                                cmd.Parameters.AddWithValue("@dateOfBirth", txtDOB.Value.Date);
                                 cmd.Parameters.AddWithValue("@salary", salary);
                                 cmd.Parameters.AddWithValue("@imageUrl", string.IsNullOrWhiteSpace(selectedImagePath) ? (object)DBNull.Value : selectedImagePath);
                                 cmd.Parameters.AddWithValue("@status", status);
