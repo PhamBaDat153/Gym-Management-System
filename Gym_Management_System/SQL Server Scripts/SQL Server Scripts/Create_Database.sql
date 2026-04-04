@@ -38,7 +38,7 @@ CREATE TABLE [PaymentMethod] (
 );
 
 -- 4. Create Main Entity Tables
-CREATE TABLE [Package] (
+Create TABLE [Package] (
     package_id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     package_name NVARCHAR(255) NOT NULL,
     duration INT NOT NULL,
@@ -134,3 +134,5 @@ CREATE TABLE [RevenueReport] (
     report_date DATE NOT NULL
 );
 GO
+
+INSERT INTO dbo.PaymentMethod (method_id, method_name) VALUES (1, N'Tiền mặt'), (2, N'Quẹt thẻ'), (3, N'Chuyển khoản');
