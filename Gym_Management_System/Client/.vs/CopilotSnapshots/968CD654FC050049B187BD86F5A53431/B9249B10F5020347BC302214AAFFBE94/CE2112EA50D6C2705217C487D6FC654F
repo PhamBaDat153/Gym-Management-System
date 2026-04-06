@@ -15,8 +15,8 @@ namespace Client.Forms.PackageManage
 {
     public partial class frmPackage : Form
     {
-        // Kết nối SQL được sử dụng bởi form này khi thực thi các lệnh.
-        // Lưu trường này để có thể mở/đóng trong phương thức loadData.
+        // SQL connection used by this form when executing commands.
+        // Stored here so it can be opened/closed inside loadData.
         private SqlConnection connection;
         public frmPackage()
         {
@@ -25,25 +25,25 @@ namespace Client.Forms.PackageManage
 
         public void loadData(SqlCommand cmd)
         {
-            // Danh sách tạm chứa các đối tượng Package được đọc từ cơ sở dữ liệu
+            // Temporary list to hold Package objects read from the database
             List<Package> packages = new List<Package>();
 
             try
             {
-                // Lấy kết nối từ GymManagementSystemContext và gán cho SqlCommand
+                // Get a connection from the shared context and associate it with the command
                 connection = GymManagementSystemContext.Connect();
                 cmd.Connection = connection;
                 connection.Open();
 
-                // Thực thi lệnh và lấy SqlDataReader để xử lý từng hàng
+                // Execute the command and obtain a reader for row-by-row processing
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                // Chuyển mỗi hàng kết quả thành một thể hiện của model Package
+                // Map each result row to a Package model instance
                 while (reader.Read())
                 {
                     Package package = new Package
                     {
-                       // Lưu ý: ép kiểu trực tiếp giả định các cột trong DB không null và đúng kiểu dữ liệu
+                       // Note: direct casts assume database columns are non-null and of the expected types
                        PackageId = (Guid)reader["package_id"],
                        PackageName = reader["package_name"].ToString(),
                        Duration = (int)reader["duration"],
@@ -56,12 +56,12 @@ namespace Client.Forms.PackageManage
                     packages.Add(package);
                 }
 
-                // Đóng reader và kết nối sau khi đọc xong
+                // Close reader and connection once done reading
                 reader.Close();
                 connection.Close();
 
-                // Đổ dữ liệu vào DataGridView từ danh sách packages
-                // Xóa các dòng hiện có rồi thêm từng package vào
+                // Populate the DataGridView with the loaded packages
+                // Clear existing rows first, then add one row per package
                 dgv_package.Rows.Clear();
 
                 foreach (Package package in packages)
@@ -69,26 +69,26 @@ namespace Client.Forms.PackageManage
                     int rowIndex = dgv_package.Rows.Add();
                     var row = dgv_package.Rows[rowIndex];
 
-                    // Gán giá trị cho ô theo tên cột đã định nghĩa trong designer
+                    // Assign values to cells by the column names defined in the designer
                     row.Cells["package_id"].Value = package.PackageId.ToString();
                     row.Cells["package_name"].Value = package.PackageName;
                     row.Cells["duration"].Value = package.Duration;
-                    // Định dạng price với dấu phân cách hàng nghìn
+                    // Format price with thousand separators
                     row.Cells["price"].Value = package.Price.ToString("N0");
-                    // Chuyển giá trị boolean thành chuỗi hiển thị tiếng Việt
+                    // Translate boolean flags to Vietnamese display strings
                     row.Cells["with_trainer"].Value = package.WithTrainer ? "CÓ" : "KHÔNG";
                     row.Cells["is_active"].Value = package.IsActive ? "ĐANG HOẠT ĐỘNG" : "NGƯNG HOẠT ĐỘNG";
 
-                    // Lưu PackageId lên row.Tag để tham chiếu sau này (ví dụ sửa/xóa)
+                    // Store the PackageId on the row for later reference (e.g., edits/deletes)
                     row.Tag = package.PackageId;
                 }
 
-                // Tự động điều chỉnh kích thước cột cho phù hợp nội dung
+                // Resize columns to fit content
                 dgv_package.AutoResizeColumns();
             }
             catch (Exception ex)
             {
-                // Hiển thị thông báo lỗi nếu có sự cố khi tải dữ liệu
+                // Show an error message if anything goes wrong while loading data
                 MessageBox.Show("Không tải được danh sách gói tập.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

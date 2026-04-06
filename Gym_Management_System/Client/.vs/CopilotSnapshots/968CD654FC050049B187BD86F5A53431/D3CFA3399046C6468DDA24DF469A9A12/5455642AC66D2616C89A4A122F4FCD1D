@@ -15,8 +15,6 @@ namespace Client.Forms.PackageManage
 {
     public partial class frmPackage : Form
     {
-        // Kết nối SQL được sử dụng bởi form này khi thực thi các lệnh.
-        // Lưu trường này để có thể mở/đóng trong phương thức loadData.
         private SqlConnection connection;
         public frmPackage()
         {
@@ -25,25 +23,20 @@ namespace Client.Forms.PackageManage
 
         public void loadData(SqlCommand cmd)
         {
-            // Danh sách tạm chứa các đối tượng Package được đọc từ cơ sở dữ liệu
             List<Package> packages = new List<Package>();
 
             try
             {
-                // Lấy kết nối từ GymManagementSystemContext và gán cho SqlCommand
                 connection = GymManagementSystemContext.Connect();
                 cmd.Connection = connection;
                 connection.Open();
 
-                // Thực thi lệnh và lấy SqlDataReader để xử lý từng hàng
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                // Chuyển mỗi hàng kết quả thành một thể hiện của model Package
                 while (reader.Read())
                 {
                     Package package = new Package
                     {
-                       // Lưu ý: ép kiểu trực tiếp giả định các cột trong DB không null và đúng kiểu dữ liệu
                        PackageId = (Guid)reader["package_id"],
                        PackageName = reader["package_name"].ToString(),
                        Duration = (int)reader["duration"],
@@ -56,12 +49,11 @@ namespace Client.Forms.PackageManage
                     packages.Add(package);
                 }
 
-                // Đóng reader và kết nối sau khi đọc xong
                 reader.Close();
+
                 connection.Close();
 
-                // Đổ dữ liệu vào DataGridView từ danh sách packages
-                // Xóa các dòng hiện có rồi thêm từng package vào
+                // Populate DataGridView with packages
                 dgv_package.Rows.Clear();
 
                 foreach (Package package in packages)
@@ -69,26 +61,21 @@ namespace Client.Forms.PackageManage
                     int rowIndex = dgv_package.Rows.Add();
                     var row = dgv_package.Rows[rowIndex];
 
-                    // Gán giá trị cho ô theo tên cột đã định nghĩa trong designer
+                    // Fill cells by column name (matches designer names)
                     row.Cells["package_id"].Value = package.PackageId.ToString();
                     row.Cells["package_name"].Value = package.PackageName;
                     row.Cells["duration"].Value = package.Duration;
-                    // Định dạng price với dấu phân cách hàng nghìn
                     row.Cells["price"].Value = package.Price.ToString("N0");
-                    // Chuyển giá trị boolean thành chuỗi hiển thị tiếng Việt
                     row.Cells["with_trainer"].Value = package.WithTrainer ? "CÓ" : "KHÔNG";
                     row.Cells["is_active"].Value = package.IsActive ? "ĐANG HOẠT ĐỘNG" : "NGƯNG HOẠT ĐỘNG";
 
-                    // Lưu PackageId lên row.Tag để tham chiếu sau này (ví dụ sửa/xóa)
                     row.Tag = package.PackageId;
                 }
 
-                // Tự động điều chỉnh kích thước cột cho phù hợp nội dung
                 dgv_package.AutoResizeColumns();
             }
             catch (Exception ex)
             {
-                // Hiển thị thông báo lỗi nếu có sự cố khi tải dữ liệu
                 MessageBox.Show("Không tải được danh sách gói tập.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
