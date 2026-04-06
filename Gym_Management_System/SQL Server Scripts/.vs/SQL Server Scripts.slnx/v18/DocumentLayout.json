@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\",
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
-      "RelativeMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|solutionrelative:SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
-      "RelativeMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|solutionrelative:SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,26 +18,39 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Create_Database.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (88))",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql",
+              "Title": "Create_Database.sql",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql",
               "RelativeDocumentMoniker": "SQL Server Scripts\\Create_Database.sql",
-              "ToolTip": "Create_Database.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (88))",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql",
+              "RelativeToolTip": "SQL Server Scripts\\Create_Database.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-04-01T01:47:00.108Z",
-              "EditorCaption": " - LILITH\\SQLEXPRESS.master (LILITH\\phamb (88))"
+              "WhenOpened": "2026-04-01T01:47:00.108Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Create_dummy_user.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (87))",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql",
               "RelativeDocumentMoniker": "SQL Server Scripts\\Create_dummy_user.sql",
-              "ToolTip": "Create_dummy_user.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (87))",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (87))",
+              "RelativeToolTip": "SQL Server Scripts\\Create_dummy_user.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (87))",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2026-04-02T07:04:31.841Z",
               "EditorCaption": " - LILITH\\SQLEXPRESS.master (LILITH\\phamb (87))"

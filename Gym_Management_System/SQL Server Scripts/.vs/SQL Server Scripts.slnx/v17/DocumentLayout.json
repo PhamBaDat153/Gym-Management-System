@@ -1,0 +1,35 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{2F8894D3-DE9D-1060-3D4C-9DD8F3EC9333}|SQL Server Scripts\\SQL Server Scripts.ssmssqlproj|solutionrelative:SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create_dummy_user.sql - LILITH\\SQLEXPRESS.GymManagementSystem (DESKTOP-S9B3N7M\\THE 4NH (54))",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql",
+              "RelativeDocumentMoniker": "SQL Server Scripts\\Create_dummy_user.sql",
+              "ToolTip": "Create_dummy_user.sql - LILITH\\SQLEXPRESS.GymManagementSystem (DESKTOP-S9B3N7M\\THE 4NH (54))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-05T14:28:23.294Z",
+              "EditorCaption": " - LILITH\\SQLEXPRESS.GymManagementSystem (DESKTOP-S9B3N7M\\THE 4NH (54))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

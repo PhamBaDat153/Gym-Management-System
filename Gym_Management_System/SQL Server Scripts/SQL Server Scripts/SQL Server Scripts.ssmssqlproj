@@ -3,7 +3,21 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="LILITH\SQLEXPRESS:LILITH\phamb">
+        <ConnectionNode Name="DESKTOP-S9B3N7M:DESKTOP-S9B3N7M\THE 4NH">
+          <Created>2026-04-05T21:28:08.090841+07:00</Created>
+          <Type>SQL</Type>
+          <Server>DESKTOP-S9B3N7M</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <EncryptionOption>True</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="LILITH\SQLEXPRESS:DESKTOP-S9B3N7M\THE 4NH">
           <Created>2026-04-01T08:47:01.8798139+07:00</Created>
           <Type>SQL</Type>
           <Server>LILITH\SQLEXPRESS</Server>
@@ -22,14 +36,14 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="Create_Database.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LILITH\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>LILITH\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-S9B3N7M:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-S9B3N7M</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Create_Database.sql</FullPath>
         </FileNode>
         <FileNode Name="Create_dummy_user.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LILITH\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>LILITH\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-S9B3N7M:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-S9B3N7M</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Create_dummy_user.sql</FullPath>
         </FileNode>

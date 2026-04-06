@@ -943,5 +943,10 @@ namespace Client.Forms.EmployeeManage
         }
 
         #endregion
+
+        private void txtEmployeeName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
