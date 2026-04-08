@@ -718,46 +718,33 @@ namespace Client.Forms.EmployeeManage
         //Nút xóa nhân viên
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lvEmployee.SelectedItems.Count == 0)
+            if (string.IsNullOrWhiteSpace(choosenEmployeeId))
             {
-                MessageBox.Show("Hãy chọn ít nhất một nhân viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hãy chọn nhân viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            List<Guid> employeeIds = new List<Guid>();
-            List<string> employeeNames = new List<string>();
-
-            foreach (ListViewItem selectedItem in lvEmployee.SelectedItems)
-            {
-                Guid employeeId = (Guid)selectedItem.Tag;
-
-                if (employeeId == User.EmployeeId)
-                {
-                    MessageBox.Show("Bạn không thể xóa chính mình.", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (!CanUpdateEmployee(employeeId))
-                {
-                    MessageBox.Show("Bạn không có quyền xóa một hoặc nhiều tài khoản Admin hoặc Manager.", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                employeeIds.Add(employeeId);
-                employeeNames.Add(selectedItem.SubItems[0].Text);
-            }
-
-            string confirmMessage = employeeIds.Count == 1
-                ? "Xác nhận xóa nhân viên này?"
-                : "Xác nhận xóa " + employeeIds.Count + " nhân viên đã chọn?";
-
-            if (MessageBox.Show(confirmMessage, "Xóa nhân viên", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show("Xác nhận xóa nhân viên này?", "Xóa nhân viên", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
                 return;
             }
 
-            List<string> imagePaths = new List<string>();
+            Guid employeeId = Guid.Parse(choosenEmployeeId);
+            string imagePath = null;
 
+            if (!CanUpdateEmployee(employeeId))
+            {
+                MessageBox.Show("Bạn không có quyền xóa tài khoản Admin hoặc Manager.", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if(employeeId == User.EmployeeId)
+            {
+                MessageBox.Show("Bạn không thể xóa chính mình.", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+         
+            //xóa 1 nhân viên
             try
             {
                 using (SqlConnection conn = GymManagementSystemContext.Connect())
@@ -768,34 +755,26 @@ namespace Client.Forms.EmployeeManage
                     {
                         try
                         {
-                            foreach (Guid employeeId in employeeIds)
+                            using (SqlCommand cmdGetImage = new SqlCommand(
+                                "SELECT image_url FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
                             {
-                                using (SqlCommand cmdGetImage = new SqlCommand(
-                                    "SELECT image_url FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
-                                {
-                                    cmdGetImage.Parameters.AddWithValue("@employeeId", employeeId);
-                                    object result = cmdGetImage.ExecuteScalar();
-                                    string imagePath = result == null || result == DBNull.Value ? null : result.ToString();
+                                cmdGetImage.Parameters.AddWithValue("@employeeId", employeeId);
+                                object result = cmdGetImage.ExecuteScalar();
+                                imagePath = result == null || result == DBNull.Value ? null : result.ToString();
+                            }
 
-                                    if (!string.IsNullOrWhiteSpace(imagePath))
-                                    {
-                                        imagePaths.Add(imagePath);
-                                    }
-                                }
+                            using (SqlCommand cmdRole = new SqlCommand(
+                                "DELETE FROM dbo.EmployeeRole WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmdRole.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdRole.ExecuteNonQuery();
+                            }
 
-                                using (SqlCommand cmdRole = new SqlCommand(
-                                    "DELETE FROM dbo.EmployeeRole WHERE employee_id = @employeeId", conn, tran))
-                                {
-                                    cmdRole.Parameters.AddWithValue("@employeeId", employeeId);
-                                    cmdRole.ExecuteNonQuery();
-                                }
-
-                                using (SqlCommand cmdEmp = new SqlCommand(
-                                    "DELETE FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
-                                {
-                                    cmdEmp.Parameters.AddWithValue("@employeeId", employeeId);
-                                    cmdEmp.ExecuteNonQuery();
-                                }
+                            using (SqlCommand cmdEmp = new SqlCommand(
+                                "DELETE FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
+                            {
+                                cmdEmp.Parameters.AddWithValue("@employeeId", employeeId);
+                                cmdEmp.ExecuteNonQuery();
                             }
 
                             tran.Commit();
@@ -808,12 +787,11 @@ namespace Client.Forms.EmployeeManage
                     }
                 }
 
-                string userImagesFolder = Path.Combine(Application.StartupPath, "UserImages");
-                string fullUserImagesFolder = Path.GetFullPath(userImagesFolder);
-
-                foreach (string imagePath in imagePaths)
+                if (!string.IsNullOrWhiteSpace(imagePath))
                 {
+                    string userImagesFolder = Path.Combine(Application.StartupPath, "UserImages");
                     string fullImagePath = Path.GetFullPath(imagePath);
+                    string fullUserImagesFolder = Path.GetFullPath(userImagesFolder);
 
                     if (fullImagePath.StartsWith(fullUserImagesFolder, StringComparison.OrdinalIgnoreCase) && File.Exists(fullImagePath))
                     {
