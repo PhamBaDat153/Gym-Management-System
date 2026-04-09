@@ -21,6 +21,13 @@ namespace Client
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
             // TODO: mở form mới để người dùng nhập thông tin và gửi email/sđt lấy lại mật khẩu 
+            using(frmForgotPassword frm = new frmForgotPassword())
+            {
+                this.Hide();
+                frm.ShowDialog();
+                this.Show();
+            }
+           
 
         }
 
