@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQL Server Scripts\\Create_dummy_user.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQL Server Scripts\\Create_Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
     }
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,27 +34,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create_Database.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (86))",
+              "DocumentIndex": 0,
+              "Title": "Create_Database.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (84))",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql",
               "RelativeDocumentMoniker": "SQL Server Scripts\\Create_Database.sql",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (86))",
-              "RelativeToolTip": "SQL Server Scripts\\Create_Database.sql - LILITH\\SQLEXPRESS.master (LILITH\\phamb (86))",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_Database.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (84))",
+              "RelativeToolTip": "SQL Server Scripts\\Create_Database.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (84))",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2026-04-01T01:47:00.108Z",
-              "EditorCaption": " - LILITH\\SQLEXPRESS.master (LILITH\\phamb (86))"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Create_dummy_user.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (87))",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql",
-              "RelativeDocumentMoniker": "SQL Server Scripts\\Create_dummy_user.sql",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\SQL Server Scripts\\SQL Server Scripts\\Create_dummy_user.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (87))",
-              "RelativeToolTip": "SQL Server Scripts\\Create_dummy_user.sql - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (87))",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-04-02T07:04:31.841Z",
-              "EditorCaption": " - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (87))"
+              "EditorCaption": " - LILITH\\SQLEXPRESS.GymManagementSystem (LILITH\\phamb (84))"
             }
           ]
         }

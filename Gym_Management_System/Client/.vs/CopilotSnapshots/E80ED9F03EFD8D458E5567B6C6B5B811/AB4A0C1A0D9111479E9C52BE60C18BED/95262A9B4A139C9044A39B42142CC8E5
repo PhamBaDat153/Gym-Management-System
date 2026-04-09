@@ -3,7 +3,14 @@ using Client.Forms.Dashboard;
 using Client.Forms.Login;
 using Client.Models;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Client
@@ -27,50 +34,50 @@ namespace Client
         // Nút đăng nhập
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
             string loginKey = txtLoginKey.Text;
             string password = txtPassword.Text;
 
             try
             {
-                if (!loginUtils.checkLoginInfoIsValid(loginKey, password))
+                //Kiểm tra thông tin đăng nhập có hợp lệ hay không
+                if (loginUtils.checkLoginInfoIsValid(loginKey, password))
                 {
-                    return;
-                }
+                    connection = GymManagementSystemContext.Connect();
+                    SqlCommand cmd = new SqlCommand("", connection);
 
-                using (connection = GymManagementSystemContext.Connect())
-                using (SqlCommand cmd = new SqlCommand(
-                    "Select Employee.*, Role.role_name " +
-                    "From dbo.Employee " +
-                    "Inner Join dbo.EmployeeRole On Employee.employee_id = EmployeeRole.employee_id " +
-                    "Inner Join dbo.Role On EmployeeRole.role_id = Role.role_id " +
-                    "Where Employee.is_active = 1 And Employee.login_key = @loginKey",
-                    connection))
-                {
+                    // Kiểm tra xem người dùng có tồn tại trong database hay không
+                    cmd.CommandText = "Select COUNT(*)" +
+                        " From dbo.Employee" +
+                        " Where is_active = 1 And login_key = @loginKey And password = @password";
+                    cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@loginKey", loginKey);
+                    cmd.Parameters.AddWithValue("@password", password);
 
                     connection.Open();
+                    int cnt = (int)cmd.ExecuteScalar();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    // Nếu tồn tại, lấy thông tin người dùng và các vai trò của họ
+                    if (cnt > 0)
                     {
                         User.Roles.Clear();
+
+                        cmd.CommandText = "Select Employee.*, Role.role_name " +
+                            "From dbo.Employee, dbo.EmployeeRole, dbo.Role " +
+                            "Where Employee.employee_id = EmployeeRole.employee_id and EmployeeRole.role_id = Role.role_id and Employee.login_key = @loginKey";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@loginKey", loginKey);
+
+                        SqlDataReader reader = cmd.ExecuteReader();
                         bool isUserInitialized = false;
-                        bool isPasswordValid = false;
 
                         while (reader.Read())
                         {
                             if (!isUserInitialized)
                             {
-                                string storedPassword = reader["password"].ToString();
-
-                                isPasswordValid = BCrypt.Net.BCrypt.Verify(password, storedPassword);
-                                if (!isPasswordValid)
-                                {
-                                    break;
-                                }
-
                                 User.EmployeeId = (Guid)reader["employee_id"];
                                 User.LoginKey = reader["login_key"].ToString();
-                                User.Password = storedPassword;
+                                User.Password = reader["password"].ToString();
                                 User.Email = reader["email"].ToString();
                                 User.ImageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
                                 User.EmployeeName = reader["employee_name"].ToString();
@@ -88,12 +95,11 @@ namespace Client
                                 User.Roles.Add(reader["role_name"].ToString());
                             }
                         }
-
-                        if (!isUserInitialized || !isPasswordValid)
-                        {
-                            MessageBox.Show("Thông tin đăng nhập không chính xác hoặc tài khoản đã bị vô hiệu hóa!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thông tin đăng nhập không chính xác hoặc tài khoản đã bị vô hiệu hóa!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -103,6 +109,10 @@ namespace Client
                     txtLoginKey.Text = "";
                     txtPassword.Text = "";
                     this.Show();
+                }
+                else
+                {   
+                    return;
                 }
             }
             catch (Exception ex)
@@ -135,44 +145,7 @@ namespace Client
         // Thêm tài khoản mẫu để test nhanh - Xóa sau khi hoàn thành dự án
         private void btnAddDummyAccount_Click(object sender, EventArgs e)
         {
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword("lol123");
 
-            const string sql = @"
-DELETE FROM [EmployeeRole];
-DELETE FROM [Employee];
-
-
-DECLARE @AdminID UNIQUEIDENTIFIER = NEWID();
-DECLARE @ManagerID UNIQUEIDENTIFIER = NEWID();
-DECLARE @ReceptionistID UNIQUEIDENTIFIER = NEWID();
-DECLARE @TrainerID UNIQUEIDENTIFIER = NEWID();
-
-INSERT INTO [Employee] (employee_id, login_key, password, email, employee_name, phone_number, date_of_birth, salary, hire_date, status, is_active)
-VALUES 
-(@AdminID, 'admin', @passwordHash, 'admin@gym.com', N'Nguyễn Admin', '0900000001', '1990-01-01', 25000000, GETDATE(), 1, 1),
-(@ManagerID, 'manager', @passwordHash, 'manager@gym.com', N'Trần Manager', '0900000002', '1992-05-15', 20000000, GETDATE(), 1, 1),
-(@ReceptionistID, 'receptionist', @passwordHash, 'reception@gym.com', N'Lê Tiếp Tân', '0900000003', '1998-10-20', 10000000, GETDATE(), 1, 1),
-(@TrainerID, 'trainer', @passwordHash, 'trainer@gym.com', N'Phạm Huấn Luyện Viên', '0900000004', '1995-03-12', 15000000, GETDATE(), 1, 1);
-
-INSERT INTO [EmployeeRole] (employee_id, role_id) VALUES 
-(@AdminID, 1), (@AdminID, 2), (@AdminID, 3), (@AdminID, 4), (@ManagerID, 2), (@ReceptionistID, 3), (@TrainerID, 4);";
-
-            try
-            {
-                using (SqlConnection conn = GymManagementSystemContext.Connect())
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@passwordHash", passwordHash);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Đã thêm các tài khoản mẫu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Không thêm được tài khoản mẫu.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

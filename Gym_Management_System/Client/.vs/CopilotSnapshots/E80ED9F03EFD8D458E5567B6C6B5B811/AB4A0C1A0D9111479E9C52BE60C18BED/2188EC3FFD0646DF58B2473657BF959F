@@ -104,6 +104,10 @@ namespace Client
                     txtPassword.Text = "";
                     this.Show();
                 }
+                else
+                {   
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -140,7 +144,13 @@ namespace Client
             const string sql = @"
 DELETE FROM [EmployeeRole];
 DELETE FROM [Employee];
+DELETE FROM [Role];
 
+INSERT INTO [Role] (role_id, role_name) VALUES 
+(1, 'Admin'), 
+(2, 'Manager'), 
+(3, 'Receptionist'), 
+(4, 'Trainer');
 
 DECLARE @AdminID UNIQUEIDENTIFIER = NEWID();
 DECLARE @ManagerID UNIQUEIDENTIFIER = NEWID();

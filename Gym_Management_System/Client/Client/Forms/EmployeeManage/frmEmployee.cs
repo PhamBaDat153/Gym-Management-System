@@ -447,8 +447,10 @@ namespace Client.Forms.EmployeeManage
                     {
                         string imageUrl = reader["image_url"] == DBNull.Value ? null : reader["image_url"].ToString();
                         selectedImagePath = imageUrl;
-                        txtLoginKey.Text = reader["login_key"].ToString();
-                        txtPassword.Text = reader["password"].ToString();
+
+                        if(User.Roles.Contains("Admin"))
+                            txtLoginKey.Text = reader["login_key"].ToString();
+
 
                         SetPictureEmployeeImage(imageUrl);
                     }
@@ -651,7 +653,8 @@ namespace Client.Forms.EmployeeManage
 
             string loginKey = txtLoginKey.Text.Trim();
 
-            string password = txtPassword.Text.Trim();
+            //Hashing trc khi thêm vào database
+            string password = BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim());
             DateTime dateOfBirth = txtDOB.Value.Date;
             DateTime hireDate = DateTime.Today;
 
@@ -876,6 +879,8 @@ namespace Client.Forms.EmployeeManage
                     {
                         try
                         {
+                
+
                             using (SqlCommand cmd = new SqlCommand(
                                 "UPDATE dbo.Employee SET " +
                                 "login_key = @loginKey, " +
@@ -892,7 +897,10 @@ namespace Client.Forms.EmployeeManage
                             {
                                 cmd.Parameters.AddWithValue("@employeeId", employeeId);
                                 cmd.Parameters.AddWithValue("@loginKey", txtLoginKey.Text.Trim());
-                                cmd.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
+
+
+                                //Hash password trc khi thêm vào databased
+                                cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim()));
                                 cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
