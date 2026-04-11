@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|c:\\users\\admin\\documents\\github\\gym-management-system\\gym-management-system\\gym_management_system\\client\\client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|c:\\users\\admin\\documents\\github\\gym-management-system\\gym-management-system\\gym_management_system\\client\\client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\client\\models\\package.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,25 +66,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "frmPackage.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
-              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAMwK8AAABPAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs*",
+              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs*",
+              "ViewState": "AgIAANABAAAAAAAAAAAiwOsBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T15:05:02.978Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "frmPackage.cs [Design]",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\GitHub\\Gym-Management-System\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs [Design]*",
+              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-11T14:31:53.506Z",
               "EditorCaption": " [Design]"
