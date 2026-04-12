@@ -21,65 +21,6 @@ namespace Client.Forms.PackageManage
             InitializeComponent();
         }
 
-        // Determine with_trainer filter from either radio buttons or checkboxes
-        private bool? GetWithTrainerFilter()
-        {
-            // If checkboxes exist and one is checked, use them
-            try
-            {
-                // Prefer search-tab checkboxes (cbox_y / cbox_n). If they exist, use them.
-                if (this.Controls.Find("cbox_y", true).Length > 0 && this.Controls.Find("cbox_n", true).Length > 0)
-                {
-                    bool co = cbox_y.Checked;
-                    bool khong = cbox_n.Checked;
-                    if (co && !khong) return true;
-                    if (!co && khong) return false;
-                    return null; // both or none -> no filter
-                }
-
-                // Fallback to info-tab checkboxes (cbox_co / cbox_khong)
-                if (this.Controls.Find("cbox_co", true).Length > 0 && this.Controls.Find("cbox_khong", true).Length > 0)
-                {
-                    bool co = cbox_co.Checked;
-                    bool khong = cbox_khong.Checked;
-                    if (co && !khong) return true;
-                    if (!co && khong) return false;
-                    return null;
-                }
-            }
-            catch { }
-            return null;
-        }
-
-        // Determine is_active filter from either radio buttons or checkboxes
-        private bool? GetIsActiveFilter()
-        {
-            try
-            {
-                // Prefer search-tab checkboxes (cbox_isKH / cbox_notKH)
-                if (this.Controls.Find("cbox_isKH", true).Length > 0 && this.Controls.Find("cbox_notKH", true).Length > 0)
-                {
-                    bool da = cbox_isKH.Checked;
-                    bool chua = cbox_notKH.Checked;
-                    if (da && !chua) return true;
-                    if (!da && chua) return false;
-                    return null;
-                }
-
-                // Fallback to info-tab checkboxes (cbox_daKH / cbox_cKH)
-                if (this.Controls.Find("cbox_daKH", true).Length > 0 && this.Controls.Find("cbox_cKH", true).Length > 0)
-                {
-                    bool da = cbox_daKH.Checked;
-                    bool chua = cbox_cKH.Checked;
-                    if (da && !chua) return true;
-                    if (!da && chua) return false;
-                    return null;
-                }
-            }
-            catch { }
-            return null;
-        }
-
         // Handle Ctrl + Left Click (mouse1) to allow selecting/unselecting rows without losing existing selection
         private void dgv_package_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -460,20 +401,26 @@ namespace Client.Forms.PackageManage
                 cmd.Parameters.AddWithValue("@name", "%" + nameFilter + "%");
             }
 
-            // with_trainer filter: support either RadioButtons (rbtn_co/rbtn_khong) or CheckBoxes (cbox_co/cbox_khong)
-            bool? withTrainer = GetWithTrainerFilter();
-            if (withTrainer.HasValue)
+            if (rbtn_co.Checked)
             {
                 sql.Append(" AND with_trainer = @withTrainer");
-                cmd.Parameters.AddWithValue("@withTrainer", withTrainer.Value);
+                cmd.Parameters.AddWithValue("@withTrainer", true);
+            }
+            else if (rbtn_khong.Checked)
+            {
+                sql.Append(" AND with_trainer = @withTrainer");
+                cmd.Parameters.AddWithValue("@withTrainer", false);
             }
 
-            // is_active filter: support RadioButtons (rbtn_daKH/rbtn_cKH) or CheckBoxes (cbox_daKH/cbox_cKH)
-            bool? isActive = GetIsActiveFilter();
-            if (isActive.HasValue)
+            if (rbtn_daKH.Checked)
             {
                 sql.Append(" AND is_active = @isActive");
-                cmd.Parameters.AddWithValue("@isActive", isActive.Value);
+                cmd.Parameters.AddWithValue("@isActive", true);
+            }
+            else if (rbtn_cKH.Checked)
+            {
+                sql.Append(" AND is_active = @isActive");
+                cmd.Parameters.AddWithValue("@isActive", false);
             }
 
             cmd.CommandText = sql.ToString();
@@ -484,10 +431,10 @@ namespace Client.Forms.PackageManage
         {
             // Reset filters and reload all data
             txtbox_tenGT.Text = string.Empty;
-            cbox_co.Checked = false;
-            cbox_khong.Checked = false;
-            cbox_isKH.Checked = false;
-            cbox_notKH.Checked = false;
+            rbtn_co.Checked = false;
+            rbtn_khong.Checked = false;
+            rbtn_daKH.Checked = false;
+            rbtn_cKH.Checked = false;
 
             loadData(new SqlCommand("SELECT * FROM dbo.Package"));
         }

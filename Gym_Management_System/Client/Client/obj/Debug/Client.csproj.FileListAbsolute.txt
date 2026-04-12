@@ -89,3 +89,4 @@ D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Cl
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.exe
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.pdb
 D:\Documents\School\DesktopDev\LT\Gym-Management-System\Gym_Management_System\Client\Client\bin\Debug\Client.pdb
+C:\Users\ADMIN\Documents\GitHub\Gym-Management-System\Gym-Management-System\Gym_Management_System\Client\Client\obj\Debug\Client.Forms.Login.frmForgotPassword.resources
