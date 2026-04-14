@@ -131,6 +131,11 @@
     <Compile Include="Forms\ScheduleManage\frmSchedule.Designer.cs">
       <DependentUpon>frmSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="GymManagementSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GymManagementSystemDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeRole.cs" />
     <Compile Include="Models\Member.cs" />
@@ -183,6 +188,17 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="GymManagementSystemDataSet.xsc">
+      <DependentUpon>GymManagementSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GymManagementSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GymManagementSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GymManagementSystemDataSet.xss">
+      <DependentUpon>GymManagementSystemDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
