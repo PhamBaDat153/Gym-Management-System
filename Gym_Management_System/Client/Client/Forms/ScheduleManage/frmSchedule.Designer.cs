@@ -172,6 +172,7 @@
             this.btnClear.TabIndex = 32;
             this.btnClear.Text = "Làm mới";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnUpdate
             // 
@@ -182,6 +183,7 @@
             this.btnUpdate.TabIndex = 31;
             this.btnUpdate.Text = "Cập nhập";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -192,6 +194,7 @@
             this.btnDelete.TabIndex = 30;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -202,6 +205,7 @@
             this.btnAdd.TabIndex = 29;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
             // 
             // txtTime
             // 
@@ -286,7 +290,7 @@
             this.Controls.Add(this.txtScheduleId);
             this.Controls.Add(this.dgvScheduleManage);
             this.Controls.Add(this.label9);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmSchedule";
             this.Text = "frmSchedule";
             ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleManage)).EndInit();

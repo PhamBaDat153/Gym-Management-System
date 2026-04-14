@@ -144,9 +144,10 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cmbTrainer);
             this.Controls.Add(this.label5);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmBrowse";
             this.Text = "frmBrowse";
+            this.Load += new System.EventHandler(this.frmBrowse_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleBrowse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

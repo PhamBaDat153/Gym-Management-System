@@ -1,155 +1,157 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Client.DataContext;
+using Client.Models;
+using System;
 using System.Data;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Client.Forms.ScheduleBrowse
 {
     public partial class frmBrowse : Form
     {
+        SqlConnection connection;
 
-        // TODO: Thay chuỗi này bằng Connection String bạn đã copy ở Server Explorer
-        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=GymManagementSystem;Integrated Security=True";
         public frmBrowse()
         {
             InitializeComponent();
         }
-        private void LoadScheduleByDate(DateTime selectedDate)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                // Câu lệnh SQL: Lọc (WHERE) theo cột schedule_date và đổi luôn tên cột sang tiếng Việt
-                string query = @"SELECT 
-                            e.employee_name AS [Huấn luyện viên], 
-                            m.member_name AS [Hội viên], 
-                            s.session_start AS [Giờ bắt đầu], 
-                            s.session_end AS [Giờ kết thúc], 
-                            CASE 
-                                WHEN s.session_status = 1 THEN N'Hoạt động' 
-                                ELSE N'Dừng hoạt động' 
-                            END AS [Trạng thái]
-                         FROM Schedule s
-                         LEFT JOIN Employee e ON s.employee_id = e.employee_id
-                         LEFT JOIN Member m ON s.member_id = m.member_id
-                         WHERE CAST(s.schedule_date AS DATE) = @SelectedDate";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+        private void frmBrowse_Load(object sender, EventArgs e)
+        {
+            LoadCombo();
+
+            SqlCommand cmd = new SqlCommand(@"
+                SELECT 
+                    e.employee_name AS [Huấn luyện viên], 
+                    m.member_name AS [Hội viên], 
+                    s.session_start AS [Giờ bắt đầu], 
+                    s.session_end AS [Giờ kết thúc], 
+                    CASE 
+                        WHEN s.session_status = 1 THEN N'Hoạt động' 
+                        ELSE N'Dừng hoạt động' 
+                    END AS [Trạng thái]
+                FROM Schedule s
+                LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                LEFT JOIN Member m ON s.member_id = m.member_id
+                WHERE CAST(s.schedule_date AS DATE) = @date
+            ");
+
+            cmd.Parameters.AddWithValue("@date", DateTime.Today);
+
+            LoadData(cmd);
+        }
+
+        // ===== LOAD DATA GIỐNG frmEmployee =====
+        public void LoadData(SqlCommand cmd)
+        {
+            try
+            {
+                connection = GymManagementSystemContext.Connect();
+                cmd.Connection = connection;
+                connection.Open();
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // Gán dữ liệu vào bảng
-                dgvScheduleBrowse.DataSource = dt; // Đổi 'dataGridView1' thành tên DataGridView của bạn nếu bạn đã đổi tên
+                dgvScheduleBrowse.DataSource = dt;
 
-                // Định dạng giờ hiển thị cho đẹp
                 if (dgvScheduleBrowse.Columns["Giờ bắt đầu"] != null)
                     dgvScheduleBrowse.Columns["Giờ bắt đầu"].DefaultCellStyle.Format = "HH:mm";
 
                 if (dgvScheduleBrowse.Columns["Giờ kết thúc"] != null)
                     dgvScheduleBrowse.Columns["Giờ kết thúc"].DefaultCellStyle.Format = "HH:mm";
 
-                // Cho bảng tự động giãn đều lấp đầy
                 dgvScheduleBrowse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
-        private void frmBrowse_Load(object sender, EventArgs e)
+
+        // ===== LOAD COMBO =====
+        private void LoadCombo()
         {
-            // Tự động load dữ liệu của ngày hiện tại
-            LoadScheduleByDate(DateTime.Today);
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                conn.Open();
+
+                // Trainer
+                SqlDataAdapter daTrainer = new SqlDataAdapter(
+                    "SELECT employee_id, employee_name FROM Employee WHERE login_key = 'trainer' AND is_active = 1",
+                    conn);
+
+                DataTable dtTrainer = new DataTable();
+                daTrainer.Fill(dtTrainer);
+
+                cmbTrainer.DataSource = dtTrainer;
+                cmbTrainer.DisplayMember = "employee_name";
+
+                // Member
+                SqlDataAdapter daMember = new SqlDataAdapter(
+                    "SELECT member_name FROM Member", conn);
+                DataTable dtMember = new DataTable();
+                daMember.Fill(dtMember);
+
+                cmbMember.DataSource = dtMember;
+                cmbMember.DisplayMember = "member_name";
+            }
+        }
+
+        // ===== SEARCH =====
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand(@"
+                SELECT 
+                    e.employee_name AS [Huấn luyện viên], 
+                    m.member_name AS [Hội viên], 
+                    s.session_start AS [Giờ bắt đầu], 
+                    s.session_end AS [Giờ kết thúc], 
+                    CASE 
+                        WHEN s.session_status = 1 THEN N'Hoạt động' 
+                        ELSE N'Dừng hoạt động' 
+                    END AS [Trạng thái]
+                FROM Schedule s
+                LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                LEFT JOIN Member m ON s.member_id = m.member_id
+                WHERE CAST(s.schedule_date AS DATE) = @date
+            ");
+
+            cmd.Parameters.AddWithValue("@date", monthCalendar1.SelectionStart.Date);
+
+            if (!string.IsNullOrWhiteSpace(cmbTrainer.Text))
+            {
+                cmd.CommandText += " AND e.employee_name LIKE @trainer";
+                cmd.Parameters.AddWithValue("@trainer", "%" + cmbTrainer.Text + "%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(cmbMember.Text))
+            {
+                cmd.CommandText += " AND m.member_name LIKE @member";
+                cmd.Parameters.AddWithValue("@member", "%" + cmbMember.Text + "%");
+            }
+
+            LoadData(cmd);
+        }
+
+        // ===== CLICK NGÀY =====
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            btnSearch_Click(sender, e); // reuse luôn
         }
         private void dgvScheduleBrowse_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            {
-                // Chuỗi kết nối (nhớ đổi lại cho đúng với máy của bạn)
-                string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GymManagementSystem;Integrated Security=True";
-
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    // 1. Câu lệnh SQL gốc: Luôn luôn lọc theo Ngày đang chọn trên Lịch
-                    string query = @"SELECT 
-                            e.employee_name AS [Huấn luyện viên], 
-                            m.member_name AS [Hội viên], 
-                            s.session_start AS [Giờ bắt đầu], 
-                            s.session_end AS [Giờ kết thúc], 
-                            CASE 
-                                WHEN s.session_status = 1 THEN N'Hoạt động' 
-                                ELSE N'Dừng hoạt động' 
-                            END AS [Trạng thái]
-                         FROM Schedule s
-                         LEFT JOIN Employee e ON s.employee_id = e.employee_id
-                         LEFT JOIN Member m ON s.member_id = m.member_id
-                         WHERE CAST(s.schedule_date AS DATE) = @SelectedDate";
-
-                    // 2. Kiểm tra nếu có nhập Tên HLV thì thêm điều kiện lọc HLV
-                    if (!string.IsNullOrWhiteSpace(cmbTrainer.Text))
-                    {
-                        query += " AND e.employee_name LIKE @TrainerName";
-                    }
-
-                    // 3. Kiểm tra nếu có nhập Tên Hội viên thì thêm điều kiện lọc Hội viên
-                    if (!string.IsNullOrWhiteSpace(cmbMember.Text))
-                    {
-                        query += " AND m.member_name LIKE @MemberName";
-                    }
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-
-                    // Truyền giá trị Ngày từ cuốn lịch vào SQL
-                    cmd.Parameters.AddWithValue("@SelectedDate", monthCalendar1.SelectionStart.Date);
-
-                    // Truyền giá trị chuỗi tìm kiếm (Dùng % để tìm kiếm gần đúng)
-                    if (!string.IsNullOrWhiteSpace(cmbTrainer.Text))
-                    {
-                        cmd.Parameters.AddWithValue("@TrainerName", "%" + cmbTrainer.Text.Trim() + "%");
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(cmbMember.Text))
-                    {
-                        cmd.Parameters.AddWithValue("@MemberName", "%" + cmbMember.Text.Trim() + "%");
-                    }
-
-                    // Đổ dữ liệu ra bảng
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dgvScheduleBrowse.DataSource = dt;
-
-                    // Định dạng giờ hiển thị
-                    if (dgvScheduleBrowse.Columns["Giờ bắt đầu"] != null)
-                        dgvScheduleBrowse.Columns["Giờ bắt đầu"].DefaultCellStyle.Format = "HH:mm";
-
-                    if (dgvScheduleBrowse.Columns["Giờ kết thúc"] != null)
-                        dgvScheduleBrowse.Columns["Giờ kết thúc"].DefaultCellStyle.Format = "HH:mm";
-                }
-            }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            // Lấy ngày mà người dùng vừa click trên lịch
-            DateTime dateToView = monthCalendar1.SelectionStart;
-
-            // Gọi hàm load dữ liệu
-            LoadScheduleByDate(dateToView);
+            
         }
     }
 }
