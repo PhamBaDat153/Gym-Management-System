@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Gym_Management_System/Client/Client/bin/Debug/Client.exe
+/Gym_Management_System/Client/Client/bin/Debug/Client.exe.config
+/Gym_Management_System/Client/Client/bin/Debug/Client.pdb
