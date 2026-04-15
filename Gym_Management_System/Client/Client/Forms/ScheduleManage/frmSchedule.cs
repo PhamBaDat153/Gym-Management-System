@@ -24,6 +24,8 @@ namespace Client.Forms.ScheduleManage
 
         private void frmSchedule_Load(object sender, EventArgs e)
         {
+            LoadCombo();
+
             SqlCommand cmd = new SqlCommand(
                 @"SELECT s.schedule_id, s.employee_id, e.employee_name,
                  s.member_id, m.member_name,
@@ -34,35 +36,57 @@ namespace Client.Forms.ScheduleManage
           LEFT JOIN Member m ON s.member_id = m.member_id");
 
             LoadData(cmd);
-            LoadCombo();
+         
         }
         private void LoadCombo()
         {
+            try
+            {
+                LoadTrainerCombo();
+                LoadMemberCombo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được dữ liệu combo.\n" + ex.Message);
+            }
+        }
+
+        private void LoadTrainerCombo()
+        {
             using (SqlConnection conn = GymManagementSystemContext.Connect())
             {
-                conn.Open();
+                using (SqlDataAdapter daTrainer = new SqlDataAdapter(
+                    "SELECT e.employee_id, e.employee_name FROM Employee e " +
+                    "JOIN EmployeeRole er ON e.employee_id = er.employee_id " +
+                    "JOIN Role r ON er.role_id = r.role_id " +
+                    "WHERE r.role_name = 'Trainer' AND e.is_active = 1 " +
+                    "ORDER BY e.employee_name",
+                    conn))
+                {
+                    DataTable dtTrainer = new DataTable();
+                    daTrainer.Fill(dtTrainer);
 
-                // Trainer
-                SqlDataAdapter daTrainer = new SqlDataAdapter(
-                    "SELECT employee_id, employee_name FROM Employee WHERE login_key = 'trainer' AND is_active = 1",
-                    conn);
+                    cmbTrainer.DataSource = dtTrainer;
+                    cmbTrainer.DisplayMember = "employee_name";
+                    cmbTrainer.ValueMember = "employee_id";
+                }
+            }
+        }
 
-                DataTable dtTrainer = new DataTable();
-                daTrainer.Fill(dtTrainer);
+        private void LoadMemberCombo()
+        {
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                using (SqlDataAdapter daMember = new SqlDataAdapter(
+                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
+                {
+                    DataTable dtMember = new DataTable();
+                    daMember.Fill(dtMember);
 
-                cmbTrainer.DataSource = dtTrainer;
-                cmbTrainer.DisplayMember = "employee_name";
-                cmbTrainer.ValueMember = "employee_id";
-
-                // Member
-                SqlDataAdapter daMember = new SqlDataAdapter(
-                    "SELECT member_name FROM Member", conn);
-                DataTable dtMember = new DataTable();
-                daMember.Fill(dtMember);
-
-                cmbMember.DataSource = dtMember;
-                cmbMember.DisplayMember = "member_name";
-                cmbMember.ValueMember = "member_id";
+                    cmbMember.DataSource = dtMember;
+                    cmbMember.DisplayMember = "member_name";
+                    cmbMember.ValueMember = "member_id";
+                }
             }
         }
         public void LoadData(SqlCommand cmd)
@@ -79,29 +103,62 @@ namespace Client.Forms.ScheduleManage
 
                 dgvScheduleManage.DataSource = dt;
 
-                // Format
-                if (dgvScheduleManage.Columns["session_start"] != null)
-                    dgvScheduleManage.Columns["session_start"].DefaultCellStyle.Format = "HH:mm";
+                // Debug: Show row count
+                if (dt.Rows.Count == 0)
+                {
+                    // Not an error - just no data
+                    System.Diagnostics.Debug.WriteLine("LoadData: No rows returned from query");
+                }
 
-                if (dgvScheduleManage.Columns["session_end"] != null)
-                    dgvScheduleManage.Columns["session_end"].DefaultCellStyle.Format = "HH:mm";
-
-                if (dgvScheduleManage.Columns["schedule_date"] != null)
-                    dgvScheduleManage.Columns["schedule_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
-
-                // Hide ID
-                dgvScheduleManage.Columns["employee_id"].Visible = false;
-                dgvScheduleManage.Columns["member_id"].Visible = false;
-                dgvScheduleManage.Columns["schedule_id"].Visible = false;
-                dgvScheduleManage.Columns["session_status"].Visible = false;
+                // Format columns
+                FormatGridColumns();
+                HideGridColumns();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không tải được dữ liệu.\n" + ex.Message);
+                MessageBox.Show("Không tải được dữ liệu.\n\nDetails: " + ex.Message + "\n\nInner: " + (ex.InnerException?.Message ?? "None"));
+                System.Diagnostics.Debug.WriteLine($"LoadData Error: {ex}");
+            }
+            finally
+            {
+                if (connection != null && connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
             }
         }
-        private bool ValidateInput()
+
+        private void FormatGridColumns()
         {
+            if (dgvScheduleManage.Columns["session_start"] != null)
+                dgvScheduleManage.Columns["session_start"].DefaultCellStyle.Format = "HH:mm";
+
+            if (dgvScheduleManage.Columns["session_end"] != null)
+                dgvScheduleManage.Columns["session_end"].DefaultCellStyle.Format = "HH:mm";
+
+            if (dgvScheduleManage.Columns["schedule_date"] != null)
+                dgvScheduleManage.Columns["schedule_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
+        }
+
+        private void HideGridColumns()
+        {
+            var colEmpId = dgvScheduleManage.Columns["employee_id"];
+            if (colEmpId != null) colEmpId.Visible = false;
+
+            var colMemId = dgvScheduleManage.Columns["member_id"];
+            if (colMemId != null) colMemId.Visible = false;
+
+            var colSchedId = dgvScheduleManage.Columns["schedule_id"];
+            if (colSchedId != null) colSchedId.Visible = false;
+
+            var colStatus = dgvScheduleManage.Columns["session_status"];
+            if (colStatus != null) colStatus.Visible = false;
+        }
+        private bool ValidateInput(out TimeSpan startTime, out TimeSpan endTime)
+        {
+            startTime = TimeSpan.Zero;
+            endTime = TimeSpan.Zero;
+
             if (cmbTrainer.SelectedItem == null)
             {
                 MessageBox.Show("Chọn HLV");
@@ -121,14 +178,26 @@ namespace Client.Forms.ScheduleManage
                 return false;
             }
 
-            if (!TimeSpan.TryParse(txtTime.Text, out _) ||
-                !TimeSpan.TryParse(txtEndTime.Text, out _))
+            if (!TimeSpan.TryParse(txtTime.Text, out startTime) ||
+                !TimeSpan.TryParse(txtEndTime.Text, out endTime))
             {
                 MessageBox.Show("Sai format giờ (HH:mm)");
                 return false;
             }
 
+            if (startTime >= endTime)
+            {
+                MessageBox.Show("Giờ bắt đầu phải nhỏ hơn giờ kết thúc.");
+                return false;
+            }
+
             return true;
+        }
+
+        // Old signature for backward compatibility with ClearForm validation calls
+        private bool ValidateInput()
+        {
+            return ValidateInput(out _, out _);
         }
         private void ClearForm()
         {
@@ -147,51 +216,63 @@ namespace Client.Forms.ScheduleManage
         // --- CLICK VÀO BẢNG: ĐẨY DỮ LIỆU LÊN Ô NHẬP ---
         private void dgvScheduleManage_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0)
+                return;
+
+            DataGridViewRow row = dgvScheduleManage.Rows[e.RowIndex];
+            LoadScheduleToForm(row);
+        }
+
+        private void LoadScheduleToForm(DataGridViewRow row)
+        {
+            try
             {
-                DataGridViewRow row = dgvScheduleManage.Rows[e.RowIndex];
-
-                // Lấy ID lịch tập
-                selectedScheduleId = row.Cells["schedule_id"].Value.ToString();
-
-                if (row.Cells["schedule_id"].Value != DBNull.Value)
+                // Load Schedule ID
+                var schedVal = row.Cells["schedule_id"].Value;
+                if (schedVal != DBNull.Value)
                 {
-                    txtScheduleId.Text = row.Cells["schedule_id"].Value.ToString();
+                    selectedScheduleId = schedVal.ToString();
+                    txtScheduleId.Text = selectedScheduleId;
                 }
-                // Đẩy dữ liệu lên các Combobox
-                cmbTrainer.SelectedValue = row.Cells["employee_id"].Value;
-                cmbMember.SelectedValue = row.Cells["member_id"].Value;
+                else
+                {
+                    selectedScheduleId = null;
+                    txtScheduleId.Clear();
+                }
 
-                // Xử lý ngày tháng
+                // Load Trainer
+                var empVal = row.Cells["employee_id"].Value;
+                if (empVal != DBNull.Value)
+                    cmbTrainer.SelectedValue = empVal;
+
+                // Load Member
+                var memVal = row.Cells["member_id"].Value;
+                if (memVal != DBNull.Value)
+                    cmbMember.SelectedValue = memVal;
+
+                // Load Date
                 if (row.Cells["schedule_date"].Value != DBNull.Value)
-                {
                     dtpDate.Value = Convert.ToDateTime(row.Cells["schedule_date"].Value);
-                }
 
-                // Xử lý giờ bắt đầu và kết thúc
+                // Load Start Time
                 if (row.Cells["session_start"].Value != DBNull.Value)
-                {
                     txtTime.Text = Convert.ToDateTime(row.Cells["session_start"].Value).ToString("HH:mm");
-                }
 
+                // Load End Time
                 if (row.Cells["session_end"].Value != DBNull.Value)
-                {
                     txtEndTime.Text = Convert.ToDateTime(row.Cells["session_end"].Value).ToString("HH:mm");
-                }
 
-                // Xử lý Check RadioButton Trạng thái
+                // Load Status
                 if (row.Cells["session_status"].Value != DBNull.Value)
                 {
                     int status = Convert.ToInt32(row.Cells["session_status"].Value);
-                    if (status == 1)
-                    {
-                        rdoKichHoat.Checked = true;
-                    }
-                    else
-                    {
-                        rdoChuaKichHoat.Checked = true;
-                    }
+                    rdoKichHoat.Checked = (status == 1);
+                    rdoChuaKichHoat.Checked = (status == 0);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
             }
         }
 
@@ -213,7 +294,7 @@ namespace Client.Forms.ScheduleManage
         // --- NÚT THÊM LỊCH TẬP ---
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            if (!ValidateInput()) return;
+            if (!ValidateInput(out TimeSpan startTime, out TimeSpan endTime)) return;
 
             try
             {
@@ -231,18 +312,14 @@ namespace Client.Forms.ScheduleManage
                         (@id, @emp, @mem, @date, @start, @end, @status)", conn, tran);
 
                             Guid id = Guid.NewGuid();
-
-                            cmd.Parameters.AddWithValue("@id", id);
-                            cmd.Parameters.AddWithValue("@emp", cmbTrainer.SelectedValue);
-                            cmd.Parameters.AddWithValue("@mem", cmbMember.SelectedValue);
-                            cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
-                            cmd.Parameters.AddWithValue("@start", txtTime.Text);
-                            cmd.Parameters.AddWithValue("@end", txtEndTime.Text);
-                            cmd.Parameters.AddWithValue("@status", rdoKichHoat.Checked ? 1 : 0);
+                            BindScheduleParameters(cmd, id, cmbTrainer.SelectedValue, cmbMember.SelectedValue, startTime, endTime);
 
                             cmd.ExecuteNonQuery();
-
                             tran.Commit();
+
+                            MessageBox.Show("Thêm thành công");
+                            RefreshData();
+                            ClearForm();
                         }
                         catch
                         {
@@ -251,14 +328,10 @@ namespace Client.Forms.ScheduleManage
                         }
                     }
                 }
-
-                MessageBox.Show("Thêm thành công");
-                LoadData(new SqlCommand("SELECT * FROM Schedule"));
-                ClearForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi thêm lịch tập: " + ex.Message);
             }
         }
 
@@ -270,7 +343,7 @@ namespace Client.Forms.ScheduleManage
                 return;
             }
 
-            if (!ValidateInput()) return;
+            if (!ValidateInput(out TimeSpan startTime, out TimeSpan endTime)) return;
 
             try
             {
@@ -289,23 +362,18 @@ namespace Client.Forms.ScheduleManage
                 WHERE schedule_id=@id", conn);
 
                     cmd.Parameters.AddWithValue("@id", selectedScheduleId);
-                    cmd.Parameters.AddWithValue("@emp", cmbTrainer.SelectedValue);
-                    cmd.Parameters.AddWithValue("@mem", cmbMember.SelectedValue);
-                    cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
-                    cmd.Parameters.AddWithValue("@start", txtTime.Text);
-                    cmd.Parameters.AddWithValue("@end", txtEndTime.Text);
-                    cmd.Parameters.AddWithValue("@status", rdoKichHoat.Checked ? 1 : 0);
+                    BindScheduleParameters(cmd, Guid.Empty, cmbTrainer.SelectedValue, cmbMember.SelectedValue, startTime, endTime);
 
                     cmd.ExecuteNonQuery();
-                }
 
-                MessageBox.Show("Cập nhật thành công");
-                LoadData(new SqlCommand("SELECT * FROM Schedule"));
-                ClearForm();
+                    MessageBox.Show("Cập nhật thành công");
+                    RefreshData();
+                    ClearForm();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi cập nhật lịch tập: " + ex.Message);
             }
         }
 
@@ -368,18 +436,35 @@ namespace Client.Forms.ScheduleManage
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            selectedScheduleId = null;
-
-            cmbTrainer.SelectedIndex = -1;
-            cmbMember.SelectedIndex = -1;
-
-            txtTime.Clear();
-            txtEndTime.Clear();
-            txtScheduleId.Clear();
-
-            dtpDate.Value = DateTime.Now;
-
-            rdoKichHoat.Checked = true;
+            ClearForm();
         }
+
+        #region Helper Methods
+
+        private void BindScheduleParameters(SqlCommand cmd, Guid scheduleId, object trainerId, object memberId, TimeSpan startTime, TimeSpan endTime)
+        {
+            if (scheduleId != Guid.Empty)
+                cmd.Parameters.AddWithValue("@id", scheduleId);
+
+            cmd.Parameters.AddWithValue("@emp", trainerId);
+            cmd.Parameters.AddWithValue("@mem", memberId);
+            cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
+            cmd.Parameters.Add("@start", SqlDbType.Time).Value = startTime;
+            cmd.Parameters.Add("@end", SqlDbType.Time).Value = endTime;
+            cmd.Parameters.AddWithValue("@status", rdoKichHoat.Checked ? 1 : 0);
+        }
+
+        private void RefreshData()
+        {
+            LoadData(new SqlCommand(@"SELECT s.schedule_id, s.employee_id, e.employee_name,
+                 s.member_id, m.member_name,
+                 s.schedule_date, s.session_start, s.session_end,
+                 s.session_status
+          FROM Schedule s
+          LEFT JOIN Employee e ON s.employee_id = e.employee_id
+          LEFT JOIN Member m ON s.member_id = m.member_id"));
+        }
+
+        #endregion
     }
 }

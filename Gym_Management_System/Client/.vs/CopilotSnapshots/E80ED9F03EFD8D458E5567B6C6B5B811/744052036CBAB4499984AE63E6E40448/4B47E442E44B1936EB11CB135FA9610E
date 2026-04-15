@@ -1,0 +1,213 @@
+﻿using Client.DataContext;
+using Client.Models;
+using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.IO;
+
+namespace Client.Forms.ScheduleBrowse
+{
+    public partial class frmBrowse : Form
+    {
+        private SqlConnection connection;
+
+        public frmBrowse()
+        {
+            InitializeComponent();
+        }
+
+        private void frmBrowse_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadCombo();
+                LoadTodaySchedules();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load form: " + ex.Message);
+            }
+        }
+
+        private void LoadTodaySchedules()
+        {
+            SqlCommand cmd = new SqlCommand(@"
+                SELECT 
+                    e.employee_name AS [Huấn luyện viên], 
+                    m.member_name AS [Hội viên], 
+                    s.session_start AS [Giờ bắt đầu], 
+                    s.session_end AS [Giờ kết thúc], 
+                    CASE 
+                        WHEN s.session_status = 1 THEN N'Hoạt động' 
+                        ELSE N'Dừng hoạt động' 
+                    END AS [Trạng thái]
+                FROM Schedule s
+                LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                LEFT JOIN Member m ON s.member_id = m.member_id
+                WHERE CAST(s.schedule_date AS DATE) = @date");
+
+            cmd.Parameters.AddWithValue("@date", DateTime.Today);
+            LoadData(cmd);
+        }
+
+        // ===== LOAD DATA GIỐNG frmEmployee =====
+        public void LoadData(SqlCommand cmd)
+        {
+            try
+            {
+                connection = GymManagementSystemContext.Connect();
+                cmd.Connection = connection;
+                connection.Open();
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvScheduleBrowse.DataSource = dt;
+
+                FormatGridColumns();
+                dgvScheduleBrowse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
+            }
+            finally
+            {
+                if (connection != null && connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
+
+        private void FormatGridColumns()
+        {
+            if (dgvScheduleBrowse.Columns["Giờ bắt đầu"] != null)
+                dgvScheduleBrowse.Columns["Giờ bắt đầu"].DefaultCellStyle.Format = "HH:mm";
+
+            if (dgvScheduleBrowse.Columns["Giờ kết thúc"] != null)
+                dgvScheduleBrowse.Columns["Giờ kết thúc"].DefaultCellStyle.Format = "HH:mm";
+        }
+
+        // ===== LOAD COMBO =====
+        private void LoadCombo()
+        {
+            try
+            {
+                LoadTrainerCombo();
+                LoadMemberCombo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được dữ liệu combo.\n" + ex.Message);
+            }
+        }
+
+        private void LoadTrainerCombo()
+        {
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                using (SqlDataAdapter daTrainer = new SqlDataAdapter(
+                    "SELECT e.employee_id, e.employee_name FROM Employee e " +
+                    "JOIN EmployeeRole er ON e.employee_id = er.employee_id " +
+                    "JOIN Role r ON er.role_id = r.role_id " +
+                    "WHERE r.role_name = 'Trainer' AND e.is_active = 1 " +
+                    "ORDER BY e.employee_name",
+                    conn))
+                {
+                    DataTable dtTrainer = new DataTable();
+                    daTrainer.Fill(dtTrainer);
+
+                    cmbTrainer.DataSource = dtTrainer;
+                    cmbTrainer.DisplayMember = "employee_name";
+                }
+            }
+        }
+
+        private void LoadMemberCombo()
+        {
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                using (SqlDataAdapter daMember = new SqlDataAdapter(
+                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
+                {
+                    DataTable dtMember = new DataTable();
+                    daMember.Fill(dtMember);
+
+                    cmbMember.DataSource = dtMember;
+                    cmbMember.DisplayMember = "member_name";
+                }
+            }
+        }
+
+        // ===== SEARCH =====
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BuildAndExecuteSearchQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
+            }
+        }
+
+        private void BuildAndExecuteSearchQuery()
+        {
+            string baseQuery = @"
+                SELECT 
+                    e.employee_name AS [Huấn luyện viên], 
+                    m.member_name AS [Hội viên], 
+                    s.session_start AS [Giờ bắt đầu], 
+                    s.session_end AS [Giờ kết thúc], 
+                    CASE 
+                        WHEN s.session_status = 1 THEN N'Hoạt động' 
+                        ELSE N'Dừng hoạt động' 
+                    END AS [Trạng thái]
+                FROM Schedule s
+                LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                LEFT JOIN Member m ON s.member_id = m.member_id
+                WHERE CAST(s.schedule_date AS DATE) = @date";
+
+            List<string> conditions = new List<string>();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Parameters.AddWithValue("@date", monthCalendar1.SelectionStart.Date);
+
+            if (!string.IsNullOrWhiteSpace(cmbTrainer.Text))
+            {
+                conditions.Add("e.employee_name LIKE @trainer");
+                cmd.Parameters.AddWithValue("@trainer", "%" + cmbTrainer.Text.Trim() + "%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(cmbMember.Text))
+            {
+                conditions.Add("m.member_name LIKE @member");
+                cmd.Parameters.AddWithValue("@member", "%" + cmbMember.Text.Trim() + "%");
+            }
+
+            if (conditions.Count > 0)
+            {
+                baseQuery += " AND " + string.Join(" AND ", conditions);
+            }
+
+            cmd.CommandText = baseQuery;
+            LoadData(cmd);
+        }
+
+        // ===== CLICK NGÀY =====
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            btnSearch_Click(sender, e); // reuse luôn
+        }
+        private void dgvScheduleBrowse_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+    }
+}

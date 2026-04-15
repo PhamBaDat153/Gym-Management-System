@@ -90,7 +90,7 @@ CREATE TABLE [Schedule] (
     schedule_id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     employee_id UNIQUEIDENTIFIER NOT NULL,
     member_id UNIQUEIDENTIFIER NOT NULL,
-    note NVARCHAR(255) NOT NULL,
+    note NVARCHAR(255),
     schedule_date DATE NOT NULL,
     session_start DATETIME NOT NULL,
     session_end DATETIME NOT NULL,
