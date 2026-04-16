@@ -194,6 +194,7 @@
             // panelManage
             // 
             this.panelManage.AutoSize = true;
+            this.panelManage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelManage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelManage.Location = new System.Drawing.Point(191, 100);

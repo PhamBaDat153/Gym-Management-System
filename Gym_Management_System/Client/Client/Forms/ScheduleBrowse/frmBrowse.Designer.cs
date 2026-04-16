@@ -1,4 +1,4 @@
-﻿namespace Client.Forms.ScheduleBrowse
+namespace Client.Forms.ScheduleBrowse
 {
     partial class frmBrowse
     {
@@ -28,141 +28,153 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbMember = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgvScheduleBrowse = new System.Windows.Forms.DataGridView();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.cmbTrainer = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleBrowse)).BeginInit();
+            this.cmbMember = new System.Windows.Forms.ComboBox();
+            this.dgvTimetable = new System.Windows.Forms.DataGridView();
+            this.lblWeekRange = new System.Windows.Forms.Label();
+            this.btnPrevWeek = new System.Windows.Forms.Button();
+            this.btnNextWeek = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.lblTrainer = new System.Windows.Forms.Label();
+            this.lblMember = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cmbMember
-            // 
-            this.cmbMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMember.FormattingEnabled = true;
-            this.cmbMember.Location = new System.Drawing.Point(693, 216);
-            this.cmbMember.Name = "cmbMember";
-            this.cmbMember.Size = new System.Drawing.Size(188, 28);
-            this.cmbMember.TabIndex = 18;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(582, 220);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 20);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Tên hội viên";
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(18, 78);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(79, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 25);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Thời gian";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(303, 219);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 20);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Tên HLV";
-            // 
-            // dgvScheduleBrowse
-            // 
-            this.dgvScheduleBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvScheduleBrowse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvScheduleBrowse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvScheduleBrowse.Location = new System.Drawing.Point(12, 260);
-            this.dgvScheduleBrowse.Name = "dgvScheduleBrowse";
-            this.dgvScheduleBrowse.ReadOnly = true;
-            this.dgvScheduleBrowse.Size = new System.Drawing.Size(1008, 409);
-            this.dgvScheduleBrowse.TabIndex = 13;
-            this.dgvScheduleBrowse.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScheduleBrowse_CellContentClick);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(887, 215);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(99, 28);
-            this.btnSearch.TabIndex = 12;
-            this.btnSearch.Text = "Tìm kiếm";
-            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // cmbTrainer
             // 
-            this.cmbTrainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTrainer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTrainer.FormattingEnabled = true;
-            this.cmbTrainer.Location = new System.Drawing.Point(388, 216);
+            this.cmbTrainer.Location = new System.Drawing.Point(83, 15);
+            this.cmbTrainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTrainer.Name = "cmbTrainer";
-            this.cmbTrainer.Size = new System.Drawing.Size(188, 28);
-            this.cmbTrainer.TabIndex = 11;
+            this.cmbTrainer.Size = new System.Drawing.Size(239, 24);
+            this.cmbTrainer.TabIndex = 1;
             // 
-            // label5
+            // cmbMember
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(349, 20);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label5.Size = new System.Drawing.Size(261, 25);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "LỊCH TẬP PHÒNG GYM";
+            this.cmbMember.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMember.FormattingEnabled = true;
+            this.cmbMember.Location = new System.Drawing.Point(416, 15);
+            this.cmbMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbMember.Name = "cmbMember";
+            this.cmbMember.Size = new System.Drawing.Size(239, 24);
+            this.cmbMember.TabIndex = 3;
+            // 
+            // dgvTimetable
+            // 
+            this.dgvTimetable.AllowUserToAddRows = false;
+            this.dgvTimetable.AllowUserToDeleteRows = false;
+            this.dgvTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTimetable.Location = new System.Drawing.Point(16, 94);
+            this.dgvTimetable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvTimetable.Name = "dgvTimetable";
+            this.dgvTimetable.ReadOnly = true;
+            this.dgvTimetable.RowHeadersVisible = false;
+            this.dgvTimetable.RowHeadersWidth = 51;
+            this.dgvTimetable.Size = new System.Drawing.Size(1280, 582);
+            this.dgvTimetable.TabIndex = 8;
+            // 
+            // lblWeekRange
+            // 
+            this.lblWeekRange.AutoSize = true;
+            this.lblWeekRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.Location = new System.Drawing.Point(64, 60);
+            this.lblWeekRange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWeekRange.Name = "lblWeekRange";
+            this.lblWeekRange.Size = new System.Drawing.Size(56, 20);
+            this.lblWeekRange.TabIndex = 6;
+            this.lblWeekRange.Text = "Tuần:";
+            // 
+            // btnPrevWeek
+            // 
+            this.btnPrevWeek.Location = new System.Drawing.Point(16, 55);
+            this.btnPrevWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrevWeek.Name = "btnPrevWeek";
+            this.btnPrevWeek.Size = new System.Drawing.Size(40, 31);
+            this.btnPrevWeek.TabIndex = 5;
+            this.btnPrevWeek.Text = "<";
+            this.btnPrevWeek.UseVisualStyleBackColor = true;
+            this.btnPrevWeek.Click += new System.EventHandler(this.btnPrevWeek_Click);
+            // 
+            // btnNextWeek
+            // 
+            this.btnNextWeek.Location = new System.Drawing.Point(467, 55);
+            this.btnNextWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNextWeek.Name = "btnNextWeek";
+            this.btnNextWeek.Size = new System.Drawing.Size(40, 31);
+            this.btnNextWeek.TabIndex = 7;
+            this.btnNextWeek.Text = ">";
+            this.btnNextWeek.UseVisualStyleBackColor = true;
+            this.btnNextWeek.Click += new System.EventHandler(this.btnNextWeek_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(680, 12);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(100, 31);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // lblTrainer
+            // 
+            this.lblTrainer.AutoSize = true;
+            this.lblTrainer.Location = new System.Drawing.Point(16, 18);
+            this.lblTrainer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTrainer.Name = "lblTrainer";
+            this.lblTrainer.Size = new System.Drawing.Size(53, 16);
+            this.lblTrainer.TabIndex = 0;
+            this.lblTrainer.Text = "Trainer:";
+            // 
+            // lblMember
+            // 
+            this.lblMember.AutoSize = true;
+            this.lblMember.Location = new System.Drawing.Point(344, 18);
+            this.lblMember.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMember.Name = "lblMember";
+            this.lblMember.Size = new System.Drawing.Size(60, 16);
+            this.lblMember.TabIndex = 2;
+            this.lblMember.Text = "Member:";
             // 
             // frmBrowse
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1032, 695);
-            this.Controls.Add(this.cmbMember);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dgvScheduleBrowse);
+            this.ClientSize = new System.Drawing.Size(1312, 690);
+            this.Controls.Add(this.dgvTimetable);
+            this.Controls.Add(this.btnNextWeek);
+            this.Controls.Add(this.lblWeekRange);
+            this.Controls.Add(this.btnPrevWeek);
             this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.cmbMember);
+            this.Controls.Add(this.lblMember);
             this.Controls.Add(this.cmbTrainer);
-            this.Controls.Add(this.label5);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Controls.Add(this.lblTrainer);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmBrowse";
             this.Text = "frmBrowse";
             this.Load += new System.EventHandler(this.frmBrowse_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleBrowse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cmbMember;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgvScheduleBrowse;
-        private System.Windows.Forms.Button btnSearch;
+
+        private System.Windows.Forms.Label lblTrainer;
         private System.Windows.Forms.ComboBox cmbTrainer;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblMember;
+        private System.Windows.Forms.ComboBox cmbMember;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnPrevWeek;
+        private System.Windows.Forms.Label lblWeekRange;
+        private System.Windows.Forms.Button btnNextWeek;
+        private System.Windows.Forms.DataGridView dgvTimetable;
     }
 }

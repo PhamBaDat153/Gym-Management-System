@@ -1,4 +1,4 @@
-﻿namespace Client.Forms.ScheduleManage
+namespace Client.Forms.ScheduleManage
 {
     partial class frmSchedule
     {
@@ -28,300 +28,397 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rdoKichHoat = new System.Windows.Forms.RadioButton();
-            this.rdoChuaKichHoat = new System.Windows.Forms.RadioButton();
+            this.pnlNavigation = new System.Windows.Forms.Panel();
+            this.lblWeekRange = new System.Windows.Forms.Label();
+            this.btnNextWeek = new System.Windows.Forms.Button();
+            this.btnPrevWeek = new System.Windows.Forms.Button();
+            this.dgvTimetable = new System.Windows.Forms.DataGridView();
+            this.pnlInput = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtNote = new System.Windows.Forms.TextBox();
+            this.lblNote = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEndTime = new System.Windows.Forms.TextBox();
-            this.cmbMember = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.txtTime = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
             this.cmbTrainer = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbMember = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtScheduleId = new System.Windows.Forms.TextBox();
-            this.dgvScheduleManage = new System.Windows.Forms.DataGridView();
-            this.label9 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleManage)).BeginInit();
+            this.pnlNavigation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).BeginInit();
+            this.pnlInput.SuspendLayout();
             this.SuspendLayout();
             // 
-            // rdoKichHoat
+            // pnlNavigation
             // 
-            this.rdoKichHoat.AutoSize = true;
-            this.rdoKichHoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoKichHoat.Location = new System.Drawing.Point(345, 552);
-            this.rdoKichHoat.Name = "rdoKichHoat";
-            this.rdoKichHoat.Size = new System.Drawing.Size(142, 22);
-            this.rdoKichHoat.TabIndex = 43;
-            this.rdoKichHoat.TabStop = true;
-            this.rdoKichHoat.Text = "ĐÃ KÍCH HOẠT";
-            this.rdoKichHoat.UseVisualStyleBackColor = true;
+            this.pnlNavigation.Controls.Add(this.lblWeekRange);
+            this.pnlNavigation.Controls.Add(this.btnNextWeek);
+            this.pnlNavigation.Controls.Add(this.btnPrevWeek);
+            this.pnlNavigation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlNavigation.Location = new System.Drawing.Point(0, 0);
+            this.pnlNavigation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavigation.Name = "pnlNavigation";
+            this.pnlNavigation.Size = new System.Drawing.Size(1924, 43);
+            this.pnlNavigation.TabIndex = 1;
             // 
-            // rdoChuaKichHoat
+            // lblWeekRange
             // 
-            this.rdoChuaKichHoat.AutoSize = true;
-            this.rdoChuaKichHoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoChuaKichHoat.Location = new System.Drawing.Point(345, 580);
-            this.rdoChuaKichHoat.Name = "rdoChuaKichHoat";
-            this.rdoChuaKichHoat.Size = new System.Drawing.Size(166, 22);
-            this.rdoChuaKichHoat.TabIndex = 42;
-            this.rdoChuaKichHoat.TabStop = true;
-            this.rdoChuaKichHoat.Text = "CHƯA KÍCH HOẠT";
-            this.rdoChuaKichHoat.UseVisualStyleBackColor = true;
+            this.lblWeekRange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblWeekRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.Location = new System.Drawing.Point(187, 0);
+            this.lblWeekRange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWeekRange.Name = "lblWeekRange";
+            this.lblWeekRange.Size = new System.Drawing.Size(1550, 43);
+            this.lblWeekRange.TabIndex = 1;
+            this.lblWeekRange.Text = "Tuần: ...";
+            this.lblWeekRange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // btnNextWeek
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(176, 552);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 20);
-            this.label8.TabIndex = 41;
-            this.label8.Text = "Trạng thái";
+            this.btnNextWeek.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNextWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNextWeek.Location = new System.Drawing.Point(1737, 0);
+            this.btnNextWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNextWeek.Name = "btnNextWeek";
+            this.btnNextWeek.Size = new System.Drawing.Size(187, 43);
+            this.btnNextWeek.TabIndex = 2;
+            this.btnNextWeek.Text = "Tuần sau →";
+            this.btnNextWeek.UseVisualStyleBackColor = true;
+            this.btnNextWeek.Click += new System.EventHandler(this.btnNextWeek_Click);
             // 
-            // label2
+            // btnPrevWeek
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(176, 523);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 20);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Giờ kết thúc";
+            this.btnPrevWeek.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPrevWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPrevWeek.Location = new System.Drawing.Point(0, 0);
+            this.btnPrevWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrevWeek.Name = "btnPrevWeek";
+            this.btnPrevWeek.Size = new System.Drawing.Size(187, 43);
+            this.btnPrevWeek.TabIndex = 0;
+            this.btnPrevWeek.Text = "← Tuần trước";
+            this.btnPrevWeek.UseVisualStyleBackColor = true;
+            this.btnPrevWeek.Click += new System.EventHandler(this.btnPrevWeek_Click);
             // 
-            // txtEndTime
+            // dgvTimetable
             // 
-            this.txtEndTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEndTime.Location = new System.Drawing.Point(345, 517);
-            this.txtEndTime.Name = "txtEndTime";
-            this.txtEndTime.Size = new System.Drawing.Size(100, 26);
-            this.txtEndTime.TabIndex = 39;
+            this.dgvTimetable.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dgvTimetable.AllowUserToAddRows = false;
+            this.dgvTimetable.AllowUserToDeleteRows = false;
+            this.dgvTimetable.AllowUserToResizeRows = false;
+            this.dgvTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTimetable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTimetable.Location = new System.Drawing.Point(0, 43);
+            this.dgvTimetable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvTimetable.MultiSelect = false;
+            this.dgvTimetable.Name = "dgvTimetable";
+            this.dgvTimetable.ReadOnly = true;
+            this.dgvTimetable.RowHeadersVisible = false;
+            this.dgvTimetable.RowHeadersWidth = 51;
+            this.dgvTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvTimetable.Size = new System.Drawing.Size(1924, 1012);
+            this.dgvTimetable.TabIndex = 2;
+            this.dgvTimetable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTimetable_CellClick);
             // 
-            // cmbMember
+            // pnlInput
             // 
-            this.cmbMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMember.FormattingEnabled = true;
-            this.cmbMember.Location = new System.Drawing.Point(345, 387);
-            this.cmbMember.Name = "cmbMember";
-            this.cmbMember.Size = new System.Drawing.Size(261, 28);
-            this.cmbMember.TabIndex = 38;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(176, 390);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(104, 20);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "Chọn hội viên";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(176, 356);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 20);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Mã lịch";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(176, 491);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 20);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Giờ bắt đầu";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(176, 458);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 20);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Chọn ngày tập";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(176, 422);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(163, 20);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Chọn Huấn luyện viên";
+            this.pnlInput.Controls.Add(this.btnClear);
+            this.pnlInput.Controls.Add(this.btnDelete);
+            this.pnlInput.Controls.Add(this.btnUpdate);
+            this.pnlInput.Controls.Add(this.btnAdd);
+            this.pnlInput.Controls.Add(this.cmbStatus);
+            this.pnlInput.Controls.Add(this.label8);
+            this.pnlInput.Controls.Add(this.txtNote);
+            this.pnlInput.Controls.Add(this.lblNote);
+            this.pnlInput.Controls.Add(this.label2);
+            this.pnlInput.Controls.Add(this.txtEndTime);
+            this.pnlInput.Controls.Add(this.label5);
+            this.pnlInput.Controls.Add(this.txtTime);
+            this.pnlInput.Controls.Add(this.label4);
+            this.pnlInput.Controls.Add(this.dtpDate);
+            this.pnlInput.Controls.Add(this.label3);
+            this.pnlInput.Controls.Add(this.cmbTrainer);
+            this.pnlInput.Controls.Add(this.label7);
+            this.pnlInput.Controls.Add(this.cmbMember);
+            this.pnlInput.Controls.Add(this.label6);
+            this.pnlInput.Controls.Add(this.txtScheduleId);
+            this.pnlInput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlInput.Location = new System.Drawing.Point(0, 774);
+            this.pnlInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlInput.Name = "pnlInput";
+            this.pnlInput.Size = new System.Drawing.Size(1924, 281);
+            this.pnlInput.TabIndex = 3;
             // 
             // btnClear
             // 
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(204, 627);
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnClear.Location = new System.Drawing.Point(1399, 55);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(96, 34);
-            this.btnClear.TabIndex = 32;
+            this.btnClear.Size = new System.Drawing.Size(160, 43);
+            this.btnClear.TabIndex = 17;
             this.btnClear.Text = "Làm mới";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(408, 627);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(96, 34);
-            this.btnUpdate.TabIndex = 31;
-            this.btnUpdate.Text = "Cập nhập";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // btnDelete
             // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(306, 627);
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDelete.Location = new System.Drawing.Point(1399, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(96, 34);
-            this.btnDelete.TabIndex = 30;
+            this.btnDelete.Size = new System.Drawing.Size(160, 43);
+            this.btnDelete.TabIndex = 16;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnUpdate.Location = new System.Drawing.Point(1231, 55);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(160, 43);
+            this.btnUpdate.TabIndex = 15;
+            this.btnUpdate.Text = "Cập nhật";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(510, 627);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAdd.Location = new System.Drawing.Point(1231, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(96, 34);
-            this.btnAdd.TabIndex = 29;
+            this.btnAdd.Size = new System.Drawing.Size(160, 43);
+            this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
             // 
+            // cmbStatus
+            // 
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(880, 119);
+            this.cmbStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(332, 28);
+            this.cmbStatus.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label8.Location = new System.Drawing.Point(720, 123);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(84, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Trạng thái";
+            // 
+            // txtNote
+            // 
+            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtNote.Location = new System.Drawing.Point(213, 119);
+            this.txtNote.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(465, 26);
+            this.txtNote.TabIndex = 20;
+            // 
+            // lblNote
+            // 
+            this.lblNote.AutoSize = true;
+            this.lblNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblNote.Location = new System.Drawing.Point(13, 123);
+            this.lblNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNote.Name = "lblNote";
+            this.lblNote.Size = new System.Drawing.Size(67, 20);
+            this.lblNote.TabIndex = 19;
+            this.lblNote.Text = "Ghi chú";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(720, 86);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 20);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Giờ kết thúc";
+            // 
+            // txtEndTime
+            // 
+            this.txtEndTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtEndTime.Location = new System.Drawing.Point(880, 82);
+            this.txtEndTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEndTime.Name = "txtEndTime";
+            this.txtEndTime.Size = new System.Drawing.Size(132, 26);
+            this.txtEndTime.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label5.Location = new System.Drawing.Point(720, 49);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Giờ bắt đầu";
+            // 
             // txtTime
             // 
-            this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTime.Location = new System.Drawing.Point(345, 485);
+            this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtTime.Location = new System.Drawing.Point(880, 46);
+            this.txtTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(100, 26);
-            this.txtTime.TabIndex = 28;
+            this.txtTime.Size = new System.Drawing.Size(132, 26);
+            this.txtTime.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Location = new System.Drawing.Point(720, 12);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Chọn ngày tập";
             // 
             // dtpDate
             // 
-            this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDate.Location = new System.Drawing.Point(345, 453);
+            this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.dtpDate.Location = new System.Drawing.Point(880, 9);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(261, 26);
-            this.dtpDate.TabIndex = 27;
+            this.dtpDate.Size = new System.Drawing.Size(332, 26);
+            this.dtpDate.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label3.Location = new System.Drawing.Point(13, 86);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(172, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Chọn Huấn luyện viên";
             // 
             // cmbTrainer
             // 
-            this.cmbTrainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTrainer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTrainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmbTrainer.FormattingEnabled = true;
-            this.cmbTrainer.Location = new System.Drawing.Point(345, 419);
+            this.cmbTrainer.Location = new System.Drawing.Point(213, 82);
+            this.cmbTrainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTrainer.Name = "cmbTrainer";
-            this.cmbTrainer.Size = new System.Drawing.Size(261, 28);
-            this.cmbTrainer.TabIndex = 26;
+            this.cmbTrainer.Size = new System.Drawing.Size(465, 28);
+            this.cmbTrainer.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label7.Location = new System.Drawing.Point(13, 49);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 20);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Chọn hội viên";
+            // 
+            // cmbMember
+            // 
+            this.cmbMember.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbMember.FormattingEnabled = true;
+            this.cmbMember.Location = new System.Drawing.Point(213, 46);
+            this.cmbMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbMember.Name = "cmbMember";
+            this.cmbMember.Size = new System.Drawing.Size(465, 28);
+            this.cmbMember.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label6.Location = new System.Drawing.Point(13, 12);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 20);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Mã lịch";
             // 
             // txtScheduleId
             // 
-            this.txtScheduleId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtScheduleId.Location = new System.Drawing.Point(345, 356);
+            this.txtScheduleId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtScheduleId.Location = new System.Drawing.Point(213, 9);
+            this.txtScheduleId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtScheduleId.Name = "txtScheduleId";
             this.txtScheduleId.ReadOnly = true;
-            this.txtScheduleId.Size = new System.Drawing.Size(261, 26);
-            this.txtScheduleId.TabIndex = 25;
-            // 
-            // dgvScheduleManage
-            // 
-            this.dgvScheduleManage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvScheduleManage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvScheduleManage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvScheduleManage.Location = new System.Drawing.Point(12, 65);
-            this.dgvScheduleManage.Name = "dgvScheduleManage";
-            this.dgvScheduleManage.Size = new System.Drawing.Size(826, 270);
-            this.dgvScheduleManage.TabIndex = 24;
-            this.dgvScheduleManage.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScheduleManage_CellContentClick);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(318, 37);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(173, 25);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "quản lý lịch tập";
+            this.txtScheduleId.Size = new System.Drawing.Size(465, 26);
+            this.txtScheduleId.TabIndex = 1;
             // 
             // frmSchedule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 695);
-            this.Controls.Add(this.rdoKichHoat);
-            this.Controls.Add(this.rdoChuaKichHoat);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtEndTime);
-            this.Controls.Add(this.cmbMember);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtTime);
-            this.Controls.Add(this.dtpDate);
-            this.Controls.Add(this.cmbTrainer);
-            this.Controls.Add(this.txtScheduleId);
-            this.Controls.Add(this.dgvScheduleManage);
-            this.Controls.Add(this.label9);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.pnlInput);
+            this.Controls.Add(this.dgvTimetable);
+            this.Controls.Add(this.pnlNavigation);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmSchedule";
-            this.Text = "frmSchedule";
+            this.Text = "Quản lý lịch tập";
             this.Load += new System.EventHandler(this.frmSchedule_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvScheduleManage)).EndInit();
+            this.pnlNavigation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).EndInit();
+            this.pnlInput.ResumeLayout(false);
+            this.pnlInput.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RadioButton rdoKichHoat;
-        private System.Windows.Forms.RadioButton rdoChuaKichHoat;
+        private System.Windows.Forms.Panel pnlNavigation;
+        private System.Windows.Forms.Label lblWeekRange;
+        private System.Windows.Forms.Button btnNextWeek;
+        private System.Windows.Forms.Button btnPrevWeek;
+        private System.Windows.Forms.DataGridView dgvTimetable;
+        private System.Windows.Forms.Panel pnlInput;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtNote;
+        private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEndTime;
-        private System.Windows.Forms.ComboBox cmbMember;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtTime;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbTrainer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbMember;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtScheduleId;
-        private System.Windows.Forms.DataGridView dgvScheduleManage;
-        private System.Windows.Forms.Label label9;
     }
 }

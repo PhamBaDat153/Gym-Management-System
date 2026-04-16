@@ -1,0 +1,596 @@
+﻿using Client.DataContext;
+using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+
+namespace Client.Forms.ScheduleManage
+{
+    public partial class frmSchedule : Form
+    {
+        private string selectedScheduleId;
+        private DateTime currentWeekStart; // Monday of the displayed week
+        private DataTable scheduleData;    // Raw schedule rows for the current week
+
+        // Time slot range for the timetable (2-hour sessions)
+        private const int StartHour = 6;
+        private const int EndHour = 22;
+        private const int SlotDuration = 2;
+
+        private static readonly string[] DayHeaders = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN" };
+
+        public frmSchedule()
+        {
+            InitializeComponent();
+        }
+
+        #region Form Load
+
+        private void frmSchedule_Load(object sender, EventArgs e)
+        {
+            LoadCombo();
+            InitTimetableGrid();
+
+            // Start on the Monday of the current week
+            currentWeekStart = GetMonday(DateTime.Today);
+            LoadWeeklyTimetable();
+        }
+
+        #endregion
+
+        #region Combo Loading
+
+        private void LoadCombo()
+        {
+            try
+            {
+                LoadTrainerCombo();
+                LoadMemberCombo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được dữ liệu combo.\n" + ex.Message);
+            }
+        }
+
+        private void LoadTrainerCombo()
+        {
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT e.employee_id, e.employee_name FROM Employee e " +
+                    "JOIN EmployeeRole er ON e.employee_id = er.employee_id " +
+                    "JOIN Role r ON er.role_id = r.role_id " +
+                    "WHERE r.role_name = 'Trainer' AND e.is_active = 1 " +
+                    "ORDER BY e.employee_name", conn))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    cmbTrainer.DataSource = dt;
+                    cmbTrainer.DisplayMember = "employee_name";
+                    cmbTrainer.ValueMember = "employee_id";
+                }
+            }
+        }
+
+        private void LoadMemberCombo()
+        {
+            using (SqlConnection conn = GymManagementSystemContext.Connect())
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    cmbMember.DataSource = dt;
+                    cmbMember.DisplayMember = "member_name";
+                    cmbMember.ValueMember = "member_id";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Timetable Grid Setup
+
+        private void InitTimetableGrid()
+        {
+            dgvTimetable.Columns.Clear();
+            dgvTimetable.Rows.Clear();
+
+            // First column: time slot labels
+            dgvTimetable.Columns.Add("colTime", "Giờ");
+            dgvTimetable.Columns["colTime"].Width = 70;
+            dgvTimetable.Columns["colTime"].DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
+            dgvTimetable.Columns["colTime"].DefaultCellStyle.BackColor = Color.LightGray;
+            dgvTimetable.Columns["colTime"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            // 7 day columns (Mon–Sun)
+            for (int i = 0; i < 7; i++)
+            {
+                var col = new DataGridViewTextBoxColumn
+                {
+                    Name = "colDay" + i,
+                    HeaderText = DayHeaders[i],
+                    SortMode = DataGridViewColumnSortMode.NotSortable,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                };
+                col.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                dgvTimetable.Columns.Add(col);
+            }
+
+            // Add rows for each 2-hour slot
+            for (int h = StartHour; h < EndHour; h += SlotDuration)
+            {
+                int rowIdx = dgvTimetable.Rows.Add();
+                dgvTimetable.Rows[rowIdx].Cells["colTime"].Value = $"{h:D2}:00-{(h + SlotDuration):D2}:00";
+                dgvTimetable.Rows[rowIdx].Height = 48;
+                dgvTimetable.Rows[rowIdx].Tag = h; // store the start hour for lookup
+            }
+
+            dgvTimetable.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 8F);
+            dgvTimetable.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
+            dgvTimetable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        #endregion
+
+        #region Weekly Data Loading
+
+        private void LoadWeeklyTimetable()
+        {
+            UpdateWeekLabel();
+            UpdateDayColumnHeaders();
+            ClearTimetableCells();
+
+            DateTime weekEnd = currentWeekStart.AddDays(6);
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"SELECT s.schedule_id, s.employee_id, e.employee_name,
+                                 s.member_id, m.member_name,
+                                 s.schedule_date, s.session_start, s.session_end,
+                                 s.session_status, s.note
+                          FROM Schedule s
+                          LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                          LEFT JOIN Member m ON s.member_id = m.member_id
+                          WHERE s.schedule_date >= @weekStart AND s.schedule_date <= @weekEnd
+                          ORDER BY s.schedule_date, s.session_start", conn);
+
+                    cmd.Parameters.AddWithValue("@weekStart", currentWeekStart.Date);
+                    cmd.Parameters.AddWithValue("@weekEnd", weekEnd.Date);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    scheduleData = new DataTable();
+                    da.Fill(scheduleData);
+                }
+
+                PopulateTimetable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không tải được dữ liệu.\n" + ex.Message);
+            }
+        }
+
+        private void PopulateTimetable()
+        {
+            if (scheduleData == null) return;
+
+            foreach (DataRow row in scheduleData.Rows)
+            {
+                if (row["schedule_date"] == DBNull.Value || row["session_start"] == DBNull.Value)
+                    continue;
+
+                DateTime schedDate = Convert.ToDateTime(row["schedule_date"]);
+                TimeSpan startTime = ToTimeSpan(row["session_start"]);
+
+                // Determine column index (0=Mon, 6=Sun)
+                int dayOffset = (schedDate.Date - currentWeekStart.Date).Days;
+                if (dayOffset < 0 || dayOffset > 6) continue;
+
+                int colIdx = dayOffset + 1; // +1 because column 0 is the time label
+
+                // Determine row index based on 2-hour slot
+                int hour = startTime.Hours;
+                int rowIdx = (hour - StartHour) / SlotDuration;
+                if (rowIdx < 0 || rowIdx >= dgvTimetable.Rows.Count) continue;
+
+                // Build cell display text
+                string trainer = row["employee_name"] != DBNull.Value ? row["employee_name"].ToString() : "?";
+                string member = row["member_name"] != DBNull.Value ? row["member_name"].ToString() : "?";
+                string note = row["note"] != DBNull.Value ? row["note"].ToString() : "";
+                string endStr = row["session_end"] != DBNull.Value
+                    ? ToTimeSpan(row["session_end"]).ToString(@"hh\:mm")
+                    : "?";
+
+                string existing = dgvTimetable.Rows[rowIdx].Cells[colIdx].Value?.ToString();
+                string cellText = $"{trainer} - {member} ({startTime.ToString(@"hh\:mm")}-{endStr})";
+                if (!string.IsNullOrEmpty(note))
+                    cellText += $"\n  [{note}]";
+
+                if (!string.IsNullOrEmpty(existing))
+                    cellText = existing + "\n" + cellText;
+
+                dgvTimetable.Rows[rowIdx].Cells[colIdx].Value = cellText;
+
+                // Store schedule_id in Tag for single-schedule cells; for multi, store list
+                var cell = dgvTimetable.Rows[rowIdx].Cells[colIdx];
+                if (cell.Tag == null)
+                {
+                    cell.Tag = new List<string> { row["schedule_id"].ToString() };
+                }
+                else
+                {
+                    ((List<string>)cell.Tag).Add(row["schedule_id"].ToString());
+                }
+
+                // Color coding based on status
+                int status = row["session_status"] != DBNull.Value ? Convert.ToInt32(row["session_status"]) : 0;
+                cell.Style.BackColor = status == 1 ? Color.LightGreen : Color.LightCoral;
+            }
+        }
+
+        private void ClearTimetableCells()
+        {
+            for (int r = 0; r < dgvTimetable.Rows.Count; r++)
+            {
+                for (int c = 1; c < dgvTimetable.Columns.Count; c++)
+                {
+                    dgvTimetable.Rows[r].Cells[c].Value = null;
+                    dgvTimetable.Rows[r].Cells[c].Tag = null;
+                    dgvTimetable.Rows[r].Cells[c].Style.BackColor = Color.White;
+                }
+            }
+        }
+
+        private void UpdateWeekLabel()
+        {
+            DateTime weekEnd = currentWeekStart.AddDays(6);
+            lblWeekRange.Text = $"Tuần: {currentWeekStart:dd/MM/yyyy} – {weekEnd:dd/MM/yyyy}";
+        }
+
+        private void UpdateDayColumnHeaders()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                DateTime day = currentWeekStart.AddDays(i);
+                dgvTimetable.Columns["colDay" + i].HeaderText = $"{DayHeaders[i]}\n{day:dd/MM}";
+            }
+        }
+
+        #endregion
+
+        #region Week Navigation
+
+        private void btnPrevWeek_Click(object sender, EventArgs e)
+        {
+            currentWeekStart = currentWeekStart.AddDays(-7);
+            LoadWeeklyTimetable();
+            ClearForm();
+        }
+
+        private void btnNextWeek_Click(object sender, EventArgs e)
+        {
+            currentWeekStart = currentWeekStart.AddDays(7);
+            LoadWeeklyTimetable();
+            ClearForm();
+        }
+
+        #endregion
+
+        #region Timetable Cell Click
+
+        private void dgvTimetable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 1) return;
+
+            var cell = dgvTimetable.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var scheduleIds = cell.Tag as List<string>;
+
+            if (scheduleIds == null || scheduleIds.Count == 0)
+            {
+                // Clicked an empty cell — pre-fill date and time from the cell position
+                int dayOffset = e.ColumnIndex - 1;
+                DateTime clickedDate = currentWeekStart.AddDays(dayOffset);
+                int hour = (int)dgvTimetable.Rows[e.RowIndex].Tag;
+
+                dtpDate.Value = clickedDate;
+                txtTime.Text = $"{hour:D2}:00";
+                txtEndTime.Text = $"{(hour + SlotDuration):D2}:00";
+                selectedScheduleId = null;
+                txtScheduleId.Clear();
+                txtNote.Clear();
+                return;
+            }
+
+            // Load the first schedule in this cell into the form
+            string schedId = scheduleIds[0];
+            LoadScheduleToForm(schedId);
+        }
+
+        private void LoadScheduleToForm(string scheduleId)
+        {
+            if (scheduleData == null) return;
+
+            DataRow[] rows = scheduleData.Select($"schedule_id = '{scheduleId}'");
+            if (rows.Length == 0) return;
+
+            DataRow row = rows[0];
+            try
+            {
+                selectedScheduleId = scheduleId;
+                txtScheduleId.Text = scheduleId;
+
+                if (row["employee_id"] != DBNull.Value)
+                    cmbTrainer.SelectedValue = row["employee_id"];
+
+                if (row["member_id"] != DBNull.Value)
+                    cmbMember.SelectedValue = row["member_id"];
+
+                if (row["schedule_date"] != DBNull.Value)
+                    dtpDate.Value = Convert.ToDateTime(row["schedule_date"]);
+
+                if (row["session_start"] != DBNull.Value)
+                    txtTime.Text = ToTimeSpan(row["session_start"]).ToString(@"hh\:mm");
+
+                if (row["session_end"] != DBNull.Value)
+                    txtEndTime.Text = ToTimeSpan(row["session_end"]).ToString(@"hh\:mm");
+
+                if (row["session_status"] != DBNull.Value)
+                {
+                    int status = Convert.ToInt32(row["session_status"]);
+                    rdoKichHoat.Checked = (status == 1);
+                    rdoChuaKichHoat.Checked = (status == 0);
+                }
+
+                txtNote.Text = row["note"] != DBNull.Value ? row["note"].ToString() : "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Validation & Clear
+
+        private bool ValidateInput(out TimeSpan startTime, out TimeSpan endTime)
+        {
+            startTime = TimeSpan.Zero;
+            endTime = TimeSpan.Zero;
+
+            if (cmbTrainer.SelectedItem == null)
+            {
+                MessageBox.Show("Chọn HLV");
+                return false;
+            }
+
+            if (cmbMember.SelectedItem == null)
+            {
+                MessageBox.Show("Chọn hội viên");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTime.Text) ||
+                string.IsNullOrWhiteSpace(txtEndTime.Text))
+            {
+                MessageBox.Show("Nhập giờ");
+                return false;
+            }
+
+            if (!TimeSpan.TryParse(txtTime.Text, out startTime) ||
+                !TimeSpan.TryParse(txtEndTime.Text, out endTime))
+            {
+                MessageBox.Show("Sai format giờ (HH:mm)");
+                return false;
+            }
+
+            if (startTime >= endTime)
+            {
+                MessageBox.Show("Giờ bắt đầu phải nhỏ hơn giờ kết thúc.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ClearForm()
+        {
+            selectedScheduleId = null;
+            txtScheduleId.Clear();
+            cmbTrainer.SelectedIndex = -1;
+            cmbMember.SelectedIndex = -1;
+            txtTime.Clear();
+            txtEndTime.Clear();
+            txtNote.Clear();
+            dtpDate.Value = DateTime.Now;
+            rdoKichHoat.Checked = true;
+        }
+
+        #endregion
+
+        #region CRUD Operations
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
+        {
+            if (!ValidateInput(out TimeSpan startTime, out TimeSpan endTime)) return;
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            SqlCommand cmd = new SqlCommand(
+                                @"INSERT INTO Schedule
+                                  (schedule_id, employee_id, member_id, schedule_date, session_start, session_end, session_status, note)
+                                  VALUES (@id, @emp, @mem, @date, @start, @end, @status, @note)", conn, tran);
+
+                            Guid id = Guid.NewGuid();
+                            BindScheduleParameters(cmd, id, cmbTrainer.SelectedValue, cmbMember.SelectedValue, startTime, endTime);
+
+                            cmd.ExecuteNonQuery();
+                            tran.Commit();
+
+                            MessageBox.Show("Thêm thành công");
+                            LoadWeeklyTimetable();
+                            ClearForm();
+                        }
+                        catch
+                        {
+                            tran.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm lịch tập: " + ex.Message);
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectedScheduleId))
+            {
+                MessageBox.Show("Chọn lịch cần sửa");
+                return;
+            }
+
+            if (!ValidateInput(out TimeSpan startTime, out TimeSpan endTime)) return;
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"UPDATE Schedule SET
+                          employee_id=@emp, member_id=@mem, schedule_date=@date,
+                          session_start=@start, session_end=@end, session_status=@status, note=@note
+                          WHERE schedule_id=@id", conn);
+
+                    cmd.Parameters.AddWithValue("@id", selectedScheduleId);
+                    BindScheduleParameters(cmd, Guid.Empty, cmbTrainer.SelectedValue, cmbMember.SelectedValue, startTime, endTime);
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Cập nhật thành công");
+                    LoadWeeklyTimetable();
+                    ClearForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi cập nhật lịch tập: " + ex.Message);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(selectedScheduleId))
+            {
+                MessageBox.Show("Hãy chọn lịch cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc muốn xóa lịch này?", "Xác nhận",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes) return;
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+                    using (SqlTransaction tran = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            SqlCommand cmd = new SqlCommand(
+                                "DELETE FROM Schedule WHERE schedule_id = @id", conn, tran);
+                            cmd.Parameters.AddWithValue("@id", selectedScheduleId);
+                            cmd.ExecuteNonQuery();
+                            tran.Commit();
+                        }
+                        catch
+                        {
+                            tran.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Xóa thành công.", "Thông báo");
+                LoadWeeklyTimetable();
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể xóa.\n" + ex.Message, "Lỗi");
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        private void BindScheduleParameters(SqlCommand cmd, Guid scheduleId, object trainerId, object memberId, TimeSpan startTime, TimeSpan endTime)
+        {
+            if (scheduleId != Guid.Empty)
+                cmd.Parameters.AddWithValue("@id", scheduleId);
+
+            cmd.Parameters.AddWithValue("@emp", trainerId);
+            cmd.Parameters.AddWithValue("@mem", memberId);
+            cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
+            cmd.Parameters.Add("@start", SqlDbType.Time).Value = startTime;
+            cmd.Parameters.Add("@end", SqlDbType.Time).Value = endTime;
+            cmd.Parameters.AddWithValue("@status", rdoKichHoat.Checked ? 1 : 0);
+            cmd.Parameters.AddWithValue("@note", (object)txtNote.Text ?? DBNull.Value);
+        }
+
+        private static DateTime GetMonday(DateTime date)
+        {
+            int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
+            return date.AddDays(-diff).Date;
+        }
+
+        private static TimeSpan ToTimeSpan(object value)
+        {
+            if (value is TimeSpan ts) return ts;
+            if (value is DateTime dt) return dt.TimeOfDay;
+            return TimeSpan.Parse(value.ToString());
+        }
+
+        // Kept for backward compatibility with other callers
+        private void label5_Click(object sender, EventArgs e) { }
+        private void label6_Click(object sender, EventArgs e) { }
+        private void label7_Click(object sender, EventArgs e) { }
+        private void cmbTrainer_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void cmbPackage_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void txtScheduleId_TextChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+
+        #endregion
+    }
+}
