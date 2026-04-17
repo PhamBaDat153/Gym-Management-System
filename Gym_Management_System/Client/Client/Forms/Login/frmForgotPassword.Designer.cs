@@ -46,49 +46,55 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(252, 35);
+            this.label1.Location = new System.Drawing.Point(189, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 29);
+            this.label1.Size = new System.Drawing.Size(131, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đổi mật khẩu";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 86);
+            this.label2.Location = new System.Drawing.Point(39, 70);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 16);
+            this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Mã Đăng Nhập:";
             // 
             // txtLoginKey
             // 
-            this.txtLoginKey.Location = new System.Drawing.Point(158, 83);
+            this.txtLoginKey.Location = new System.Drawing.Point(118, 67);
+            this.txtLoginKey.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtLoginKey.Name = "txtLoginKey";
-            this.txtLoginKey.Size = new System.Drawing.Size(374, 22);
+            this.txtLoginKey.Size = new System.Drawing.Size(282, 20);
             this.txtLoginKey.TabIndex = 2;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(158, 123);
+            this.txtEmail.Location = new System.Drawing.Point(118, 100);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(374, 22);
+            this.txtEmail.Size = new System.Drawing.Size(282, 20);
             this.txtEmail.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(108, 126);
+            this.label3.Location = new System.Drawing.Point(81, 102);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Email:";
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(158, 243);
+            this.btnSubmit.Location = new System.Drawing.Point(118, 197);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(176, 56);
+            this.btnSubmit.Size = new System.Drawing.Size(132, 46);
             this.btnSubmit.TabIndex = 5;
             this.btnSubmit.Text = "Xác nhận";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -96,9 +102,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(356, 243);
+            this.btnExit.Location = new System.Drawing.Point(267, 197);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(176, 56);
+            this.btnExit.Size = new System.Drawing.Size(132, 46);
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "Quay lại";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -106,41 +113,45 @@
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Location = new System.Drawing.Point(158, 163);
+            this.txtNewPassword.Location = new System.Drawing.Point(118, 132);
+            this.txtNewPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(374, 22);
+            this.txtNewPassword.Size = new System.Drawing.Size(282, 20);
             this.txtNewPassword.TabIndex = 8;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 169);
+            this.label4.Location = new System.Drawing.Point(46, 137);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 16);
+            this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Mật Khẩu Mới:";
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(158, 203);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(118, 165);
+            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(374, 22);
+            this.txtConfirmPassword.Size = new System.Drawing.Size(282, 20);
             this.txtConfirmPassword.TabIndex = 10;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 209);
+            this.label5.Location = new System.Drawing.Point(20, 170);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 16);
+            this.label5.Size = new System.Drawing.Size(107, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Xác Nhận Mật Khẩu:";
             // 
             // frmForgotPassword
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 311);
+            this.ClientSize = new System.Drawing.Size(419, 253);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtNewPassword);
@@ -153,7 +164,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmForgotPassword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hệ Thống Quản Lý Phòng Gym - Thay Đổi Mật Khẩu";
             this.ResumeLayout(false);
             this.PerformLayout();
