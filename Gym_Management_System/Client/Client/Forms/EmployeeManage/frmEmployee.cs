@@ -1,10 +1,13 @@
 ﻿using Client.DataContext;
 using Client.Models;
+using CloudinaryDotNet;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO;
@@ -18,6 +21,7 @@ namespace Client.Forms.EmployeeManage
         public Employee choosenEmployee;
         
         private string selectedImagePath;
+        private readonly Cloudinary cloudinary;
 
         public frmEmployee()
         {
@@ -26,6 +30,7 @@ namespace Client.Forms.EmployeeManage
             txtDOB.Value = DateTime.Today.AddYears(-18);
             pictureEmployee.Click += pictureEmployee_Click;
             pictureEmployee.Cursor = Cursors.Hand;
+            cloudinary = TryCreateCloudinary();
         }
 
         #region Shared
@@ -200,12 +205,83 @@ namespace Client.Forms.EmployeeManage
             }
         }
 
+        private static Cloudinary TryCreateCloudinary()
+        {
+            try
+            {
+                string cloudName = ConfigurationManager.AppSettings["CloudinaryCloudName"];
+                string apiKey = ConfigurationManager.AppSettings["CloudinaryApiKey"];
+                string apiSecret = ConfigurationManager.AppSettings["CloudinaryApiSecret"];
+
+                if (string.IsNullOrWhiteSpace(cloudName) ||
+                    string.IsNullOrWhiteSpace(apiKey) ||
+                    string.IsNullOrWhiteSpace(apiSecret))
+                {
+                    return null;
+                }
+
+                var account = new Account(cloudName.Trim(), apiKey.Trim(), apiSecret.Trim());
+                return new Cloudinary(account) { Api = { Secure = true } };
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static bool IsHttpUrl(string value)
+        {
+            return Uri.TryCreate(value, UriKind.Absolute, out Uri uri) &&
+                   (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+        }
+
+        private string UploadEmployeeImageToCloudinary(string sourceFilePath, Guid employeeId)
+        {
+            if (cloudinary == null)
+            {
+                throw new InvalidOperationException("Chưa cấu hình Cloudinary trong App.config (CloudinaryCloudName/CloudinaryApiKey/CloudinaryApiSecret).");
+            }
+
+            if (string.IsNullOrWhiteSpace(sourceFilePath) || !File.Exists(sourceFilePath))
+            {
+                throw new FileNotFoundException("Không tìm thấy file ảnh.", sourceFilePath);
+            }
+
+            string folder = ConfigurationManager.AppSettings["CloudinaryEmployeesFolder"];
+            folder = string.IsNullOrWhiteSpace(folder) ? "gym/employees" : folder.Trim().Trim('/');
+
+            var uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams
+            {
+                File = new CloudinaryDotNet.FileDescription(sourceFilePath),
+                Folder = folder,
+                PublicId = "employee_" + employeeId.ToString("N"),
+                Overwrite = true,
+                UniqueFilename = false
+            };
+
+            CloudinaryDotNet.Actions.ImageUploadResult result = cloudinary.Upload(uploadParams);
+            if (result == null || result.StatusCode != HttpStatusCode.OK || result.SecureUrl == null)
+            {
+                string msg = result != null ? result.Error?.Message : null;
+                throw new Exception("Upload ảnh thất bại." + (string.IsNullOrWhiteSpace(msg) ? "" : "\n" + msg));
+            }
+
+            return result.SecureUrl.ToString();
+        }
+
         // Phương thức lưu ảnh
         private string SaveImage(string sourceFilePath)
         {
             if (string.IsNullOrWhiteSpace(sourceFilePath) || !File.Exists(sourceFilePath))
             {
                 return null;
+            }
+
+            if (cloudinary != null)
+            {
+                // Nếu đang chọn một nhân viên cụ thể, dùng employeeId đó để đặt PublicId. Nếu đang tạo mới, dùng Guid mới tạm thời.
+                Guid idForImage = Guid.TryParse(choosenEmployeeId, out Guid parsed) ? parsed : Guid.NewGuid();
+                return UploadEmployeeImageToCloudinary(sourceFilePath, idForImage);
             }
 
             string userImagesFolder = Path.Combine(Application.StartupPath, "UserImages");
@@ -228,7 +304,26 @@ namespace Client.Forms.EmployeeManage
         {
             pictureEmployee.Image = Properties.Resources.defaultUser;
 
-            if (string.IsNullOrWhiteSpace(imagePath) || !File.Exists(imagePath))
+            if (string.IsNullOrWhiteSpace(imagePath))
+            {
+                return;
+            }
+
+            if (IsHttpUrl(imagePath))
+            {
+                try
+                {
+                    pictureEmployee.Load(imagePath);
+                }
+                catch
+                {
+                    pictureEmployee.Image = Properties.Resources.defaultUser;
+                }
+
+                return;
+            }
+
+            if (!File.Exists(imagePath))
             {
                 return;
             }
@@ -816,6 +911,11 @@ namespace Client.Forms.EmployeeManage
 
                 foreach (string imagePath in imagePaths)
                 {
+                    if (string.IsNullOrWhiteSpace(imagePath) || IsHttpUrl(imagePath))
+                    {
+                        continue;
+                    }
+
                     string fullImagePath = Path.GetFullPath(imagePath);
 
                     if (fullImagePath.StartsWith(fullUserImagesFolder, StringComparison.OrdinalIgnoreCase) && File.Exists(fullImagePath))
@@ -976,7 +1076,8 @@ namespace Client.Forms.EmployeeManage
                     MessageBox.Show("Không lưu được ảnh.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            choosenEmployeeId = null;
+            // Không reset choosenEmployeeId ở đây, để người dùng vẫn có thể bấm "Cập nhật"
+            // và lưu selectedImagePath (URL Cloudinary) xuống DB.
         }
 
         #endregion

@@ -14,6 +14,12 @@ namespace Client.Forms.Dashboard
 {
     public partial class frmUserInfo : Form
     {
+        private static bool IsHttpUrl(string value)
+        {
+            return Uri.TryCreate(value, UriKind.Absolute, out Uri uri) &&
+                   (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+        }
+
         public frmUserInfo()
         {
             InitializeComponent();
@@ -21,9 +27,23 @@ namespace Client.Forms.Dashboard
 
         private void frmUserInfo_Load(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(User.ImageUrl) && File.Exists(User.ImageUrl))
+            if (!string.IsNullOrWhiteSpace(User.ImageUrl) && IsHttpUrl(User.ImageUrl))
             {
-                picUser.Image = Image.FromFile(User.ImageUrl);
+                try
+                {
+                    picUser.Load(User.ImageUrl);
+                }
+                catch
+                {
+                    picUser.Image = Properties.Resources.defaultUser;
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(User.ImageUrl) && File.Exists(User.ImageUrl))
+            {
+                using (Image img = Image.FromFile(User.ImageUrl))
+                {
+                    picUser.Image = new Bitmap(img);
+                }
             }
 
             lblName.Text = User.EmployeeName;

@@ -20,6 +20,12 @@ namespace Client.Forms.Dashboard
 {
     public partial class Dashboard : Form
     {
+        private static bool IsHttpUrl(string value)
+        {
+            return Uri.TryCreate(value, UriKind.Absolute, out Uri uri) &&
+                   (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+        }
+
         public Dashboard()
         {
             InitializeComponent();
@@ -30,11 +36,30 @@ namespace Client.Forms.Dashboard
             OpenChildForm(new frmDefault());
             pictureUser.SizeMode = PictureBoxSizeMode.Zoom;
 
-
             string imageUrl = User.ImageUrl;
-            if (!string.IsNullOrWhiteSpace(imageUrl) && File.Exists(imageUrl))
+            if (string.IsNullOrWhiteSpace(imageUrl))
             {
-                pictureUser.Image = Image.FromFile(imageUrl);
+                SetNavigationVisibility();
+                return;
+            }
+
+            if (IsHttpUrl(imageUrl))
+            {
+                try
+                {
+                    pictureUser.Load(imageUrl);
+                }
+                catch
+                {
+                    pictureUser.Image = Properties.Resources.defaultUser;
+                }
+            }
+            else if (File.Exists(imageUrl))
+            {
+                using (Image img = Image.FromFile(imageUrl))
+                {
+                    pictureUser.Image = new Bitmap(img);
+                }
             }
 
             SetNavigationVisibility();
