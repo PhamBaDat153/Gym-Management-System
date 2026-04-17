@@ -20,22 +20,50 @@ namespace Client.Forms.MemberManage
         /// Khi true, bỏ qua SelectionChanged để tránh nạp lại form sau khi gán DataSource (thường auto-chọn dòng đầu).
         /// </summary>
         private bool _suppressGridSelectionSync;
+        private const int MinMemberAgeYears = 15;
+        private DateTime _lastLowRemainingWarningDate = DateTime.MinValue;
+        private string _pendingLowRemainingWarningMessage;
 
+        /// <summary>
+        /// Khởi tạo form quản lý hội viên.
+        /// </summary>
         public frmMember()
         {
             InitializeComponent();
+            Shown += frmMember_Shown;
         }
 
+        /// <summary>
+        /// Form đã hiển thị xong: hiện các thông báo đã xếp hàng (nếu có).
+        /// </summary>
+        private void frmMember_Shown(object sender, EventArgs e)
+        {
+            ShowPendingLowRemainingWarningIfAny();
+        }
+
+        /// <summary>
+        /// Thiết lập trạng thái ban đầu và nạp dữ liệu lên form.
+        /// </summary>
         private void frmMember_Load(object sender, EventArgs e)
         {
             dgvMembers.AutoGenerateColumns = true;
+            dgvMembers.MultiSelect = true;
+            dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             cmbFilter.SelectedIndex = 0;
+
+            // Giới hạn ngày sinh để tuổi >= MinMemberAgeYears (tính theo năm hiện tại - năm sinh).
+            dtpDOB.MaxDate = DateTime.Today.AddYears(-MinMemberAgeYears);
+            dtpDOB.MinDate = DateTimePicker.MinimumDateTime;
+
             LoadPackages();
             LoadPaymentMethods();
             LoadMembers();
             _readyForFilterEvents = true;
         }
 
+        /// <summary>
+        /// Nạp danh sách gói tập còn hoạt động vào combobox.
+        /// </summary>
         private void LoadPackages()
         {
             try
@@ -74,6 +102,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Nạp danh sách hình thức thanh toán vào combobox.
+        /// </summary>
         private void LoadPaymentMethods()
         {
             try
@@ -96,10 +127,15 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Nạp danh sách hội viên theo tìm kiếm/bộ lọc và bind lên lưới.
+        /// </summary>
         private void LoadMembers()
         {
             try
             {
+                UpdateMemberRemainingDurationsOncePerDay();
+
                 var dt = new DataTable();
                 string sql =
                     "SELECT m.member_id, m.member_name, " +
@@ -159,6 +195,7 @@ namespace Client.Forms.MemberManage
                 }
 
                 SetColumnHeaders();
+                WarnLowRemainingDuration(dt);
             }
             catch (Exception ex)
             {
@@ -166,6 +203,149 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Đảm bảo DB có cột theo dõi ngày cập nhật "ngày còn lại" và tự động trừ số ngày đã qua (mỗi ngày trừ đúng 1 lần).
+        /// </summary>
+        private void UpdateMemberRemainingDurationsOncePerDay()
+        {
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                using (SqlCommand cmd = new SqlCommand(
+                    @"
+IF COL_LENGTH('dbo.Member', 'last_duration_update') IS NULL
+BEGIN
+    ALTER TABLE dbo.Member
+    ADD last_duration_update DATE NOT NULL
+        CONSTRAINT DF_Member_last_duration_update DEFAULT (CONVERT(date, GETDATE()));
+END;
+
+DECLARE @today DATE = CONVERT(date, GETDATE());
+
+UPDATE m
+SET
+    m.remaining_duration =
+        CASE
+            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
+            ELSE
+                CASE
+                    WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
+                    ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
+                END
+        END,
+    m.last_duration_update =
+        CASE
+            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.last_duration_update
+            ELSE @today
+        END,
+    m.is_expired =
+        CASE
+            WHEN
+                (CASE
+                    WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
+                    ELSE
+                        CASE
+                            WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
+                            ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
+                        END
+                END) <= 0
+            THEN 1 ELSE 0
+        END
+FROM dbo.Member m;
+",
+                    conn))
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                // Không chặn việc hiển thị form nếu DB không cho ALTER/UPDATE; danh sách vẫn nạp theo dữ liệu hiện có.
+            }
+        }
+
+        /// <summary>
+        /// Thông báo khi có hội viên còn lại từ 1..7 ngày (chỉ thông báo tối đa 1 lần/ngày cho form).
+        /// </summary>
+        private void WarnLowRemainingDuration(DataTable membersTable)
+        {
+            if (membersTable == null || membersTable.Rows.Count == 0)
+            {
+                return;
+            }
+
+            if (_lastLowRemainingWarningDate.Date == DateTime.Today)
+            {
+                return;
+            }
+
+            var names = new List<string>();
+            foreach (DataRow r in membersTable.Rows)
+            {
+                if (r == null)
+                {
+                    continue;
+                }
+
+                if (r.Table.Columns.Contains("remaining_duration") &&
+                    r["remaining_duration"] != DBNull.Value &&
+                    int.TryParse(r["remaining_duration"].ToString(), out int remaining) &&
+                    remaining >= 1 &&
+                    remaining <= 7)
+                {
+                    string name = r.Table.Columns.Contains("member_name") ? r["member_name"]?.ToString() : null;
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        names.Add(name.Trim());
+                    }
+                }
+            }
+
+            if (names.Count == 0)
+            {
+                return;
+            }
+
+            _lastLowRemainingWarningDate = DateTime.Today;
+            int showCount = Math.Min(10, names.Count);
+            string preview = string.Join(", ", names.GetRange(0, showCount));
+            string more = names.Count > showCount ? $"\n... và {names.Count - showCount} hội viên khác." : "";
+
+            _pendingLowRemainingWarningMessage =
+                $"Có {names.Count} hội viên còn lại từ 7 ngày trở xuống.\n{preview}{more}";
+
+            // Nếu form đã hiển thị rồi (Refresh/Search), vẫn đảm bảo cảnh báo hiện "thuận mắt"
+            // bằng cách đẩy sang message loop thay vì hiện ngay giữa lúc đang bind lưới.
+            if (IsHandleCreated && Visible)
+            {
+                BeginInvoke((Action)ShowPendingLowRemainingWarningIfAny);
+            }
+        }
+
+        /// <summary>
+        /// Hiện cảnh báo còn lại 1..7 ngày nếu đang có message chờ.
+        /// </summary>
+        private void ShowPendingLowRemainingWarningIfAny()
+        {
+            if (string.IsNullOrWhiteSpace(_pendingLowRemainingWarningMessage))
+            {
+                return;
+            }
+
+            string msg = _pendingLowRemainingWarningMessage;
+            _pendingLowRemainingWarningMessage = null;
+
+            MessageBox.Show(
+                msg,
+                "Cảnh báo sắp hết hạn",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+        }
+
+        /// <summary>
+        /// Đặt tiêu đề cột và định dạng hiển thị cho lưới danh sách hội viên.
+        /// </summary>
         private void SetColumnHeaders()
         {
             var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -197,6 +377,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Đồng bộ hội viên đang chọn trên lưới sang phần chi tiết (chỉ xử lý theo dòng hiện tại).
+        /// </summary>
         private void dgvMembers_SelectionChanged(object sender, EventArgs e)
         {
             if (_suppressGridSelectionSync)
@@ -226,6 +409,9 @@ namespace Client.Forms.MemberManage
             LoadMemberToForm(memberId);
         }
 
+        /// <summary>
+        /// Nạp thông tin hội viên theo id lên các control chi tiết.
+        /// </summary>
         private void LoadMemberToForm(Guid memberId)
         {
             try
@@ -264,17 +450,17 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Tính tuổi theo yêu cầu: năm hiện tại trừ năm sinh (không xét ngày/tháng sinh).
+        /// </summary>
         private static int ComputeAge(DateTime dateOfBirth)
         {
-            int age = DateTime.Today.Year - dateOfBirth.Year;
-            if (dateOfBirth.Date > DateTime.Today.AddYears(-age))
-            {
-                age--;
-            }
-
-            return age;
+            return DateTime.Today.Year - dateOfBirth.Year;
         }
 
+        /// <summary>
+        /// Kiểm tra dữ liệu nhập trước khi thêm/cập nhật.
+        /// </summary>
         private bool TryValidateInput(out string error)
         {
             error = null;
@@ -282,6 +468,20 @@ namespace Client.Forms.MemberManage
             if (string.IsNullOrWhiteSpace(txtMemberName.Text))
             {
                 error = "Vui lòng nhập họ tên.";
+                return false;
+            }
+
+            DateTime dob = dtpDOB.Value.Date;
+            if (dob > DateTime.Today)
+            {
+                error = "Ngày sinh không hợp lệ.";
+                return false;
+            }
+
+            int age = ComputeAge(dob);
+            if (age < MinMemberAgeYears)
+            {
+                error = $"Hội viên phải từ {MinMemberAgeYears} tuổi trở lên.";
                 return false;
             }
 
@@ -316,16 +516,25 @@ namespace Client.Forms.MemberManage
             return true;
         }
 
+        /// <summary>
+        /// Tải lại danh sách hội viên.
+        /// </summary>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadMembers();
         }
 
+        /// <summary>
+        /// Tìm kiếm theo nội dung ô tìm kiếm và bộ lọc hiện tại.
+        /// </summary>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadMembers();
         }
 
+        /// <summary>
+        /// Áp dụng bộ lọc danh sách khi người dùng thay đổi lựa chọn.
+        /// </summary>
         private void cmbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_readyForFilterEvents)
@@ -336,6 +545,9 @@ namespace Client.Forms.MemberManage
             LoadMembers();
         }
 
+        /// <summary>
+        /// Xóa bộ lọc/tìm kiếm và reset phần chi tiết.
+        /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
             _suppressGridSelectionSync = true;
@@ -387,6 +599,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Thêm hội viên mới từ thông tin trên form.
+        /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!TryValidateInput(out string err))
@@ -436,6 +651,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Cập nhật hội viên đang chọn từ thông tin trên form.
+        /// </summary>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (_selectedMemberId == null)
@@ -497,20 +715,51 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Xóa hội viên: hỗ trợ xóa nhiều dòng đang chọn trên lưới; nếu không chọn nhiều thì xóa theo hội viên hiện tại.
+        /// </summary>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (_selectedMemberId == null)
+            var ids = new List<Guid>();
+
+            if (dgvMembers.SelectedRows != null && dgvMembers.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Chọn một hội viên trong danh sách để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (DataGridViewRow row in dgvMembers.SelectedRows)
+                {
+                    if (row == null || row.IsNewRow)
+                    {
+                        continue;
+                    }
+
+                    if (row.DataBoundItem is DataRowView rv &&
+                        rv.Row.Table.Columns.Contains("member_id") &&
+                        rv["member_id"] != null &&
+                        rv["member_id"] != DBNull.Value)
+                    {
+                        ids.Add((Guid)rv["member_id"]);
+                    }
+                }
+            }
+
+            if (ids.Count == 0 && _selectedMemberId != null)
+            {
+                ids.Add(_selectedMemberId.Value);
+            }
+
+            if (ids.Count == 0)
+            {
+                MessageBox.Show("Chọn ít nhất một hội viên trong danh sách để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBox.Show("Xóa hội viên đã chọn? Các lịch hẹn và hóa đơn liên quan cũng sẽ bị xóa.", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            string msg = ids.Count == 1
+                ? "Xóa hội viên đã chọn? Các lịch hẹn và hóa đơn liên quan cũng sẽ bị xóa."
+                : $"Xóa {ids.Count} hội viên đã chọn? Các lịch hẹn và hóa đơn liên quan cũng sẽ bị xóa.";
+
+            if (MessageBox.Show(msg, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
                 return;
             }
-
-            Guid id = _selectedMemberId.Value;
 
             try
             {
@@ -521,22 +770,25 @@ namespace Client.Forms.MemberManage
                     {
                         try
                         {
-                            using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Schedule WHERE member_id = @id", conn, tx))
+                            foreach (Guid id in ids)
                             {
-                                cmd.Parameters.AddWithValue("@id", id);
-                                cmd.ExecuteNonQuery();
-                            }
+                                using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Schedule WHERE member_id = @id", conn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@id", id);
+                                    cmd.ExecuteNonQuery();
+                                }
 
-                            using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Receipt WHERE member_id = @id", conn, tx))
-                            {
-                                cmd.Parameters.AddWithValue("@id", id);
-                                cmd.ExecuteNonQuery();
-                            }
+                                using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Receipt WHERE member_id = @id", conn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@id", id);
+                                    cmd.ExecuteNonQuery();
+                                }
 
-                            using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Member WHERE member_id = @id", conn, tx))
-                            {
-                                cmd.Parameters.AddWithValue("@id", id);
-                                cmd.ExecuteNonQuery();
+                                using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.Member WHERE member_id = @id", conn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@id", id);
+                                    cmd.ExecuteNonQuery();
+                                }
                             }
 
                             tx.Commit();
@@ -550,7 +802,7 @@ namespace Client.Forms.MemberManage
                 }
 
                 _selectedMemberId = null;
-                MessageBox.Show("Đã xóa hội viên.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ids.Count == 1 ? "Đã xóa hội viên." : $"Đã xóa {ids.Count} hội viên.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnClear_Click(sender, e);
             }
             catch (Exception ex)
@@ -559,6 +811,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Ghi nhận thanh toán, tạo hóa đơn và cộng thêm thời hạn gói cho hội viên đang chọn.
+        /// </summary>
         private void btnRegisterPackage_Click(object sender, EventArgs e)
         {
             if (_selectedMemberId == null)
@@ -643,6 +898,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Xuất danh sách hội viên trên lưới ra file CSV.
+        /// </summary>
         private void btnExportCsv_Click(object sender, EventArgs e)
         {
             if (dgvMembers.Rows.Count == 0)
@@ -720,6 +978,9 @@ namespace Client.Forms.MemberManage
             }
         }
 
+        /// <summary>
+        /// Escape giá trị theo chuẩn CSV (bao dấu nháy và ký tự đặc biệt).
+        /// </summary>
         private static string EscapeCsv(string s)
         {
             if (string.IsNullOrEmpty(s))
@@ -735,9 +996,6 @@ namespace Client.Forms.MemberManage
             return s;
         }
 
-        private void panelButtons_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }
