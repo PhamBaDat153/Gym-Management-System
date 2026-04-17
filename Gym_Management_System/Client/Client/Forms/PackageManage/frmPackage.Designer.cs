@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_find = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.tabCtrl_find_infoP = new System.Windows.Forms.TabControl();
@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_renew = new System.Windows.Forms.Button();
             this.btn_add = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.cbox_daKH = new System.Windows.Forms.CheckBox();
             this.cbox_cKH = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.cbox_khong = new System.Windows.Forms.CheckBox();
             this.txtbox_packagename = new System.Windows.Forms.TextBox();
             this.cbox_co = new System.Windows.Forms.CheckBox();
@@ -59,7 +61,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgv_package = new System.Windows.Forms.DataGridView();
             this.package_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,14 +70,6 @@
             this.with_trainer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.is_active = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.tabCtrl_find_infoP.SuspendLayout();
             this.TabCtrl_find.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -93,9 +86,9 @@
             this.btn_find.BackColor = System.Drawing.Color.Tomato;
             this.btn_find.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_find.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_find.Location = new System.Drawing.Point(552, 113);
+            this.btn_find.Location = new System.Drawing.Point(500, 59);
             this.btn_find.Name = "btn_find";
-            this.btn_find.Size = new System.Drawing.Size(109, 37);
+            this.btn_find.Size = new System.Drawing.Size(163, 58);
             this.btn_find.TabIndex = 3;
             this.btn_find.Text = "Tìm kiếm";
             this.btn_find.UseVisualStyleBackColor = false;
@@ -108,9 +101,9 @@
             this.btn_refresh.BackColor = System.Drawing.Color.AliceBlue;
             this.btn_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_refresh.ForeColor = System.Drawing.Color.Coral;
-            this.btn_refresh.Location = new System.Drawing.Point(552, 163);
+            this.btn_refresh.Location = new System.Drawing.Point(500, 141);
             this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(109, 38);
+            this.btn_refresh.Size = new System.Drawing.Size(163, 60);
             this.btn_refresh.TabIndex = 3;
             this.btn_refresh.Text = "Làm mới bộ lọc";
             this.btn_refresh.UseVisualStyleBackColor = false;
@@ -125,7 +118,7 @@
             this.tabCtrl_find_infoP.Location = new System.Drawing.Point(154, 444);
             this.tabCtrl_find_infoP.Name = "tabCtrl_find_infoP";
             this.tabCtrl_find_infoP.SelectedIndex = 0;
-            this.tabCtrl_find_infoP.Size = new System.Drawing.Size(835, 276);
+            this.tabCtrl_find_infoP.Size = new System.Drawing.Size(835, 271);
             this.tabCtrl_find_infoP.TabIndex = 4;
             this.tabCtrl_find_infoP.SelectedIndexChanged += new System.EventHandler(this.tabCtrl_find_infoP_SelectedIndexChanged);
             // 
@@ -135,8 +128,6 @@
             this.TabCtrl_find.Controls.Add(this.btn_refresh);
             this.TabCtrl_find.Controls.Add(this.cbox_isKH);
             this.TabCtrl_find.Controls.Add(this.cbox_n);
-            this.TabCtrl_find.Controls.Add(this.panel5);
-            this.TabCtrl_find.Controls.Add(this.panel4);
             this.TabCtrl_find.Controls.Add(this.cbox_y);
             this.TabCtrl_find.Controls.Add(this.cbox_notKH);
             this.TabCtrl_find.Controls.Add(this.txtbox_tenGT);
@@ -147,7 +138,7 @@
             this.TabCtrl_find.Location = new System.Drawing.Point(4, 27);
             this.TabCtrl_find.Name = "TabCtrl_find";
             this.TabCtrl_find.Padding = new System.Windows.Forms.Padding(3);
-            this.TabCtrl_find.Size = new System.Drawing.Size(827, 245);
+            this.TabCtrl_find.Size = new System.Drawing.Size(827, 240);
             this.TabCtrl_find.TabIndex = 0;
             this.TabCtrl_find.Text = "Tìm kiếm ";
             this.TabCtrl_find.UseVisualStyleBackColor = true;
@@ -258,6 +249,16 @@
             this.tabPage2.Text = "Thông tin";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel7.Location = new System.Drawing.Point(413, 64);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(398, 10);
+            this.panel7.TabIndex = 6;
+            // 
             // btn_del
             // 
             this.btn_del.BackColor = System.Drawing.Color.Red;
@@ -322,7 +323,7 @@
             // 
             this.cbox_cKH.AutoSize = true;
             this.cbox_cKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbox_cKH.Location = new System.Drawing.Point(17, 57);
+            this.cbox_cKH.Location = new System.Drawing.Point(28, 57);
             this.cbox_cKH.Name = "cbox_cKH";
             this.cbox_cKH.Size = new System.Drawing.Size(152, 20);
             this.cbox_cKH.TabIndex = 21;
@@ -348,6 +349,16 @@
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin gói tập";
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel6.Location = new System.Drawing.Point(0, 33);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(905, 10);
+            this.panel6.TabIndex = 6;
             // 
             // cbox_khong
             // 
@@ -435,29 +446,15 @@
             this.label12.TabIndex = 9;
             this.label12.Text = "Tên gói tập:";
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(50, 21);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Quản lí gói tập";
-            // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dgv_package);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(2, 93);
+            this.groupBox3.Location = new System.Drawing.Point(2, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1139, 324);
+            this.groupBox3.Size = new System.Drawing.Size(1155, 405);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Bảng thông tin gói tập";
@@ -466,14 +463,14 @@
             // 
             this.dgv_package.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_package.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_package.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_package.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_package.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_package.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.package_id,
@@ -486,7 +483,7 @@
             this.dgv_package.Location = new System.Drawing.Point(3, 22);
             this.dgv_package.Name = "dgv_package";
             this.dgv_package.RowHeadersVisible = false;
-            this.dgv_package.Size = new System.Drawing.Size(1133, 299);
+            this.dgv_package.Size = new System.Drawing.Size(1149, 380);
             this.dgv_package.TabIndex = 2;
             // 
             // package_id
@@ -524,99 +521,18 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel1.Location = new System.Drawing.Point(-1, 55);
+            this.panel1.Location = new System.Drawing.Point(2, 428);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1155, 10);
             this.panel1.TabIndex = 6;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel2.Location = new System.Drawing.Point(-1, 39);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(46, 10);
-            this.panel2.TabIndex = 6;
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel3.Location = new System.Drawing.Point(249, 39);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(905, 10);
-            this.panel3.TabIndex = 6;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.panel4.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel4.Location = new System.Drawing.Point(476, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(112, 260);
-            this.panel4.TabIndex = 6;
-            // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.panel5.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel5.Location = new System.Drawing.Point(594, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(41, 260);
-            this.panel5.TabIndex = 6;
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel6.Location = new System.Drawing.Point(0, 33);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(905, 10);
-            this.panel6.TabIndex = 6;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel7.Location = new System.Drawing.Point(413, 64);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(398, 10);
-            this.panel7.TabIndex = 6;
-            // 
-            // panel8
-            // 
-            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel8.Location = new System.Drawing.Point(-7, 428);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1167, 10);
-            this.panel8.TabIndex = 6;
-            // 
-            // panel9
-            // 
-            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel9.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel9.Location = new System.Drawing.Point(-7, 737);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1164, 10);
-            this.panel9.TabIndex = 6;
             // 
             // frmPackage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 813);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel9);
-            this.Controls.Add(this.panel8);
+            this.ClientSize = new System.Drawing.Size(1156, 788);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tabCtrl_find_infoP);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmPackage";
@@ -633,7 +549,6 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_package)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -656,7 +571,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button btn_del;
         private System.Windows.Forms.Button btn_add;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgv_package;
         private System.Windows.Forms.Panel panel1;
@@ -674,17 +588,11 @@
         private System.Windows.Forms.CheckBox cbox_cKH;
         private System.Windows.Forms.CheckBox cbox_khong;
         private System.Windows.Forms.CheckBox cbox_co;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox cbox_n;
         private System.Windows.Forms.CheckBox cbox_y;
         private System.Windows.Forms.CheckBox cbox_isKH;
         private System.Windows.Forms.CheckBox cbox_notKH;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel9;
     }
 }
