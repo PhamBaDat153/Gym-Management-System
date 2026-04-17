@@ -1,8 +1,6 @@
 
-CREATE DATABASE GymManagementSystem;
-GO
 
-USE GymManagementSystem;
+USE db48275;
 GO
 
 -- 2. Drop Tables (in order of dependency)

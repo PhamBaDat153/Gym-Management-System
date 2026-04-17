@@ -1,4 +1,4 @@
-namespace Client.Forms.ScheduleBrowse
+﻿namespace Client.Forms.ScheduleBrowse
 {
     partial class frmBrowse
     {
@@ -138,10 +138,10 @@ namespace Client.Forms.ScheduleBrowse
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(459, 20);
+            this.lblStatus.Location = new System.Drawing.Point(16, 668);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(70, 16);
+            this.lblStatus.Size = new System.Drawing.Size(75, 16);
             this.lblStatus.TabIndex = 10;
             this.lblStatus.Text = "Trạng thái:";
             // 
@@ -149,7 +149,7 @@ namespace Client.Forms.ScheduleBrowse
             // 
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(543, 16);
+            this.cmbStatus.Location = new System.Drawing.Point(100, 664);
             this.cmbStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(200, 24);
@@ -157,7 +157,7 @@ namespace Client.Forms.ScheduleBrowse
             // 
             // btnUpdateStatus
             // 
-            this.btnUpdateStatus.Location = new System.Drawing.Point(759, 13);
+            this.btnUpdateStatus.Location = new System.Drawing.Point(316, 661);
             this.btnUpdateStatus.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateStatus.Name = "btnUpdateStatus";
             this.btnUpdateStatus.Size = new System.Drawing.Size(140, 31);
@@ -167,7 +167,7 @@ namespace Client.Forms.ScheduleBrowse
             this.btnUpdateStatus.Click += new System.EventHandler(this.btnUpdateStatus_Click);
             // 
             // frmBrowse
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 690);

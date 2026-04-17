@@ -63,58 +63,10 @@ namespace Client.Forms.ScheduleManage
                 LoadTrainerCombo();
                 LoadMemberCombo();
                 LoadStatusCombo();
-                LoadFilterCombos();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Không tải được dữ liệu combo.\n" + ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Tải dữ liệu cho các combobox lọc (HLV và hội viên) với dòng "-- Tất cả --" ở đầu.
-        /// </summary>
-        private void LoadFilterCombos()
-        {
-            using (SqlConnection conn = GymManagementSystemContext.Connect())
-            {
-                // Filter Trainer combo
-                using (SqlDataAdapter da = new SqlDataAdapter(
-                    "SELECT e.employee_id, e.employee_name FROM Employee e " +
-                    "JOIN EmployeeRole er ON e.employee_id = er.employee_id " +
-                    "JOIN Role r ON er.role_id = r.role_id " +
-                    "WHERE r.role_name = 'Trainer' AND e.is_active = 1 " +
-                    "ORDER BY e.employee_name", conn))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    DataRow allRow = dt.NewRow();
-                    allRow["employee_name"] = "-- Tất cả --";
-                    dt.Rows.InsertAt(allRow, 0);
-
-                    cmbFilterTrainer.DataSource = dt;
-                    cmbFilterTrainer.DisplayMember = "employee_name";
-                    cmbFilterTrainer.ValueMember = "employee_id";
-                    cmbFilterTrainer.SelectedIndex = 0;
-                }
-
-                // Filter Member combo
-                using (SqlDataAdapter da = new SqlDataAdapter(
-                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    DataRow allRow = dt.NewRow();
-                    allRow["member_name"] = "-- Tất cả --";
-                    dt.Rows.InsertAt(allRow, 0);
-
-                    cmbFilterMember.DataSource = dt;
-                    cmbFilterMember.DisplayMember = "member_name";
-                    cmbFilterMember.ValueMember = "member_id";
-                    cmbFilterMember.SelectedIndex = 0;
-                }
             }
         }
 
@@ -253,43 +205,22 @@ namespace Client.Forms.ScheduleManage
 
             try
             {
-                string query = @"
-                    SELECT s.schedule_id, s.employee_id, e.employee_name,
-                           s.member_id, m.member_name,
-                           s.schedule_date, s.session_start, s.session_end,
-                           s.session_status, s.note
-                    FROM Schedule s
-                    LEFT JOIN Employee e ON s.employee_id = e.employee_id
-                    LEFT JOIN Member m ON s.member_id = m.member_id
-                    WHERE s.schedule_date >= @weekStart AND s.schedule_date <= @weekEnd";
-
-                List<SqlParameter> parameters = new List<SqlParameter>
-                {
-                    new SqlParameter("@weekStart", currentWeekStart.Date),
-                    new SqlParameter("@weekEnd", weekEnd.Date)
-                };
-
-                // Apply trainer filter
-                if (cmbFilterTrainer.SelectedIndex > 0 && cmbFilterTrainer.SelectedValue != null && cmbFilterTrainer.SelectedValue != DBNull.Value)
-                {
-                    query += " AND s.employee_id = @empId";
-                    parameters.Add(new SqlParameter("@empId", cmbFilterTrainer.SelectedValue));
-                }
-
-                // Apply member filter
-                if (cmbFilterMember.SelectedIndex > 0 && cmbFilterMember.SelectedValue != null && cmbFilterMember.SelectedValue != DBNull.Value)
-                {
-                    query += " AND s.member_id = @memId";
-                    parameters.Add(new SqlParameter("@memId", cmbFilterMember.SelectedValue));
-                }
-
-                query += " ORDER BY s.schedule_date, s.session_start";
-
                 using (SqlConnection conn = GymManagementSystemContext.Connect())
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddRange(parameters.ToArray());
+                    SqlCommand cmd = new SqlCommand(
+                        @"SELECT s.schedule_id, s.employee_id, e.employee_name,
+                                 s.member_id, m.member_name,
+                                 s.schedule_date, s.session_start, s.session_end,
+                                 s.session_status, s.note
+                          FROM Schedule s
+                          LEFT JOIN Employee e ON s.employee_id = e.employee_id
+                          LEFT JOIN Member m ON s.member_id = m.member_id
+                          WHERE s.schedule_date >= @weekStart AND s.schedule_date <= @weekEnd
+                          ORDER BY s.schedule_date, s.session_start", conn);
+
+                    cmd.Parameters.AddWithValue("@weekStart", currentWeekStart.Date);
+                    cmd.Parameters.AddWithValue("@weekEnd", weekEnd.Date);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     scheduleData = new DataTable();
@@ -793,14 +724,6 @@ namespace Client.Forms.ScheduleManage
             if (value is TimeSpan ts) return ts;
             if (value is DateTime dt) return dt.TimeOfDay;
             return TimeSpan.Parse(value.ToString());
-        }
-
-        /// <summary>
-        /// Sự kiện nút Tìm kiếm. Tải lại lưới theo bộ lọc HLV và hội viên.
-        /// </summary>
-        private void btnFilter_Click(object sender, EventArgs e)
-        {
-            LoadWeeklyTimetable();
         }
 
         // Kept for backward compatibility with other callers

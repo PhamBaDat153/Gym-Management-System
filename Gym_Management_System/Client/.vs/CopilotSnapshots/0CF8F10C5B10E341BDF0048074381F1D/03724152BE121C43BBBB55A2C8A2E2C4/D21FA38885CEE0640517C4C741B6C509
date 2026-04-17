@@ -1,4 +1,4 @@
-namespace Client.Forms.ScheduleManage
+﻿namespace Client.Forms.ScheduleManage
 {
     partial class frmSchedule
     {
@@ -28,12 +28,6 @@ namespace Client.Forms.ScheduleManage
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlFilter = new System.Windows.Forms.Panel();
-            this.btnFilter = new System.Windows.Forms.Button();
-            this.cmbFilterMember = new System.Windows.Forms.ComboBox();
-            this.lblFilterMember = new System.Windows.Forms.Label();
-            this.cmbFilterTrainer = new System.Windows.Forms.ComboBox();
-            this.lblFilterTrainer = new System.Windows.Forms.Label();
             this.pnlNavigation = new System.Windows.Forms.Panel();
             this.lblWeekRange = new System.Windows.Forms.Label();
             this.btnNextWeek = new System.Windows.Forms.Button();
@@ -60,77 +54,10 @@ namespace Client.Forms.ScheduleManage
             this.cmbMember = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtScheduleId = new System.Windows.Forms.TextBox();
-            this.pnlFilter.SuspendLayout();
             this.pnlNavigation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).BeginInit();
             this.pnlInput.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlFilter
-            // 
-            this.pnlFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFilter.Controls.Add(this.btnFilter);
-            this.pnlFilter.Controls.Add(this.cmbFilterMember);
-            this.pnlFilter.Controls.Add(this.lblFilterMember);
-            this.pnlFilter.Controls.Add(this.cmbFilterTrainer);
-            this.pnlFilter.Controls.Add(this.lblFilterTrainer);
-            this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilter.Location = new System.Drawing.Point(0, 43);
-            this.pnlFilter.Margin = new System.Windows.Forms.Padding(5);
-            this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1924, 40);
-            this.pnlFilter.TabIndex = 30;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnFilter.Location = new System.Drawing.Point(850, 5);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(120, 32);
-            this.btnFilter.TabIndex = 4;
-            this.btnFilter.Text = "Tìm kiếm";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
-            // 
-            // cmbFilterMember
-            // 
-            this.cmbFilterMember.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFilterMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cmbFilterMember.FormattingEnabled = true;
-            this.cmbFilterMember.Location = new System.Drawing.Point(530, 7);
-            this.cmbFilterMember.Name = "cmbFilterMember";
-            this.cmbFilterMember.Size = new System.Drawing.Size(300, 28);
-            this.cmbFilterMember.TabIndex = 3;
-            // 
-            // lblFilterMember
-            // 
-            this.lblFilterMember.AutoSize = true;
-            this.lblFilterMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblFilterMember.Location = new System.Drawing.Point(420, 10);
-            this.lblFilterMember.Name = "lblFilterMember";
-            this.lblFilterMember.Size = new System.Drawing.Size(99, 20);
-            this.lblFilterMember.TabIndex = 2;
-            this.lblFilterMember.Text = "Lọc hội viên";
-            // 
-            // cmbFilterTrainer
-            // 
-            this.cmbFilterTrainer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFilterTrainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cmbFilterTrainer.FormattingEnabled = true;
-            this.cmbFilterTrainer.Location = new System.Drawing.Point(100, 7);
-            this.cmbFilterTrainer.Name = "cmbFilterTrainer";
-            this.cmbFilterTrainer.Size = new System.Drawing.Size(300, 28);
-            this.cmbFilterTrainer.TabIndex = 1;
-            // 
-            // lblFilterTrainer
-            // 
-            this.lblFilterTrainer.AutoSize = true;
-            this.lblFilterTrainer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblFilterTrainer.Location = new System.Drawing.Point(13, 10);
-            this.lblFilterTrainer.Name = "lblFilterTrainer";
-            this.lblFilterTrainer.Size = new System.Drawing.Size(76, 20);
-            this.lblFilterTrainer.TabIndex = 0;
-            this.lblFilterTrainer.Text = "Lọc HLV";
             // 
             // pnlNavigation
             // 
@@ -146,11 +73,10 @@ namespace Client.Forms.ScheduleManage
             // 
             // lblWeekRange
             // 
-            this.lblWeekRange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWeekRange.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWeekRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.lblWeekRange.Location = new System.Drawing.Point(187, 0);
-            this.lblWeekRange.Margin = new System.Windows.Forms.Padding(5);
+            this.lblWeekRange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWeekRange.Name = "lblWeekRange";
             this.lblWeekRange.Size = new System.Drawing.Size(1550, 43);
             this.lblWeekRange.TabIndex = 1;
@@ -192,21 +118,20 @@ namespace Client.Forms.ScheduleManage
             this.dgvTimetable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTimetable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTimetable.Location = new System.Drawing.Point(0, 83);
-            this.dgvTimetable.Margin = new System.Windows.Forms.Padding(5);
+            this.dgvTimetable.Location = new System.Drawing.Point(0, 43);
+            this.dgvTimetable.Margin = new System.Windows.Forms.Padding(4);
             this.dgvTimetable.MultiSelect = false;
             this.dgvTimetable.Name = "dgvTimetable";
             this.dgvTimetable.ReadOnly = true;
             this.dgvTimetable.RowHeadersVisible = false;
             this.dgvTimetable.RowHeadersWidth = 51;
             this.dgvTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvTimetable.Size = new System.Drawing.Size(1924, 972);
+            this.dgvTimetable.Size = new System.Drawing.Size(1924, 1012);
             this.dgvTimetable.TabIndex = 2;
             this.dgvTimetable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTimetable_CellClick);
             // 
             // pnlInput
             // 
-            this.pnlInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlInput.Controls.Add(this.btnClear);
             this.pnlInput.Controls.Add(this.btnDelete);
             this.pnlInput.Controls.Add(this.btnUpdate);
@@ -229,7 +154,7 @@ namespace Client.Forms.ScheduleManage
             this.pnlInput.Controls.Add(this.txtScheduleId);
             this.pnlInput.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlInput.Location = new System.Drawing.Point(0, 774);
-            this.pnlInput.Margin = new System.Windows.Forms.Padding(5);
+            this.pnlInput.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInput.Name = "pnlInput";
             this.pnlInput.Size = new System.Drawing.Size(1924, 281);
             this.pnlInput.TabIndex = 3;
@@ -456,14 +381,11 @@ namespace Client.Forms.ScheduleManage
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.pnlInput);
             this.Controls.Add(this.dgvTimetable);
-            this.Controls.Add(this.pnlFilter);
             this.Controls.Add(this.pnlNavigation);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSchedule";
             this.Text = "Quản lý lịch tập";
             this.Load += new System.EventHandler(this.frmSchedule_Load);
-            this.pnlFilter.ResumeLayout(false);
-            this.pnlFilter.PerformLayout();
             this.pnlNavigation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTimetable)).EndInit();
             this.pnlInput.ResumeLayout(false);
@@ -499,11 +421,5 @@ namespace Client.Forms.ScheduleManage
         private System.Windows.Forms.ComboBox cmbMember;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtScheduleId;
-        private System.Windows.Forms.Panel pnlFilter;
-        private System.Windows.Forms.Label lblFilterTrainer;
-        private System.Windows.Forms.ComboBox cmbFilterTrainer;
-        private System.Windows.Forms.Label lblFilterMember;
-        private System.Windows.Forms.ComboBox cmbFilterMember;
-        private System.Windows.Forms.Button btnFilter;
     }
 }

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+	<connectionStrings>
+		<add name="GymManagementSystem" connectionString="Server=db48275.databaseasp.net;Database=db48275;User Id=db48275;Password=Eh3#2!oK%jC5;Encrypt=False;MultipleActiveResultSets=True;" />
+	
+	</connectionStrings>
+</configuration>

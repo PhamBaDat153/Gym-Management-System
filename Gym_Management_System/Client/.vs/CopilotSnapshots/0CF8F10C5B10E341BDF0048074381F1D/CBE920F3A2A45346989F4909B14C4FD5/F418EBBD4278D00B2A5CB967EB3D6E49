@@ -1,4 +1,4 @@
-using Client.DataContext;
+﻿using Client.DataContext;
 using System;
 using System.Data;
 using System.Collections.Generic;
@@ -12,7 +12,6 @@ namespace Client.Forms.ScheduleBrowse
     {
         private DateTime currentWeekStart;
         private DataTable scheduleData;
-        private string selectedScheduleId;
 
         private const int StartHour = 6;
         private const int EndHour = 22;
@@ -65,7 +64,6 @@ namespace Client.Forms.ScheduleBrowse
             try
             {
                 LoadMemberCombo();
-                LoadStatusCombo();
             }
             catch (Exception ex)
             {
@@ -96,26 +94,6 @@ namespace Client.Forms.ScheduleBrowse
                     cmbMember.DisplayMember = "member_name";
                     cmbMember.ValueMember = "member_id";
                     cmbMember.SelectedIndex = 0;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Tải danh sách trạng thái buổi tập từ bảng SessionStatus.
-        /// Gán dữ liệu vào combobox cmbStatus.
-        /// </summary>
-        private void LoadStatusCombo()
-        {
-            using (SqlConnection conn = GymManagementSystemContext.Connect())
-            {
-                using (SqlDataAdapter da = new SqlDataAdapter(
-                    "SELECT status_id, status FROM SessionStatus ORDER BY status_id", conn))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    cmbStatus.DataSource = dt;
-                    cmbStatus.DisplayMember = "status";
-                    cmbStatus.ValueMember = "status_id";
                 }
             }
         }
@@ -283,18 +261,8 @@ namespace Client.Forms.ScheduleBrowse
 
                 dgvTimetable.Rows[rowIdx].Cells[colIdx].Value = cellText;
 
-                // Store schedule_id in Tag for selection
-                var cell = dgvTimetable.Rows[rowIdx].Cells[colIdx];
-                if (cell.Tag == null)
-                {
-                    cell.Tag = new List<string> { row["schedule_id"].ToString() };
-                }
-                else
-                {
-                    ((List<string>)cell.Tag).Add(row["schedule_id"].ToString());
-                }
-
                 // Color coding based on status
+                var cell = dgvTimetable.Rows[rowIdx].Cells[colIdx];
                 int status = row["session_status"] != DBNull.Value ? Convert.ToInt32(row["session_status"]) : 1;
                 if (status == 3)
                     cell.Style.BackColor = Color.LightGreen;
@@ -365,94 +333,6 @@ namespace Client.Forms.ScheduleBrowse
         {
             currentWeekStart = currentWeekStart.AddDays(7);
             LoadWeeklyTimetable();
-        }
-
-        #endregion
-
-        #region Timetable Cell Click
-
-        /// <summary>
-        /// Sự kiện khi click vào ô trong lưới thời khoá biểu.
-        /// Nếu ô có lịch tập: tải thông tin lịch tập đầu tiên và hiển thị,
-        /// cho phép cập nhật trạng thái.
-        /// </summary>
-        private void dgvTimetable_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex < 1) return;
-
-            var cell = dgvTimetable.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            var scheduleIds = cell.Tag as List<string>;
-
-            if (scheduleIds == null || scheduleIds.Count == 0)
-            {
-                selectedScheduleId = null;
-                lblScheduleInfo.Text = "";
-                return;
-            }
-
-            string schedId = scheduleIds[0];
-            selectedScheduleId = schedId;
-
-            if (scheduleData == null) return;
-
-            DataRow[] rows = scheduleData.Select($"schedule_id = '{schedId}'");
-            if (rows.Length == 0) return;
-
-            DataRow row = rows[0];
-            string trainer = row["employee_name"] != DBNull.Value ? row["employee_name"].ToString() : "?";
-            string member = row["member_name"] != DBNull.Value ? row["member_name"].ToString() : "?";
-            string startStr = row["session_start"] != DBNull.Value ? ToTimeSpan(row["session_start"]).ToString(@"hh\:mm") : "?";
-            string endStr = row["session_end"] != DBNull.Value ? ToTimeSpan(row["session_end"]).ToString(@"hh\:mm") : "?";
-
-            lblScheduleInfo.Text = $"Đã chọn: {trainer} - {member} ({startStr}-{endStr})";
-
-            if (row["session_status"] != DBNull.Value)
-                cmbStatus.SelectedValue = Convert.ToInt32(row["session_status"]);
-        }
-
-        #endregion
-
-        #region Update Status
-
-        /// <summary>
-        /// Sự kiện nút Cập nhật trạng thái.
-        /// Cập nhật trạng thái buổi tập cho lịch đã chọn.
-        /// </summary>
-        private void btnUpdateStatus_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(selectedScheduleId))
-            {
-                MessageBox.Show("Hãy chọn một buổi tập trên lưới.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (cmbStatus.SelectedValue == null)
-            {
-                MessageBox.Show("Chọn trạng thái.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                using (SqlConnection conn = GymManagementSystemContext.Connect())
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(
-                        "UPDATE Schedule SET session_status = @status WHERE schedule_id = @id", conn);
-                    cmd.Parameters.AddWithValue("@status", cmbStatus.SelectedValue);
-                    cmd.Parameters.AddWithValue("@id", Guid.Parse(selectedScheduleId));
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Cập nhật trạng thái thành công.", "Thông báo");
-                selectedScheduleId = null;
-                lblScheduleInfo.Text = "";
-                LoadWeeklyTimetable();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi cập nhật trạng thái.\n" + ex.Message, "Lỗi");
-            }
         }
 
         #endregion

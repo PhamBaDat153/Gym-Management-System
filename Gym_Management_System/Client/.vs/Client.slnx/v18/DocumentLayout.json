@@ -3,28 +3,42 @@
   "WorkspaceRootPath": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulemanage\\frmschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\models\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +47,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -82,12 +92,6 @@
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulemanage\\frmschedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -99,7 +103,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -119,51 +123,47 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmDefault.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "DocumentIndex": 0,
+              "Title": "frmEmployee.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:33:05.669Z",
+              "WhenOpened": "2026-04-17T07:13:13.987Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmBrowse.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:16:11.117Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "frmBrowse.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:30:24.359Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "frmBrowse.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAIBQwJ0BAAAAAAAAAAAAAA==",
+              "Title": "frmBrowse.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs",
+              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:15:28.92Z",
+              "WhenOpened": "2026-04-16T12:14:09.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmBrowse.cs",
+              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs",
+              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:14:47.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "frmSchedule.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-903485872\\frmSchedule.Designer.cs",
+              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-903485872\\frmSchedule.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:41:42.119Z",
               "EditorCaption": ""
             },
             {
@@ -172,87 +172,119 @@
               "Title": "frmSchedule.cs [Design]",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.cs [Design]",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs [Design]*",
+              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:04:14.285Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-04-16T12:04:14.285Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
+              "Title": "frmDefault.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:33:05.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\App.config",
+              "RelativeDocumentMoniker": "Client\\App.config",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\App.config",
+              "RelativeToolTip": "Client\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-15T00:08:16.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmBrowse.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:15:28.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frmBrowse.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:16:11.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "frmSchedule.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.cs",
-              "ViewState": "AgIAANoCAAAAAAAAAAAwwAsAAAAZAAAAAAAAAA==",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.cs*",
+              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.cs*",
+              "ViewState": "AgIAAEAAAAAAAAAAAIBJwAsAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T11:21:46.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T11:21:46.953Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "frmSchedule.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-903485872\\frmSchedule.Designer.cs",
-              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-903485872\\frmSchedule.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T10:41:42.119Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "frmBrowse.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs",
-              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAABRwMMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:14:09.855Z"
+              "WhenOpened": "2026-04-16T12:30:24.359Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "Dashboard.cs [Design]",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.cs",
               "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs [Design]",
               "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T10:38:57.531Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "frmBrowse.cs",
-              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs",
-              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-3396459\\frmBrowse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:14:47.848Z"
+              "WhenOpened": "2026-04-16T10:38:57.531Z"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "frmSchedule.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKgBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T12:02:29.443Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 22,
+              "Title": "frmSchedule.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs*",
+              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs*",
+              "ViewState": "AgIAABEAAAAAAAAAAIBZwPsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:02:29.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Schedule.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Models\\Schedule.cs",
               "RelativeDocumentMoniker": "Client\\Models\\Schedule.cs",
@@ -264,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Dashboard.Designer.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
@@ -272,25 +304,11 @@
               "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T11:15:11.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T11:15:11.543Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "App.config",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\App.config",
-              "RelativeDocumentMoniker": "Client\\App.config",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\App.config",
-              "RelativeToolTip": "Client\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-04-15T00:08:16.574Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "frmPackage.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
@@ -302,7 +320,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "frmPackage.cs [Design]",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
@@ -313,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "frmForgotPassword.cs [Design]",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.cs",
@@ -323,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "frmForgotPassword.Designer.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
@@ -335,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "frmForgotPassword.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.cs",
@@ -347,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "frmLogin.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.cs",
@@ -359,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "frmForgetPassword.Designer.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgetPassword.Designer.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgetPassword.Designer.cs",
@@ -371,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "frmEmployee.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
@@ -383,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "Package.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Models\\Package.cs",
               "RelativeDocumentMoniker": "Client\\Models\\Package.cs",
