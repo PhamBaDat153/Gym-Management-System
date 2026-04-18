@@ -113,47 +113,24 @@ namespace Client.Forms.EmployeeManage
                     throw new Exception("DataGridView chưa được khởi tạo.");
                 }
 
-                // Ensure columns exist (defensive for runtime cases where designer columns may not be present)
-                if (dgvEmployee.Columns.Count == 0)
-                {
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colName", HeaderText = "Tên nhân viên" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colEmail", HeaderText = "Email" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colPhoneNumber", HeaderText = "Số điện thoại" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colRole", HeaderText = "Chức vụ" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colDOB", HeaderText = "Ngày sinh" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colHireDate", HeaderText = "Ngày nhận việc" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colSalary", HeaderText = "Lương" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colStatus", HeaderText = "Trạng thái nhân viên" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colIsActive", HeaderText = "Trạng thái tài khoản" });
-                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colID", HeaderText = "Mã nhân viên" });
-                }
-
                 dgvEmployee.Rows.Clear();
 
                 foreach (Employee employee in employees)
                 {
-                    try
-                    {
-                        int rowIndex = dgvEmployee.Rows.Add(
-                            employee.EmployeeName,
-                            employee.Email,
-                            employee.PhoneNumber,
-                            employee.Roles.Any() ? employee.Roles.First().RoleName : "",
-                            employee.DateOfBirth.ToString("dd/MM/yyyy"),
-                            employee.HireDate.ToString("dd/MM/yyyy"),
-                            employee.Salary.ToString("N0"),
-                            employee.Status ? "Khả dụng" : "Không khả dụng",
-                            employee.IsActive ? "Đang hoạt động" : "Ngừng hoạt động",
-                            employee.EmployeeId.ToString()
-                        );
+                    int rowIndex = dgvEmployee.Rows.Add(
+                        employee.EmployeeName,
+                        employee.Email,
+                        employee.PhoneNumber,
+                        employee.Roles.Any() ? employee.Roles.First().RoleName : "",
+                        employee.DateOfBirth.ToString("dd/MM/yyyy"),
+                        employee.HireDate.ToString("dd/MM/yyyy"),
+                        employee.Salary.ToString("N0"),
+                        employee.Status ? "Khả dụng" : "Không khả dụng",
+                        employee.IsActive ? "Đang hoạt động" : "Ngừng hoạt động",
+                        employee.EmployeeId.ToString()
+                    );
 
-                        dgvEmployee.Rows[rowIndex].Tag = employee.EmployeeId;
-                    }
-                    catch (Exception rowEx)
-                    {
-                        // Skip problematic row but continue loading others
-                        System.Diagnostics.Debug.WriteLine("Failed to add employee row: " + rowEx);
-                    }
+                    dgvEmployee.Rows[rowIndex].Tag = employee.EmployeeId;
                 }
 
                 dgvEmployee.AutoResizeColumns();
@@ -533,14 +510,12 @@ namespace Client.Forms.EmployeeManage
             }
 
             DataGridViewRow selectedRow = dgvEmployee.SelectedRows[0];
-            if (selectedRow.Tag == null) return;
             Guid employeeId = (Guid)selectedRow.Tag;
             choosenEmployeeId = employeeId.ToString();
             txtNameInfo.Text = Convert.ToString(selectedRow.Cells[0].Value);
             txtEmailInfo.Text = Convert.ToString(selectedRow.Cells[1].Value);
             txtPhoneNumberInfo.Text = Convert.ToString(selectedRow.Cells[2].Value);
             txtSalaryInfo.Text = Convert.ToString(selectedRow.Cells[6].Value);
-            txtPassword.Clear();
 
             if (DateTime.TryParseExact(Convert.ToString(selectedRow.Cells[4].Value), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dateOfBirth))
             {
@@ -756,90 +731,6 @@ namespace Client.Forms.EmployeeManage
             return true;
         }
 
-        private bool ValidateInfoInputForUpdate()
-        {
-            if (txtLoginKey.Visible && string.IsNullOrWhiteSpace(txtLoginKey.Text))
-            {
-                MessageBox.Show("Login key không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtLoginKey.Focus();
-                return false;
-            }
-
-      
-
-            if (string.IsNullOrWhiteSpace(txtNameInfo.Text))
-            {
-                MessageBox.Show("Tên nhân viên không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNameInfo.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtEmailInfo.Text))
-            {
-                MessageBox.Show("Email không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmailInfo.Focus();
-                return false;
-            }
-
-            if (!Regex.IsMatch(txtEmailInfo.Text.Trim(), @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
-            {
-                MessageBox.Show("Email không đúng định dạng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmailInfo.Focus();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtPhoneNumberInfo.Text))
-            {
-                MessageBox.Show("Số điện thoại không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtPhoneNumberInfo.Focus();
-                return false;
-            }
-
-            if (!Regex.IsMatch(txtPhoneNumberInfo.Text.Trim(), @"^\d{10,11}$"))
-            {
-                MessageBox.Show("Số điện thoại phải gồm 10 hoặc 11 chữ số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtPhoneNumberInfo.Focus();
-                return false;
-            }
-
-            DateTime dateOfBirth = txtDOB.Value.Date;
-
-            if (dateOfBirth.Date >= DateTime.Today)
-            {
-                MessageBox.Show("Ngày sinh phải nhỏ hơn ngày hiện tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDOB.Focus();
-                return false;
-            }
-
-            int salary;
-            if (!int.TryParse(txtSalaryInfo.Text.Replace(",", ""), out salary) || salary < 0)
-            {
-                MessageBox.Show("Lương không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSalaryInfo.Focus();
-                return false;
-            }
-
-            if (!cbInfoIsAvailable.Checked && !cbInfoUnAvailable.Checked)
-            {
-                MessageBox.Show("Hãy chọn trạng thái nhân viên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (!cbInfoIsActive.Checked && !cbInfoUnActive.Checked)
-            {
-                MessageBox.Show("Hãy chọn trạng thái tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (cbxRoleInfo.Visible && cbxRoleInfo.SelectedItem == null)
-            {
-                MessageBox.Show("Hãy chọn chức vụ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cbxRoleInfo.Focus();
-                return false;
-            }
-
-            return true;
-        }
         // Nút thêm nhân viên mới
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -1069,7 +960,7 @@ namespace Client.Forms.EmployeeManage
                 return;
             }
 
-            if (!ValidateInfoInputForUpdate())
+            if (!ValidateInfoInput())
             {
                 return;
             }
@@ -1124,22 +1015,7 @@ namespace Client.Forms.EmployeeManage
 
 
                                 //Hash password trc khi thêm vào databased
-                                if(string.IsNullOrEmpty(txtPassword.Text.Trim()))
-                                {
-                                    using (SqlCommand cmdGetPassword = new SqlCommand(
-                                        "SELECT password FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
-                                    {
-                                        cmdGetPassword.Parameters.AddWithValue("@employeeId", employeeId);
-                                        object result = cmdGetPassword.ExecuteScalar();
-                                        string existingHashedPassword = result == null || result == DBNull.Value ? null : result.ToString();
-                                        cmd.Parameters.AddWithValue("@password", existingHashedPassword);
-                                    }
-                                }
-                                else
-                                {
-                                    cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim()));
-                                }
-                    
+                                cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim()));
                                 cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
@@ -1221,6 +1097,9 @@ namespace Client.Forms.EmployeeManage
 
         #endregion
 
-        
+        private void txtEmployeeName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

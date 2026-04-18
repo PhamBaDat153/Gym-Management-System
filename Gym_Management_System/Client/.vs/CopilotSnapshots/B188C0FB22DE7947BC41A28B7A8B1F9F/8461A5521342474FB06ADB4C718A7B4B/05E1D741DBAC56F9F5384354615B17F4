@@ -219,8 +219,6 @@
             this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picUser.TabIndex = 0;
             this.picUser.TabStop = false;
-            this.picUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picUser.Click += new System.EventHandler(this.picUser_Click);
             // 
             // btnExit
             // 

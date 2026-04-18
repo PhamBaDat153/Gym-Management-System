@@ -599,5 +599,69 @@ namespace Client.Forms.PackageManage
         {
 
         }
+
+        private void cbox_y_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_y.Checked)
+            {
+                cbox_n.Checked = false;
+            }
+        }
+
+        private void cbox_n_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_n.Checked)
+            {
+                cbox_y.Checked = false;
+            }
+        }
+
+        private void cbox_isKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_isKH.Checked)
+            {
+                cbox_notKH.Checked = false;
+            }
+        }
+
+        private void cbox_notKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_notKH.Checked)
+            {
+                cbox_isKH.Checked = false;
+            }
+        }
+
+        private void cbox_co_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_co.Checked)
+            {
+                cbox_khong.Checked = false;
+            }
+        }
+
+        private void cbox_khong_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbox_khong.Checked)
+            {
+                cbox_co.Checked = false;
+            }    
+        }
+
+        private void cbox_cKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_cKH.Checked)
+            {
+                cbox_daKH.Checked = false;
+            }
+        }
+
+        private void cbox_daKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_daKH.Checked)
+            {
+                cbox_cKH.Checked = false;
+            }
+        }
     }
 }

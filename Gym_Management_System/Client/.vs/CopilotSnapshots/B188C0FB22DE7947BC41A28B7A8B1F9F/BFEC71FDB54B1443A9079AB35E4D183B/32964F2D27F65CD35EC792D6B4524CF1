@@ -90,7 +90,6 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.TabsCtr.SuspendLayout();
             this.tabSearch.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -112,112 +111,57 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1354, 886);
+            this.groupBox1.Size = new System.Drawing.Size(1692, 884);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách nhân viên";
             // 
             // dgvEmployee
             // 
-            this.dgvEmployee.AllowUserToAddRows = false;
-            this.dgvEmployee.AllowUserToDeleteRows = false;
-            this.dgvEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvEmployee.ColumnHeadersHeight = 29;
-            this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvEmployee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
-            this.colEmail,
-            this.colPhoneNumber,
-            this.colRole,
-            this.colDOB,
-            this.colHireDate,
-            this.colSalary,
-            this.colStatus,
-            this.colIsActive,
-            this.colID});
-            this.dgvEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.dgvEmployee.Location = new System.Drawing.Point(3, 29);
-            this.dgvEmployee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvEmployee.Name = "dgvEmployee";
-            this.dgvEmployee.ReadOnly = true;
-            this.dgvEmployee.RowHeadersWidth = 51;
-            this.dgvEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmployee.Size = new System.Drawing.Size(1348, 855);
-            this.dgvEmployee.TabIndex = 0;
-          
-            this.dgvEmployee.SelectionChanged += new System.EventHandler(this.lvEmployee_SelectedIndexChanged);
+            // (properties for dgvEmployee are set earlier)
             // 
             // colName
             // 
             this.colName.HeaderText = "Tên nhân viên";
-            this.colName.MinimumWidth = 6;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
+            this.colName.Width = 184;
             // 
             // colEmail
             // 
             this.colEmail.HeaderText = "Email";
-            this.colEmail.MinimumWidth = 6;
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
+            this.colEmail.Width = 187;
             // 
             // colPhoneNumber
             // 
             this.colPhoneNumber.HeaderText = "Số điện thoại";
-            this.colPhoneNumber.MinimumWidth = 6;
-            this.colPhoneNumber.Name = "colPhoneNumber";
-            this.colPhoneNumber.ReadOnly = true;
+            this.colPhoneNumber.Width = 246;
             // 
             // colRole
             // 
             this.colRole.HeaderText = "Chức vụ";
-            this.colRole.MinimumWidth = 6;
-            this.colRole.Name = "colRole";
-            this.colRole.ReadOnly = true;
             // 
             // colDOB
             // 
             this.colDOB.HeaderText = "Ngày sinh";
-            this.colDOB.MinimumWidth = 6;
-            this.colDOB.Name = "colDOB";
-            this.colDOB.ReadOnly = true;
             // 
             // colHireDate
             // 
             this.colHireDate.HeaderText = "Ngày nhận việc";
-            this.colHireDate.MinimumWidth = 6;
-            this.colHireDate.Name = "colHireDate";
-            this.colHireDate.ReadOnly = true;
             // 
             // colSalary
             // 
             this.colSalary.HeaderText = "Lương";
-            this.colSalary.MinimumWidth = 6;
-            this.colSalary.Name = "colSalary";
-            this.colSalary.ReadOnly = true;
             // 
             // colStatus
             // 
             this.colStatus.HeaderText = "Trạng thái nhân viên";
-            this.colStatus.MinimumWidth = 6;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
             // 
             // colIsActive
             // 
             this.colIsActive.HeaderText = "Trạng thái tài khoản";
-            this.colIsActive.MinimumWidth = 6;
-            this.colIsActive.Name = "colIsActive";
-            this.colIsActive.ReadOnly = true;
             // 
             // colID
             // 
             this.colID.HeaderText = "Mã nhân viên";
-            this.colID.MinimumWidth = 6;
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Visible = false;
             // 
             // TabsCtr
             // 
@@ -225,11 +169,11 @@
             this.TabsCtr.Controls.Add(this.tabInformation);
             this.TabsCtr.Dock = System.Windows.Forms.DockStyle.Right;
             this.TabsCtr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TabsCtr.Location = new System.Drawing.Point(1354, 0);
+            this.TabsCtr.Location = new System.Drawing.Point(1353, 0);
             this.TabsCtr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TabsCtr.Name = "TabsCtr";
             this.TabsCtr.SelectedIndex = 0;
-            this.TabsCtr.Size = new System.Drawing.Size(339, 886);
+            this.TabsCtr.Size = new System.Drawing.Size(339, 884);
             this.TabsCtr.TabIndex = 1;
             this.TabsCtr.UseWaitCursor = true;
             // 
@@ -250,7 +194,7 @@
             this.tabSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabSearch.Size = new System.Drawing.Size(331, 853);
+            this.tabSearch.Size = new System.Drawing.Size(331, 851);
             this.tabSearch.TabIndex = 0;
             this.tabSearch.Text = "Tìm kiếm";
             this.tabSearch.UseVisualStyleBackColor = true;
@@ -418,7 +362,7 @@
             this.txtEmployeeName.Size = new System.Drawing.Size(253, 27);
             this.txtEmployeeName.TabIndex = 1;
             this.txtEmployeeName.UseWaitCursor = true;
-    
+            this.txtEmployeeName.TextChanged += new System.EventHandler(this.txtEmployeeName_TextChanged);
             // 
             // label1
             // 
@@ -444,7 +388,7 @@
             this.tabInformation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabInformation.Name = "tabInformation";
             this.tabInformation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabInformation.Size = new System.Drawing.Size(331, 853);
+            this.tabInformation.Size = new System.Drawing.Size(331, 831);
             this.tabInformation.TabIndex = 1;
             this.tabInformation.Text = "Thông tin";
             this.tabInformation.UseVisualStyleBackColor = true;
@@ -806,18 +750,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1693, 886);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1692, 884);
             this.Controls.Add(this.TabsCtr);
+            this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(1711, 933);
-            this.MinimumSize = new System.Drawing.Size(1711, 933);
+            this.MaximumSize = new System.Drawing.Size(1710, 931);
+            this.MinimumSize = new System.Drawing.Size(1710, 931);
             this.Name = "frmEmployee";
             this.Text = "frmEmployee";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
             this.TabsCtr.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();

@@ -42,6 +42,7 @@
             this.pictureUser = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelManage = new System.Windows.Forms.Panel();
+            this.btnTrangChu = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).BeginInit();
@@ -49,6 +50,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.btnTrangChu);
             this.flowLayoutPanel1.Controls.Add(this.btnEmployeeNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnReportNavigate);
             this.flowLayoutPanel1.Controls.Add(this.btnPackageNavigate);
@@ -66,7 +68,7 @@
             // 
             this.btnEmployeeNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmployeeNavigate.Location = new System.Drawing.Point(5, 5);
+            this.btnEmployeeNavigate.Location = new System.Drawing.Point(5, 58);
             this.btnEmployeeNavigate.Name = "btnEmployeeNavigate";
             this.btnEmployeeNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnEmployeeNavigate.TabIndex = 0;
@@ -78,7 +80,7 @@
             // 
             this.btnReportNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReportNavigate.Location = new System.Drawing.Point(5, 58);
+            this.btnReportNavigate.Location = new System.Drawing.Point(5, 111);
             this.btnReportNavigate.Name = "btnReportNavigate";
             this.btnReportNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnReportNavigate.TabIndex = 1;
@@ -90,7 +92,7 @@
             // 
             this.btnPackageNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPackageNavigate.Location = new System.Drawing.Point(5, 111);
+            this.btnPackageNavigate.Location = new System.Drawing.Point(5, 164);
             this.btnPackageNavigate.Name = "btnPackageNavigate";
             this.btnPackageNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnPackageNavigate.TabIndex = 2;
@@ -102,7 +104,7 @@
             // 
             this.btnMemberNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMemberNavigate.Location = new System.Drawing.Point(5, 164);
+            this.btnMemberNavigate.Location = new System.Drawing.Point(5, 217);
             this.btnMemberNavigate.Name = "btnMemberNavigate";
             this.btnMemberNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnMemberNavigate.TabIndex = 3;
@@ -114,7 +116,7 @@
             // 
             this.btnScheduleNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScheduleNavigate.Location = new System.Drawing.Point(5, 217);
+            this.btnScheduleNavigate.Location = new System.Drawing.Point(5, 270);
             this.btnScheduleNavigate.Name = "btnScheduleNavigate";
             this.btnScheduleNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnScheduleNavigate.TabIndex = 4;
@@ -126,7 +128,7 @@
             // 
             this.btnBrowseNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseNavigate.Location = new System.Drawing.Point(5, 270);
+            this.btnBrowseNavigate.Location = new System.Drawing.Point(5, 323);
             this.btnBrowseNavigate.Name = "btnBrowseNavigate";
             this.btnBrowseNavigate.Size = new System.Drawing.Size(183, 47);
             this.btnBrowseNavigate.TabIndex = 5;
@@ -203,6 +205,18 @@
             this.panelManage.Size = new System.Drawing.Size(1711, 933);
             this.panelManage.TabIndex = 2;
             // 
+            // btnTrangChu
+            // 
+            this.btnTrangChu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTrangChu.Location = new System.Drawing.Point(5, 5);
+            this.btnTrangChu.Name = "btnTrangChu";
+            this.btnTrangChu.Size = new System.Drawing.Size(183, 47);
+            this.btnTrangChu.TabIndex = 6;
+            this.btnTrangChu.Text = "Trang Chủ";
+            this.btnTrangChu.UseVisualStyleBackColor = true;
+            this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -243,5 +257,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnShowInfo;
+        private System.Windows.Forms.Button btnTrangChu;
     }
 }

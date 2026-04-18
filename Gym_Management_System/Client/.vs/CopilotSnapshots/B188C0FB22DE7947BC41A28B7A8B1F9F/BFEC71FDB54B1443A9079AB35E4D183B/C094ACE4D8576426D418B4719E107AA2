@@ -168,40 +168,6 @@ namespace Client.Forms.Dashboard
             {
                 form.ShowDialog(this);
             }
-            RefreshUserImage();
-        }
-
-        private void RefreshUserImage()
-        {
-            string imageUrl = User.ImageUrl;
-            if (string.IsNullOrWhiteSpace(imageUrl))
-            {
-                pictureUser.Image = Properties.Resources.defaultUser;
-                return;
-            }
-
-            if (IsHttpUrl(imageUrl))
-            {
-                try
-                {
-                    pictureUser.Load(imageUrl);
-                }
-                catch
-                {
-                    pictureUser.Image = Properties.Resources.defaultUser;
-                }
-            }
-            else if (File.Exists(imageUrl))
-            {
-                using (Image img = Image.FromFile(imageUrl))
-                {
-                    pictureUser.Image = new Bitmap(img);
-                }
-            }
-            else
-            {
-                pictureUser.Image = Properties.Resources.defaultUser;
-            }
         }
 
         // Nút chuyển form sang form trang chủ
