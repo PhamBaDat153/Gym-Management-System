@@ -35,14 +35,23 @@ namespace Client.Forms.EmployeeManage
 
         #region Shared
 
-        // Phương thức load data từ database vào ListView
+        // Phương thức load data từ database vào DataGridView
         public void loadData(SqlCommand cmd)
         {
             List<Employee> employees = new List<Employee>();
 
             try
             {
+                if (cmd == null)
+                {
+                    throw new ArgumentNullException(nameof(cmd));
+                }
+
                 connection = GymManagementSystemContext.Connect();
+                if (connection == null)
+                {
+                    throw new Exception("Không thể kết nối đến database.");
+                }
                 cmd.Connection = connection;
                 connection.Open();
 
@@ -99,26 +108,55 @@ namespace Client.Forms.EmployeeManage
 
                 connection.Close();
 
-                lvEmployee.Items.Clear();
+                if (dgvEmployee == null)
+                {
+                    throw new Exception("DataGridView chưa được khởi tạo.");
+                }
+
+                // Ensure columns exist (defensive for runtime cases where designer columns may not be present)
+                if (dgvEmployee.Columns.Count == 0)
+                {
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colName", HeaderText = "Tên nhân viên" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colEmail", HeaderText = "Email" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colPhoneNumber", HeaderText = "Số điện thoại" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colRole", HeaderText = "Chức vụ" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colDOB", HeaderText = "Ngày sinh" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colHireDate", HeaderText = "Ngày nhận việc" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colSalary", HeaderText = "Lương" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colStatus", HeaderText = "Trạng thái nhân viên" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colIsActive", HeaderText = "Trạng thái tài khoản" });
+                    dgvEmployee.Columns.Add(new DataGridViewTextBoxColumn() { Name = "colID", HeaderText = "Mã nhân viên" });
+                }
+
+                dgvEmployee.Rows.Clear();
 
                 foreach (Employee employee in employees)
                 {
-                    ListViewItem item = new ListViewItem(employee.EmployeeName);
-                    item.SubItems.Add(employee.Email);
-                    item.SubItems.Add(employee.PhoneNumber);
-                    item.SubItems.Add(employee.Roles.Any() ? employee.Roles.First().RoleName : "");
-                    item.SubItems.Add(employee.DateOfBirth.ToString("dd/MM/yyyy"));
-                    item.SubItems.Add(employee.HireDate.ToString("dd/MM/yyyy"));
-                    item.SubItems.Add(employee.Salary.ToString("N0"));
-                    item.SubItems.Add(employee.Status ? "Khả dụng" : "Không khả dụng");
-                    item.SubItems.Add(employee.IsActive ? "Đang hoạt động" : "Ngừng hoạt động");
-                    item.SubItems.Add(employee.EmployeeId.ToString());
+                    try
+                    {
+                        int rowIndex = dgvEmployee.Rows.Add(
+                            employee.EmployeeName,
+                            employee.Email,
+                            employee.PhoneNumber,
+                            employee.Roles.Any() ? employee.Roles.First().RoleName : "",
+                            employee.DateOfBirth.ToString("dd/MM/yyyy"),
+                            employee.HireDate.ToString("dd/MM/yyyy"),
+                            employee.Salary.ToString("N0"),
+                            employee.Status ? "Khả dụng" : "Không khả dụng",
+                            employee.IsActive ? "Đang hoạt động" : "Ngừng hoạt động",
+                            employee.EmployeeId.ToString()
+                        );
 
-                    item.Tag = employee.EmployeeId;
-                    lvEmployee.Items.Add(item);
+                        dgvEmployee.Rows[rowIndex].Tag = employee.EmployeeId;
+                    }
+                    catch (Exception rowEx)
+                    {
+                        // Skip problematic row but continue loading others
+                        System.Diagnostics.Debug.WriteLine("Failed to add employee row: " + rowEx);
+                    }
                 }
 
-                lvEmployee.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                dgvEmployee.AutoResizeColumns();
             }
             catch (Exception ex)
             {
@@ -489,39 +527,41 @@ namespace Client.Forms.EmployeeManage
         // Tab Thông tin
         private void lvEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvEmployee.SelectedItems.Count == 0)
+            if (dgvEmployee.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            ListViewItem selectedItem = lvEmployee.SelectedItems[0];
-            Guid employeeId = (Guid)selectedItem.Tag;
+            DataGridViewRow selectedRow = dgvEmployee.SelectedRows[0];
+            if (selectedRow.Tag == null) return;
+            Guid employeeId = (Guid)selectedRow.Tag;
             choosenEmployeeId = employeeId.ToString();
+            txtNameInfo.Text = Convert.ToString(selectedRow.Cells[0].Value);
+            txtEmailInfo.Text = Convert.ToString(selectedRow.Cells[1].Value);
+            txtPhoneNumberInfo.Text = Convert.ToString(selectedRow.Cells[2].Value);
+            txtSalaryInfo.Text = Convert.ToString(selectedRow.Cells[6].Value);
+            txtPassword.Clear();
 
-            txtNameInfo.Text = selectedItem.SubItems[0].Text;
-            txtEmailInfo.Text = selectedItem.SubItems[1].Text;
-            txtPhoneNumberInfo.Text = selectedItem.SubItems[2].Text;
-            txtSalaryInfo.Text = selectedItem.SubItems[6].Text;
-      
-            if (DateTime.TryParseExact(selectedItem.SubItems[4].Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dateOfBirth))
+            if (DateTime.TryParseExact(Convert.ToString(selectedRow.Cells[4].Value), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dateOfBirth))
             {
                 txtDOB.Value = dateOfBirth;
             }
-            lblHireDate.Text = "Ngày vào làm: " + selectedItem.SubItems[5].Text;
+            lblHireDate.Text = "Ngày vào làm: " + Convert.ToString(selectedRow.Cells[5].Value);
 
-            if (cbxRoleInfo.Items.Contains(selectedItem.SubItems[3].Text))
+            string roleText = Convert.ToString(selectedRow.Cells[3].Value);
+            if (cbxRoleInfo.Items.Contains(roleText))
             {
-                cbxRoleInfo.SelectedItem = selectedItem.SubItems[3].Text;
+                cbxRoleInfo.SelectedItem = roleText;
             }
             else
             {
                 cbxRoleInfo.SelectedIndex = -1;
             }
 
-            cbInfoIsAvailable.Checked = selectedItem.SubItems[7].Text == "Khả dụng";
-            cbInfoUnAvailable.Checked = selectedItem.SubItems[7].Text == "Không khả dụng";
-            cbInfoIsActive.Checked = selectedItem.SubItems[8].Text == "Đang hoạt động";
-            cbInfoUnActive.Checked = selectedItem.SubItems[8].Text == "Ngừng hoạt động";
+            cbInfoIsAvailable.Checked = Convert.ToString(selectedRow.Cells[7].Value) == "Khả dụng";
+            cbInfoUnAvailable.Checked = Convert.ToString(selectedRow.Cells[7].Value) == "Không khả dụng";
+            cbInfoIsActive.Checked = Convert.ToString(selectedRow.Cells[8].Value) == "Đang hoạt động";
+            cbInfoUnActive.Checked = Convert.ToString(selectedRow.Cells[8].Value) == "Ngừng hoạt động";
 
             pictureEmployee.Image = null;
 
@@ -622,7 +662,7 @@ namespace Client.Forms.EmployeeManage
             cbInfoUnActive.Checked = false;
 
             pictureEmployee.Image = Properties.Resources.defaultUser;
-            lvEmployee.SelectedItems.Clear();
+            dgvEmployee.ClearSelection();
         }
 
         // Phương thức kiểm tra tính hợp lệ của dữ liệu nhập vào tab thông tin
@@ -716,6 +756,90 @@ namespace Client.Forms.EmployeeManage
             return true;
         }
 
+        private bool ValidateInfoInputForUpdate()
+        {
+            if (txtLoginKey.Visible && string.IsNullOrWhiteSpace(txtLoginKey.Text))
+            {
+                MessageBox.Show("Login key không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginKey.Focus();
+                return false;
+            }
+
+      
+
+            if (string.IsNullOrWhiteSpace(txtNameInfo.Text))
+            {
+                MessageBox.Show("Tên nhân viên không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNameInfo.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEmailInfo.Text))
+            {
+                MessageBox.Show("Email không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmailInfo.Focus();
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtEmailInfo.Text.Trim(), @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+            {
+                MessageBox.Show("Email không đúng định dạng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmailInfo.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPhoneNumberInfo.Text))
+            {
+                MessageBox.Show("Số điện thoại không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhoneNumberInfo.Focus();
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtPhoneNumberInfo.Text.Trim(), @"^\d{10,11}$"))
+            {
+                MessageBox.Show("Số điện thoại phải gồm 10 hoặc 11 chữ số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhoneNumberInfo.Focus();
+                return false;
+            }
+
+            DateTime dateOfBirth = txtDOB.Value.Date;
+
+            if (dateOfBirth.Date >= DateTime.Today)
+            {
+                MessageBox.Show("Ngày sinh phải nhỏ hơn ngày hiện tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDOB.Focus();
+                return false;
+            }
+
+            int salary;
+            if (!int.TryParse(txtSalaryInfo.Text.Replace(",", ""), out salary) || salary < 0)
+            {
+                MessageBox.Show("Lương không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSalaryInfo.Focus();
+                return false;
+            }
+
+            if (!cbInfoIsAvailable.Checked && !cbInfoUnAvailable.Checked)
+            {
+                MessageBox.Show("Hãy chọn trạng thái nhân viên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!cbInfoIsActive.Checked && !cbInfoUnActive.Checked)
+            {
+                MessageBox.Show("Hãy chọn trạng thái tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (cbxRoleInfo.Visible && cbxRoleInfo.SelectedItem == null)
+            {
+                MessageBox.Show("Hãy chọn chức vụ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbxRoleInfo.Focus();
+                return false;
+            }
+
+            return true;
+        }
         // Nút thêm nhân viên mới
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -727,7 +851,7 @@ namespace Client.Forms.EmployeeManage
             }
 
             choosenEmployeeId = null;
-            lvEmployee.SelectedItems.Clear();
+            dgvEmployee.ClearSelection();
 
             if (!ValidateInfoInput())
             {
@@ -816,7 +940,7 @@ namespace Client.Forms.EmployeeManage
         //Nút xóa nhân viên
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lvEmployee.SelectedItems.Count == 0)
+            if (dgvEmployee.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Hãy chọn ít nhất một nhân viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -825,9 +949,9 @@ namespace Client.Forms.EmployeeManage
             List<Guid> employeeIds = new List<Guid>();
             List<string> employeeNames = new List<string>();
 
-            foreach (ListViewItem selectedItem in lvEmployee.SelectedItems)
+            foreach (DataGridViewRow selectedRow in dgvEmployee.SelectedRows)
             {
-                Guid employeeId = (Guid)selectedItem.Tag;
+                Guid employeeId = (Guid)selectedRow.Tag;
 
                 if (employeeId == User.EmployeeId)
                 {
@@ -842,7 +966,7 @@ namespace Client.Forms.EmployeeManage
                 }
 
                 employeeIds.Add(employeeId);
-                employeeNames.Add(selectedItem.SubItems[0].Text);
+                employeeNames.Add(Convert.ToString(selectedRow.Cells[0].Value));
             }
 
             string confirmMessage = employeeIds.Count == 1
@@ -945,7 +1069,7 @@ namespace Client.Forms.EmployeeManage
                 return;
             }
 
-            if (!ValidateInfoInput())
+            if (!ValidateInfoInputForUpdate())
             {
                 return;
             }
@@ -1000,7 +1124,22 @@ namespace Client.Forms.EmployeeManage
 
 
                                 //Hash password trc khi thêm vào databased
-                                cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim()));
+                                if(string.IsNullOrEmpty(txtPassword.Text.Trim()))
+                                {
+                                    using (SqlCommand cmdGetPassword = new SqlCommand(
+                                        "SELECT password FROM dbo.Employee WHERE employee_id = @employeeId", conn, tran))
+                                    {
+                                        cmdGetPassword.Parameters.AddWithValue("@employeeId", employeeId);
+                                        object result = cmdGetPassword.ExecuteScalar();
+                                        string existingHashedPassword = result == null || result == DBNull.Value ? null : result.ToString();
+                                        cmd.Parameters.AddWithValue("@password", existingHashedPassword);
+                                    }
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@password", BCrypt.Net.BCrypt.HashPassword(txtPassword.Text.Trim()));
+                                }
+                    
                                 cmd.Parameters.AddWithValue("@employeeName", txtNameInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@email", txtEmailInfo.Text.Trim());
                                 cmd.Parameters.AddWithValue("@phoneNumber", txtPhoneNumberInfo.Text.Trim());
@@ -1082,9 +1221,6 @@ namespace Client.Forms.EmployeeManage
 
         #endregion
 
-        private void txtEmployeeName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

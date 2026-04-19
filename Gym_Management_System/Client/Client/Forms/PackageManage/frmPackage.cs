@@ -83,38 +83,40 @@ namespace Client.Forms.PackageManage
         // Handle Ctrl + Left Click (mouse1) to allow selecting/unselecting rows without losing existing selection
         private void dgv_package_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            // Only process left button clicks on valid rows
-            if (e.Button != MouseButtons.Left || e.RowIndex < 0) return;
+            if (e.RowIndex < 0) return;
 
             var grid = sender as DataGridView;
             if (grid == null) return;
 
-            // If Ctrl key is pressed, toggle selection of the clicked row
+            // Ctrl → chọn nhiều dòng rời rạc
             if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                var row = grid.Rows[e.RowIndex];
-                row.Selected = !row.Selected;
+                grid.Rows[e.RowIndex].Selected = !grid.Rows[e.RowIndex].Selected;
+            }
+            // Shift → chọn 1 dãy (lên/xuống)
+            else if ((ModifierKeys & Keys.Shift) == Keys.Shift && grid.CurrentRow != null)
+            {
+                int start = grid.CurrentRow.Index;
+                int end = e.RowIndex;
 
-                // After toggling selection, ask whether to delete selected rows
-                // This implements Ctrl + Left Click delete behavior for multiple selection
-                if (grid.SelectedRows.Count > 0)
+                grid.ClearSelection();
+
+                int min = Math.Min(start, end);
+                int max = Math.Max(start, end);
+
+                for (int i = min; i <= max; i++)
                 {
-                    var confirm = MessageBox.Show($"Bạn có muốn xóa {grid.SelectedRows.Count} gói đã chọn?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        DeleteSelectedPackages();
-                    }
+                    grid.Rows[i].Selected = true;
                 }
             }
             else
             {
-                // Default behavior: select the clicked row (clears other selections)
-                grid.ClearSelection();
+                // Click thường → chọn 1 dòng
+
                 grid.Rows[e.RowIndex].Selected = true;
             }
         }
 
-        // Delete (soft-delete) all currently selected packages
         private void DeleteSelectedPackages()
         {
             var ids = new List<Guid>();
@@ -135,7 +137,7 @@ namespace Client.Forms.PackageManage
                     using (var tran = conn.BeginTransaction())
                     {
                         cmd.Transaction = tran;
-                        cmd.CommandText = "UPDATE dbo.Package SET is_active = 0 WHERE package_id = @id";
+                        cmd.CommandText = "DELETE FROM dbo.Package WHERE package_id = @id";
                         var p = cmd.Parameters.Add("@id", System.Data.SqlDbType.UniqueIdentifier);
 
                         foreach (var id in ids)
@@ -276,7 +278,39 @@ namespace Client.Forms.PackageManage
 
         }
 
+        private void dgv_package_CellClick_FillData(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
 
+            DataGridViewRow row = dgv_package.Rows[e.RowIndex];
+
+            try
+            {
+                // CHUYỂN TAB NGAY LẬP TỨC
+                tabCtrl_find_infoP.SelectedIndex = 1;
+                // hoặc nếu không có name:
+                // tabCtrl_find_infoP.SelectedIndex = 1;
+
+                // Text
+                txtbox_packagename.Text = row.Cells["package_name"].Value?.ToString();
+                txtbox_duration.Text = row.Cells["duration"].Value?.ToString();
+                txtbox_price.Text = row.Cells["price"].Value?.ToString()?.Replace(",", "");
+
+                // WITH TRAINER
+                string withTrainer = row.Cells["with_trainer"].Value?.ToString();
+                cbox_co.Checked = withTrainer == "CÓ";
+                cbox_khong.Checked = withTrainer == "KHÔNG";
+
+                // TRẠNG THÁI
+                string isActive = row.Cells["is_active"].Value?.ToString();
+                cbox_daKH.Checked = isActive == "ĐANG HOẠT ĐỘNG";
+                cbox_cKH.Checked = isActive == "NGƯNG HOẠT ĐỘNG";
+            }
+            catch
+            {
+                // tránh crash
+            }
+        }
 
         private void frmPackage_Load(object sender, EventArgs e)
         {
@@ -286,8 +320,8 @@ namespace Client.Forms.PackageManage
             // Ensure user can select multiple rows and handle Ctrl+Click
             dgv_package.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_package.MultiSelect = true;
-            dgv_package.CellMouseClick += dgv_package_CellMouseClick;
-
+            //dgv_package.CellMouseClick += dgv_package_CellMouseClick;
+            dgv_package.CellClick += dgv_package_CellClick_FillData;
 
         }
 
@@ -416,29 +450,69 @@ namespace Client.Forms.PackageManage
 
         private void btn_del_Click(object sender, EventArgs e)
         {
-            // Xóa (soft-delete) gói được chọn: đánh dấu is_active = 0
-            Guid selectedId = GetSelectedPackageIdOrEmpty();
-            if (selectedId == Guid.Empty)
+            var ids = new List<Guid>();
+            var selectedInfos = new List<string>();
+
+            foreach (DataGridViewRow row in dgv_package.SelectedRows)
             {
-                MessageBox.Show("Vui lòng chọn một gói trong bảng để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Lấy ID
+                if (row.Tag is Guid g) ids.Add(g);
+                else if (row.Cells["package_id"].Value != null &&
+                         Guid.TryParse(row.Cells["package_id"].Value.ToString(), out Guid parsed))
+                    ids.Add(parsed);
+
+                // 🔥 Lấy FULL INFO
+                string name = row.Cells["package_name"].Value?.ToString();
+                string price = row.Cells["price"].Value?.ToString();
+                string idStr = row.Cells["package_id"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    selectedInfos.Add($"- {name} | Giá: {price} | Mã: {idStr}");
+                }
+            }
+
+            if (ids.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn gói cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var result = MessageBox.Show("Bạn có chắc muốn xóa (ngừng kích hoạt) gói này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) return;
+            //  HIỂN THỊ GÓI
+            string displayText = $"Bạn có chắc muốn xóa {ids.Count} gói tập không?";
+
+            var confirm = MessageBox.Show(
+                $"Bạn có chắc muốn XÓA các gói sau?\n\n{displayText}",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes) return;
 
             try
             {
                 using (var conn = GymManagementSystemContext.Connect())
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE dbo.Package SET is_active = 0 WHERE package_id = @id";
-                    cmd.Parameters.AddWithValue("@id", selectedId);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    using (var tran = conn.BeginTransaction())
+                    {
+                        cmd.Transaction = tran;
+                        cmd.CommandText = "DELETE FROM dbo.Package WHERE package_id = @id";
+
+                        var p = cmd.Parameters.Add("@id", SqlDbType.UniqueIdentifier);
+
+                        foreach (var id in ids)
+                        {
+                            p.Value = id;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                    }
                 }
 
-                MessageBox.Show("Đã xóa (ngừng kích hoạt) gói.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Đã XÓA {ids.Count} gói thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loadData(new SqlCommand("SELECT * FROM dbo.Package"));
             }
             catch (Exception ex)
@@ -482,10 +556,17 @@ namespace Client.Forms.PackageManage
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            // Reset filters and reload all data
             txtbox_tenGT.Text = string.Empty;
+
+            // Reset ALL With Trainer checkboxes
             cbox_co.Checked = false;
             cbox_khong.Checked = false;
+            cbox_y.Checked = false;
+            cbox_n.Checked = false;
+
+            // Reset ALL Active checkboxes
+            cbox_daKH.Checked = false;
+            cbox_cKH.Checked = false;
             cbox_isKH.Checked = false;
             cbox_notKH.Checked = false;
 
@@ -512,6 +593,75 @@ namespace Client.Forms.PackageManage
             }
 
             return Guid.Empty;
+        }
+
+        private void dgv_package_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbox_y_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_y.Checked)
+            {
+                cbox_n.Checked = false;
+            }
+        }
+
+        private void cbox_n_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_n.Checked)
+            {
+                cbox_y.Checked = false;
+            }
+        }
+
+        private void cbox_isKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_isKH.Checked)
+            {
+                cbox_notKH.Checked = false;
+            }
+        }
+
+        private void cbox_notKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_notKH.Checked)
+            {
+                cbox_isKH.Checked = false;
+            }
+        }
+
+        private void cbox_co_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_co.Checked)
+            {
+                cbox_khong.Checked = false;
+            }
+        }
+
+        private void cbox_khong_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbox_khong.Checked)
+            {
+                cbox_co.Checked = false;
+            }    
+        }
+
+        private void cbox_cKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_cKH.Checked)
+            {
+                cbox_daKH.Checked = false;
+            }
+        }
+
+        private void cbox_daKH_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbox_daKH.Checked)
+            {
+                cbox_cKH.Checked = false;
+            }
         }
     }
 }
