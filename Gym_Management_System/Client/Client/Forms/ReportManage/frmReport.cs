@@ -57,7 +57,7 @@ namespace Client.Forms.ReportManage
 
             var today = DateTime.Today;
             dtp_from.Value = new DateTime(today.Year, today.Month, 1);
-            dtp_to.Value = today;
+            dtp_to.Value = new DateTime(today.Year, 1, 1);
 
             rdo_mem_nam.Checked = true;
             ApplyReportTypeUi();
@@ -110,7 +110,7 @@ namespace Client.Forms.ReportManage
             cbo_chart_mode.DropDownStyle = ComboBoxStyle.DropDownList;
             cbo_chart_mode.Font = new Font("Segoe UI", 10F);
             cbo_chart_mode.Items.AddRange(new object[] { "Tự động", "Biểu đồ cột", "Biểu đồ đường" });
-            cbo_chart_mode.SelectedIndex = ChartModeAuto;
+            cbo_chart_mode.SelectedIndex = ChartModeLine;
             cbo_chart_mode.Location = new Point(147, 220);
             cbo_chart_mode.Size = new Size(300, 30);
             cbo_chart_mode.SelectedIndexChanged += cbo_chart_mode_SelectedIndexChanged;
@@ -139,7 +139,7 @@ namespace Client.Forms.ReportManage
             dgv_invoice.MultiSelect = false;
             dgv_invoice.RowHeadersVisible = false;
             dgv_invoice.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_invoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgv_invoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_invoice.Visible = false;
 
             dgv_invoice.Columns.Add("inv_receipt_id", "Mã hóa đơn");
@@ -163,19 +163,19 @@ namespace Client.Forms.ReportManage
             groupBox_invoice.Dock = DockStyle.Fill;
             groupBox_invoice.Visible = false;
 
-            txt_inv_receipt_id = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 28), Size = new Size(420, 30) };
-            txt_inv_member = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 62), Size = new Size(420, 30) };
-            txt_inv_package = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 96), Size = new Size(420, 30) };
-            txt_inv_amount = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(920, 28), Size = new Size(220, 30) };
-            txt_inv_method = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(920, 62), Size = new Size(220, 30) };
-            dtp_inv_date = new DateTimePicker { Enabled = false, Font = new Font("Segoe UI", 10F), Format = DateTimePickerFormat.Short, Location = new Point(920, 96), Size = new Size(220, 30) };
+            txt_inv_receipt_id = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 24), Size = new Size(420, 27) };
+            txt_inv_member = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 52), Size = new Size(420, 27) };
+            txt_inv_package = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 80), Size = new Size(420, 27) };
+            txt_inv_amount = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 108), Size = new Size(420, 27) };
+            txt_inv_method = new TextBox { ReadOnly = true, Font = new Font("Segoe UI", 10F), Location = new Point(220, 136), Size = new Size(420, 27) };
+            dtp_inv_date = new DateTimePicker { Enabled = false, Font = new Font("Segoe UI", 10F), Format = DateTimePickerFormat.Short, Location = new Point(220, 164), Size = new Size(420, 27) };
 
-            groupBox_invoice.Controls.Add(new Label { Text = "Mã hóa đơn", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 33) });
-            groupBox_invoice.Controls.Add(new Label { Text = "Hội viên", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 67) });
-            groupBox_invoice.Controls.Add(new Label { Text = "Gói tập", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 101) });
-            groupBox_invoice.Controls.Add(new Label { Text = "Thành tiền", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(740, 33) });
-            groupBox_invoice.Controls.Add(new Label { Text = "Phương thức", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(740, 67) });
-            groupBox_invoice.Controls.Add(new Label { Text = "Ngày thanh toán", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(740, 101) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Mã hóa đơn", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 28) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Hội viên", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 56) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Gói tập", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 84) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Thành tiền", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 112) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Phương thức", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 140) });
+            groupBox_invoice.Controls.Add(new Label { Text = "Ngày thanh toán", AutoSize = true, Font = new Font("Segoe UI", 10F), Location = new Point(24, 168) });
             groupBox_invoice.Controls.Add(txt_inv_receipt_id);
             groupBox_invoice.Controls.Add(txt_inv_member);
             groupBox_invoice.Controls.Add(txt_inv_package);
@@ -246,22 +246,21 @@ namespace Client.Forms.ReportManage
         {
             var today = DateTime.Today;
             dtp_from.Value = new DateTime(today.Year, today.Month, 1);
-            dtp_to.Value = today;
+            dtp_to.Value = new DateTime(today.Year, 1, 1);
             await ReloadFromFilterAsync();
         }
 
         private DateTime GetFilterFrom()
         {
-            DateTime a = dtp_from.Value.Date;
-            DateTime b = dtp_to.Value.Date;
-            return a <= b ? a : b;
+            int month = dtp_from.Value.Month;
+            int year = dtp_to.Value.Year;
+            return new DateTime(year, month, 1);
         }
 
         private DateTime GetFilterTo()
         {
-            DateTime a = dtp_from.Value.Date;
-            DateTime b = dtp_to.Value.Date;
-            return a <= b ? b : a;
+            DateTime from = GetFilterFrom();
+            return from.AddMonths(1).AddDays(-1);
         }
 
         private async Task ReloadFromFilterAsync()
@@ -680,8 +679,7 @@ namespace Client.Forms.ReportManage
             if (lbl_toolbar_summary == null) return;
 
             DateTime from = GetFilterFrom();
-            DateTime to = GetFilterTo();
-            string period = from.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) + " - " + to.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            string period = from.ToString("MM/yyyy", CultureInfo.InvariantCulture);
 
             if (cbo_report_type.SelectedIndex == KindMember)
             {
