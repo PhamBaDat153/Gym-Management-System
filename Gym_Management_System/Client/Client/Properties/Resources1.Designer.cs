@@ -123,6 +123,26 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2026_04_20_223302 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2026-04-20 223302", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2026_04_20_223801 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2026-04-20 223801", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20 {
             get {
                 object obj = ResourceManager.GetObject("visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20", resourceCulture);

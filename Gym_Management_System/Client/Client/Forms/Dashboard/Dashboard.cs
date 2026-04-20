@@ -15,6 +15,7 @@ using Client.Forms.ReportManage;
 using Client.Forms.ScheduleBrowse;
 using Client.Forms.ScheduleManage;
 using Client.Models;
+using Client.Services;
 
 namespace Client.Forms.Dashboard
 {
@@ -33,8 +34,20 @@ namespace Client.Forms.Dashboard
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            // Qua ngày sẽ tự trừ ngày còn lại cho hội viên (chạy 1 lần/ngày).
+            MemberDurationService.UpdateRemainingDurationsOncePerDay();
+
             OpenChildForm(new frmDefault());
             pictureUser.SizeMode = PictureBoxSizeMode.Zoom;
+
+            if (lb_tenDangNhapvaChucVu != null)
+            {
+                string displayName = string.IsNullOrWhiteSpace(User.EmployeeName)
+                    ? (string.IsNullOrWhiteSpace(User.LoginKey) ? "-" : User.LoginKey.Trim())
+                    : User.EmployeeName.Trim();
+                string role = (User.Roles == null || User.Roles.Count == 0) ? "-" : string.Join(", ", User.Roles.Distinct());
+                lb_tenDangNhapvaChucVu.Text = "Người dùng: " + displayName + " | Chức vụ: " + role;
+            }
 
             string imageUrl = User.ImageUrl;
             if (string.IsNullOrWhiteSpace(imageUrl))
@@ -108,7 +121,30 @@ namespace Client.Forms.Dashboard
 
         private void OpenChildForm(Form childForm)
         {
+            // Dispose form con cũ (nếu có) để tránh rò rỉ bộ nhớ,
+            // thay vì dùng `using` tại nơi gọi (sẽ Dispose quá sớm).
+            // Lưu ý: không dispose từng control rồi lại Controls.Clear() (dễ bị dispose hai lần).
+            Control old = panelManage.Controls.Count > 0 ? panelManage.Controls[0] : null;
             panelManage.Controls.Clear();
+            if (old != null)
+            {
+                try
+                {
+                    if (old is Form oldForm)
+                    {
+                        try { oldForm.Close(); } catch { }
+                        oldForm.Dispose();
+                    }
+                    else
+                    {
+                        old.Dispose();
+                    }
+                }
+                catch
+                {
+                    // Best-effort cleanup
+                }
+            }
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -207,10 +243,7 @@ namespace Client.Forms.Dashboard
         // Nút chuyển form sang form trang chủ
         private void btnTrangChu_Click(object sender, EventArgs e)
         {
-            using (frmDefault form = new frmDefault())
-            {
-                OpenChildForm(form);
-            }
+            OpenChildForm(new frmDefault());
         }
     }
 }

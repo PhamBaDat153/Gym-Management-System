@@ -219,7 +219,8 @@ namespace Client.Forms.MemberManage
         {
             try
             {
-                UpdateMemberRemainingDurationsOncePerDay();
+                // Đã chạy ở Dashboard khi đăng nhập; nếu chưa chạy (mở form trực tiếp) vẫn ok.
+                // Không gọi ở đây để tránh ALTER/UPDATE lặp lại nhiều lần khi refresh/search.
 
                 var dt = new DataTable();
                 string sql =
@@ -285,68 +286,6 @@ namespace Client.Forms.MemberManage
             catch (Exception ex)
             {
                 MessageBox.Show("Không tải được danh sách hội viên.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Đảm bảo DB có cột theo dõi ngày cập nhật "ngày còn lại" và tự động trừ số ngày đã qua (mỗi ngày trừ đúng 1 lần).
-        /// </summary>
-        private void UpdateMemberRemainingDurationsOncePerDay()
-        {
-            try
-            {
-                using (SqlConnection conn = GymManagementSystemContext.Connect())
-                using (SqlCommand cmd = new SqlCommand(
-                    @"
-IF COL_LENGTH('dbo.Member', 'last_duration_update') IS NULL
-BEGIN
-    ALTER TABLE dbo.Member
-    ADD last_duration_update DATE NOT NULL
-        CONSTRAINT DF_Member_last_duration_update DEFAULT (CONVERT(date, GETDATE()));
-END;
-
-DECLARE @today DATE = CONVERT(date, GETDATE());
-
-UPDATE m
-SET
-    m.remaining_duration =
-        CASE
-            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
-            ELSE
-                CASE
-                    WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
-                    ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
-                END
-        END,
-    m.last_duration_update =
-        CASE
-            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.last_duration_update
-            ELSE @today
-        END,
-    m.is_expired =
-        CASE
-            WHEN
-                (CASE
-                    WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
-                    ELSE
-                        CASE
-                            WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
-                            ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
-                        END
-                END) <= 0
-            THEN 1 ELSE 0
-        END
-FROM dbo.Member m;
-",
-                    conn))
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch
-            {
-                // Không chặn việc hiển thị form nếu DB không cho ALTER/UPDATE; danh sách vẫn nạp theo dữ liệu hiện có.
             }
         }
 
