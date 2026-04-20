@@ -245,21 +245,21 @@
             // 
             // rev_best
             // 
-            this.rev_best.HeaderText = "Gói bán chạy";
+            this.rev_best.HeaderText = "Tên gói tập";
             this.rev_best.MinimumWidth = 180;
             this.rev_best.Name = "rev_best";
             this.rev_best.ReadOnly = true;
             // 
             // rev_least
             // 
-            this.rev_least.HeaderText = "Gói bán ế";
+            this.rev_least.HeaderText = "Đơn giá";
             this.rev_least.MinimumWidth = 180;
             this.rev_least.Name = "rev_least";
             this.rev_least.ReadOnly = true;
             // 
             // rev_sold
             // 
-            this.rev_sold.HeaderText = "Tổng gói bán";
+            this.rev_sold.HeaderText = "Số lượng bán";
             this.rev_sold.MinimumWidth = 120;
             this.rev_sold.Name = "rev_sold";
             this.rev_sold.ReadOnly = true;
@@ -273,21 +273,21 @@
             // 
             // rev_cost
             // 
-            this.rev_cost.HeaderText = "Tổng chi";
+            this.rev_cost.HeaderText = "Thời hạn (ngày)";
             this.rev_cost.MinimumWidth = 140;
             this.rev_cost.Name = "rev_cost";
             this.rev_cost.ReadOnly = true;
             // 
             // rev_profit
             // 
-            this.rev_profit.HeaderText = "Lợi nhuận";
+            this.rev_profit.HeaderText = "Có HLV";
             this.rev_profit.MinimumWidth = 140;
             this.rev_profit.Name = "rev_profit";
             this.rev_profit.ReadOnly = true;
             // 
             // rev_date
             // 
-            this.rev_date.HeaderText = "Ngày báo cáo";
+            this.rev_date.HeaderText = "Bán gần nhất";
             this.rev_date.MinimumWidth = 130;
             this.rev_date.Name = "rev_date";
             this.rev_date.ReadOnly = true;
@@ -336,42 +336,42 @@
             // 
             // mem_total
             // 
-            this.mem_total.HeaderText = "Tổng HV";
+            this.mem_total.HeaderText = "Hội viên";
             this.mem_total.MinimumWidth = 110;
             this.mem_total.Name = "mem_total";
             this.mem_total.ReadOnly = true;
             // 
             // mem_new
             // 
-            this.mem_new.HeaderText = "HV mới (tháng)";
+            this.mem_new.HeaderText = "Tuổi";
             this.mem_new.MinimumWidth = 130;
             this.mem_new.Name = "mem_new";
             this.mem_new.ReadOnly = true;
             // 
             // mem_loss
             // 
-            this.mem_loss.HeaderText = "HV mất (tháng)";
+            this.mem_loss.HeaderText = "Số điện thoại";
             this.mem_loss.MinimumWidth = 130;
             this.mem_loss.Name = "mem_loss";
             this.mem_loss.ReadOnly = true;
             // 
             // mem_age
             // 
-            this.mem_age.HeaderText = "Tuổi TB";
+            this.mem_age.HeaderText = "Email";
             this.mem_age.MinimumWidth = 90;
             this.mem_age.Name = "mem_age";
             this.mem_age.ReadOnly = true;
             // 
             // mem_gender
             // 
-            this.mem_gender.HeaderText = "Giới tính chủ yếu";
+            this.mem_gender.HeaderText = "Giới tính";
             this.mem_gender.MinimumWidth = 140;
             this.mem_gender.Name = "mem_gender";
             this.mem_gender.ReadOnly = true;
             // 
             // mem_date
             // 
-            this.mem_date.HeaderText = "Ngày báo cáo";
+            this.mem_date.HeaderText = "Ngày đăng ký";
             this.mem_date.MinimumWidth = 130;
             this.mem_date.Name = "mem_date";
             this.mem_date.ReadOnly = true;
@@ -696,7 +696,7 @@
             this.groupBox_member.Size = new System.Drawing.Size(625, 261);
             this.groupBox_member.TabIndex = 0;
             this.groupBox_member.TabStop = false;
-            this.groupBox_member.Text = "Báo cáo hội viên (MemberReport)";
+            this.groupBox_member.Text = "Chi tiết hội viên";
             // 
             // grp_gender_common
             // 
@@ -781,7 +781,7 @@
             this.lbl_mem_date.Name = "lbl_mem_date";
             this.lbl_mem_date.Size = new System.Drawing.Size(116, 23);
             this.lbl_mem_date.TabIndex = 4;
-            this.lbl_mem_date.Text = "Ngày báo cáo";
+            this.lbl_mem_date.Text = "Ngày đăng ký";
             // 
             // lbl_mem_age
             // 
@@ -791,7 +791,7 @@
             this.lbl_mem_age.Name = "lbl_mem_age";
             this.lbl_mem_age.Size = new System.Drawing.Size(151, 23);
             this.lbl_mem_age.TabIndex = 3;
-            this.lbl_mem_age.Text = "Tuổi trung bình (*)";
+            this.lbl_mem_age.Text = "Email";
             // 
             // lbl_mem_loss
             // 
@@ -801,7 +801,7 @@
             this.lbl_mem_loss.Name = "lbl_mem_loss";
             this.lbl_mem_loss.Size = new System.Drawing.Size(187, 23);
             this.lbl_mem_loss.TabIndex = 2;
-            this.lbl_mem_loss.Text = "HV mất trong tháng (*)";
+            this.lbl_mem_loss.Text = "Số điện thoại";
             // 
             // lbl_mem_new
             // 
@@ -811,7 +811,7 @@
             this.lbl_mem_new.Name = "lbl_mem_new";
             this.lbl_mem_new.Size = new System.Drawing.Size(164, 23);
             this.lbl_mem_new.TabIndex = 1;
-            this.lbl_mem_new.Text = "HV mới trong tháng";
+            this.lbl_mem_new.Text = "Tuổi";
             // 
             // lbl_mem_total
             // 
@@ -821,7 +821,7 @@
             this.lbl_mem_total.Name = "lbl_mem_total";
             this.lbl_mem_total.Size = new System.Drawing.Size(136, 23);
             this.lbl_mem_total.TabIndex = 0;
-            this.lbl_mem_total.Text = "Tổng hội viên (*)";
+            this.lbl_mem_total.Text = "Hội viên";
             // 
             // panel_btns
             // 

@@ -274,12 +274,11 @@ namespace Client.Forms.ReportManage
             if (cbo_report_type.SelectedIndex == KindMember)
             {
                 var cmd = new SqlCommand(
-                    "SELECT report_id, total_member, monthly_new_member, monthly_loss_member, average_age, common_gender, report_date " +
-                    "FROM dbo.MemberReport " +
-                    "WHERE report_date >= @from AND report_date < @toExclusive " +
-                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), report_id) LIKE @kwLike " +
-                    "OR (CASE WHEN common_gender = 1 THEN N'Nam' ELSE N'Nữ' END) LIKE @kwLike) " +
-                    "ORDER BY report_date DESC");
+                    "SELECT member_id, member_name, age, phone_number, email, gender, register_date " +
+                    "FROM dbo.Member " +
+                    "WHERE register_date >= @from AND register_date < @toExclusive " +
+                    "AND (@kw = '' OR member_name LIKE @kwLike OR phone_number LIKE @kwLike OR email LIKE @kwLike) " +
+                    "ORDER BY register_date DESC, member_name");
                 cmd.Parameters.AddWithValue("@from", from);
                 cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                 cmd.Parameters.AddWithValue("@kw", keyword);
@@ -289,11 +288,13 @@ namespace Client.Forms.ReportManage
             else if (cbo_report_type.SelectedIndex == KindRevenue)
             {
                 var cmd = new SqlCommand(
-                    "SELECT report_id, best_sell_package, least_sell_package, total_package_sold, total_amount, total_cost, net_profit, report_date " +
-                    "FROM dbo.RevenueReport " +
-                    "WHERE report_date >= @from AND report_date < @toExclusive " +
-                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), report_id) LIKE @kwLike OR best_sell_package LIKE @kwLike OR least_sell_package LIKE @kwLike) " +
-                    "ORDER BY report_date DESC");
+                    "SELECT p.package_id, p.package_name, p.price, p.duration, p.with_trainer, " +
+                    "COUNT(r.receipt_id) AS sold_count, ISNULL(SUM(CAST(r.total_amount AS BIGINT)), 0) AS total_amount, MAX(r.payment_date) AS last_sale_date " +
+                    "FROM dbo.Package p " +
+                    "LEFT JOIN dbo.Receipt r ON r.package_id = p.package_id AND r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                    "WHERE p.is_active = 1 AND (@kw = '' OR p.package_name LIKE @kwLike) " +
+                    "GROUP BY p.package_id, p.package_name, p.price, p.duration, p.with_trainer " +
+                    "ORDER BY p.package_name");
                 cmd.Parameters.AddWithValue("@from", from);
                 cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                 cmd.Parameters.AddWithValue("@kw", keyword);
@@ -335,13 +336,13 @@ namespace Client.Forms.ReportManage
                     await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        int ordId = reader.GetOrdinal("report_id");
-                        int ordTotal = reader.GetOrdinal("total_member");
-                        int ordNew = reader.GetOrdinal("monthly_new_member");
-                        int ordLoss = reader.GetOrdinal("monthly_loss_member");
-                        int ordAge = reader.GetOrdinal("average_age");
-                        int ordGender = reader.GetOrdinal("common_gender");
-                        int ordDate = reader.GetOrdinal("report_date");
+                        int ordId = reader.GetOrdinal("member_id");
+                        int ordName = reader.GetOrdinal("member_name");
+                        int ordAge = reader.GetOrdinal("age");
+                        int ordPhone = reader.GetOrdinal("phone_number");
+                        int ordEmail = reader.GetOrdinal("email");
+                        int ordGender = reader.GetOrdinal("gender");
+                        int ordDate = reader.GetOrdinal("register_date");
 
                         while (await reader.ReadAsync())
                         {
@@ -349,10 +350,10 @@ namespace Client.Forms.ReportManage
                             int rowIndex = dgv_member.Rows.Add();
                             var row = dgv_member.Rows[rowIndex];
                             row.Cells["mem_report_id"].Value = id.ToString();
-                            row.Cells["mem_total"].Value = reader.GetInt32(ordTotal);
-                            row.Cells["mem_new"].Value = reader.GetInt32(ordNew);
-                            row.Cells["mem_loss"].Value = reader.GetInt32(ordLoss);
-                            row.Cells["mem_age"].Value = reader.GetInt32(ordAge);
+                            row.Cells["mem_total"].Value = reader.GetString(ordName);
+                            row.Cells["mem_new"].Value = reader.GetInt32(ordAge);
+                            row.Cells["mem_loss"].Value = reader.IsDBNull(ordPhone) ? string.Empty : reader.GetString(ordPhone);
+                            row.Cells["mem_age"].Value = reader.IsDBNull(ordEmail) ? string.Empty : reader.GetString(ordEmail);
                             bool g = reader.GetBoolean(ordGender);
                             row.Cells["mem_gender"].Value = g ? "Nam" : "Nữ";
                             row.Cells["mem_date"].Value = reader.GetDateTime(ordDate).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -379,14 +380,14 @@ namespace Client.Forms.ReportManage
                     await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        int ordId = reader.GetOrdinal("report_id");
-                        int ordBest = reader.GetOrdinal("best_sell_package");
-                        int ordLeast = reader.GetOrdinal("least_sell_package");
-                        int ordSold = reader.GetOrdinal("total_package_sold");
+                        int ordId = reader.GetOrdinal("package_id");
+                        int ordName = reader.GetOrdinal("package_name");
+                        int ordPrice = reader.GetOrdinal("price");
+                        int ordDuration = reader.GetOrdinal("duration");
+                        int ordWithTrainer = reader.GetOrdinal("with_trainer");
+                        int ordSold = reader.GetOrdinal("sold_count");
                         int ordAmt = reader.GetOrdinal("total_amount");
-                        int ordCost = reader.GetOrdinal("total_cost");
-                        int ordProfit = reader.GetOrdinal("net_profit");
-                        int ordDate = reader.GetOrdinal("report_date");
+                        int ordDate = reader.GetOrdinal("last_sale_date");
 
                         while (await reader.ReadAsync())
                         {
@@ -394,18 +395,17 @@ namespace Client.Forms.ReportManage
                             int rowIndex = dgv_revenue.Rows.Add();
                             var row = dgv_revenue.Rows[rowIndex];
                             row.Cells["rev_report_id"].Value = id.ToString();
-                            row.Cells["rev_best"].Value = reader.GetString(ordBest);
-                            row.Cells["rev_least"].Value = reader.GetString(ordLeast);
+                            row.Cells["rev_best"].Value = reader.GetString(ordName);
+                            row.Cells["rev_least"].Value = reader.GetInt32(ordPrice).ToString("N0", CultureInfo.InvariantCulture);
                             row.Cells["rev_sold"].Value = reader.GetInt32(ordSold);
-                            row.Cells["rev_amount"].Value = reader.GetInt32(ordAmt).ToString("N0", CultureInfo.InvariantCulture);
-                            row.Cells["rev_cost"].Value = reader.GetInt32(ordCost).ToString("N0", CultureInfo.InvariantCulture);
-                            row.Cells["rev_profit"].Value = reader.GetInt32(ordProfit).ToString("N0", CultureInfo.InvariantCulture);
-                            row.Cells["rev_date"].Value = reader.GetDateTime(ordDate).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            row.Cells["rev_amount"].Value = Convert.ToInt64(reader.GetValue(ordAmt), CultureInfo.InvariantCulture).ToString("N0", CultureInfo.InvariantCulture);
+                            row.Cells["rev_cost"].Value = reader.GetInt32(ordDuration);
+                            row.Cells["rev_profit"].Value = reader.GetBoolean(ordWithTrainer) ? "Có" : "Không";
+                            row.Cells["rev_date"].Value = reader.IsDBNull(ordDate) ? "-" : reader.GetDateTime(ordDate).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
                             row.Tag = id;
                         }
                     }
                 }
-                dgv_revenue.AutoResizeColumns();
             }
             catch (Exception ex)
             {
@@ -484,38 +484,39 @@ namespace Client.Forms.ReportManage
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.CommandText =
-                                "SELECT report_date, monthly_new_member, monthly_loss_member FROM dbo.MemberReport " +
-                                "WHERE report_date >= @from AND report_date < @toExclusive " +
-                                "AND (@kw = '' OR CONVERT(NVARCHAR(36), report_id) LIKE @kwLike " +
-                                "OR (CASE WHEN common_gender = 1 THEN N'Nam' ELSE N'Nữ' END) LIKE @kwLike) " +
-                                "ORDER BY report_date";
+                                "SELECT register_date, gender, COUNT(*) AS total_count FROM dbo.Member " +
+                                "WHERE register_date >= @from AND register_date < @toExclusive " +
+                                "AND (@kw = '' OR member_name LIKE @kwLike OR phone_number LIKE @kwLike OR email LIKE @kwLike) " +
+                                "GROUP BY register_date, gender " +
+                                "ORDER BY register_date";
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                             cmd.Parameters.AddWithValue("@kw", keyword);
                             cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
 
                             var chartType = ResolveChartType();
-                            var sNew = new Series("HV mới (tháng)") { ChartType = chartType };
-                            var sLoss = new Series("HV mất (tháng)") { ChartType = chartType };
-                            sNew.ChartArea = chart_report.ChartAreas[0].Name;
-                            sLoss.ChartArea = chart_report.ChartAreas[0].Name;
+                            var sMale = new Series("Đăng ký Nam") { ChartType = chartType };
+                            var sFemale = new Series("Đăng ký Nữ") { ChartType = chartType };
+                            sMale.ChartArea = chart_report.ChartAreas[0].Name;
+                            sFemale.ChartArea = chart_report.ChartAreas[0].Name;
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
                                 while (await r.ReadAsync())
                                 {
                                     var d = r.GetDateTime(0).Date;
-                                    int pNew = sNew.Points.AddXY(d, r.GetInt32(1));
-                                    int pLoss = sLoss.Points.AddXY(d, r.GetInt32(2));
+                                    bool isMale = r.GetBoolean(1);
+                                    int count = r.GetInt32(2);
+                                    Series targetSeries = isMale ? sMale : sFemale;
+                                    int pointIndex = targetSeries.Points.AddXY(d, count);
                                     string axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                    sNew.Points[pNew].AxisLabel = axisLabel;
-                                    sLoss.Points[pLoss].AxisLabel = axisLabel;
+                                    targetSeries.Points[pointIndex].AxisLabel = axisLabel;
                                     totalPoints++;
                                 }
                             }
 
-                            chart_report.Series.Add(sNew);
-                            chart_report.Series.Add(sLoss);
+                            chart_report.Series.Add(sMale);
+                            chart_report.Series.Add(sFemale);
                         }
                     }
                     else if (cbo_report_type.SelectedIndex == KindRevenue)
@@ -523,76 +524,45 @@ namespace Client.Forms.ReportManage
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.CommandText =
-                                "SELECT report_date, SUM(total_amount) AS sum_amount, SUM(total_cost) AS sum_cost, SUM(net_profit) AS sum_profit, COUNT(*) AS total_rows FROM dbo.RevenueReport " +
-                                "WHERE report_date >= @from AND report_date < @toExclusive " +
-                                "AND (@kw = '' OR CONVERT(NVARCHAR(36), report_id) LIKE @kwLike OR best_sell_package LIKE @kwLike OR least_sell_package LIKE @kwLike) " +
-                                "GROUP BY report_date " +
-                                "ORDER BY report_date";
+                                "SELECT p.package_name, COUNT(r.receipt_id) AS sold_count, ISNULL(SUM(CAST(r.total_amount AS BIGINT)), 0) AS total_amount " +
+                                "FROM dbo.Package p " +
+                                "LEFT JOIN dbo.Receipt r ON r.package_id = p.package_id AND r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                                "WHERE p.is_active = 1 AND (@kw = '' OR p.package_name LIKE @kwLike) " +
+                                "GROUP BY p.package_name " +
+                                "ORDER BY p.package_name";
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                             cmd.Parameters.AddWithValue("@kw", keyword);
                             cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
 
                             var chartType = ResolveChartType();
+                            var sSold = new Series("Số lượng bán") { ChartType = chartType, YAxisType = AxisType.Secondary };
                             var sAmount = new Series("Tổng thu") { ChartType = chartType };
-                            var sCost = new Series("Tổng chi") { ChartType = chartType };
-                            var sProfit = new Series("Lợi nhuận") { ChartType = chartType };
+                            sSold.ChartArea = chart_report.ChartAreas[0].Name;
                             sAmount.ChartArea = chart_report.ChartAreas[0].Name;
-                            sCost.ChartArea = chart_report.ChartAreas[0].Name;
-                            sProfit.ChartArea = chart_report.ChartAreas[0].Name;
-
-                            sAmount.IsValueShownAsLabel = true;
-                            sCost.IsValueShownAsLabel = true;
-                            sProfit.IsValueShownAsLabel = true;
-                            sAmount.SmartLabelStyle.Enabled = true;
-                            sCost.SmartLabelStyle.Enabled = true;
-                            sProfit.SmartLabelStyle.Enabled = true;
-
-                            sAmount["PointWidth"] = "0.8";
-                            sCost["PointWidth"] = "0.8";
-                            sProfit["PointWidth"] = "0.8";
-                            sAmount["DrawingStyle"] = "Default";
-                            sCost["DrawingStyle"] = "Default";
-                            sProfit["DrawingStyle"] = "Default";
-
-                            sAmount.ToolTip = "Tổng thu - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
-                            sCost.ToolTip = "Tổng chi - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
-                            sProfit.ToolTip = "Lợi nhuận - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
                                 while (await r.ReadAsync())
                                 {
-                                    var d = r.GetDateTime(0).Date;
-                                    double totalAmount = Convert.ToDouble(r.GetValue(1), CultureInfo.InvariantCulture);
-                                    double totalCost = Convert.ToDouble(r.GetValue(2), CultureInfo.InvariantCulture);
-                                    double totalProfit = Convert.ToDouble(r.GetValue(3), CultureInfo.InvariantCulture);
-                                    int dataCount = r.GetInt32(4);
-
-                                    int pAmount = sAmount.Points.AddXY(d, totalAmount);
-                                    int pCost = sCost.Points.AddXY(d, totalCost);
-                                    int pProfit = sProfit.Points.AddXY(d, totalProfit);
-
-                                    string axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                    sAmount.Points[pAmount].AxisLabel = axisLabel;
-                                    sCost.Points[pCost].AxisLabel = axisLabel;
-                                    sProfit.Points[pProfit].AxisLabel = axisLabel;
-                                    sAmount.Points[pAmount].Label = FormatCompactValue(totalAmount);
-                                    sCost.Points[pCost].Label = FormatCompactValue(totalCost);
-                                    sProfit.Points[pProfit].Label = FormatCompactValue(totalProfit);
-
-                                    if (dataCount > 1)
-                                    {
-                                        // Giữ định dạng rút gọn để tránh chồng lấn nhãn.
-                                        sProfit.Points[pProfit].Label = FormatCompactValue(totalProfit);
-                                    }
+                                    string packageName = r.GetString(0);
+                                    int soldCount = r.GetInt32(1);
+                                    double totalAmount = Convert.ToDouble(r.GetValue(2), CultureInfo.InvariantCulture);
+                                    int pSold = sSold.Points.AddXY(packageName, soldCount);
+                                    int pAmount = sAmount.Points.AddXY(packageName, totalAmount);
+                                    sSold.Points[pSold].AxisLabel = packageName;
+                                    sAmount.Points[pAmount].AxisLabel = packageName;
                                     totalPoints++;
                                 }
                             }
 
+                            sSold.ToolTip = "Số lượng bán - #VALX: #VALY{N0}";
+                            sAmount.ToolTip = "Tổng thu - #VALX: #VALY{N0} VNĐ";
+                            chart_report.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
+                            chart_report.ChartAreas[0].AxisY2.Title = "Số lượng bán";
+                            chart_report.ChartAreas[0].AxisY2.LabelStyle.Format = "N0";
+                            chart_report.Series.Add(sSold);
                             chart_report.Series.Add(sAmount);
-                            chart_report.Series.Add(sCost);
-                            chart_report.Series.Add(sProfit);
                         }
                     }
                     else
@@ -645,7 +615,7 @@ namespace Client.Forms.ReportManage
                     }
                 }
 
-                chart_report.ChartAreas[0].AxisX.Title = "Ngày báo cáo";
+                chart_report.ChartAreas[0].AxisX.Title = cbo_report_type.SelectedIndex == KindRevenue ? "Gói tập" : "Ngày báo cáo";
                 chart_report.ChartAreas[0].AxisY.Title = cbo_report_type.SelectedIndex == KindMember ? "Số lượng" : "VNĐ";
                 chart_report.ChartAreas[0].AxisY.LabelStyle.Format = "N0";
                 chart_report.Legends[0].Enabled = chart_report.Series.Count > 0;
@@ -684,26 +654,29 @@ namespace Client.Forms.ReportManage
             if (cbo_report_type.SelectedIndex == KindMember)
             {
                 int rows = dgv_member.Rows.Cast<DataGridViewRow>().Count(r => !r.IsNewRow);
-                int totalNew = 0;
-                int totalLoss = 0;
+                int totalMale = 0;
+                int totalFemale = 0;
                 foreach (DataGridViewRow row in dgv_member.Rows)
                 {
                     if (row.IsNewRow) continue;
-                    totalNew += ConvertToInt(row.Cells["mem_new"].Value);
-                    totalLoss += ConvertToInt(row.Cells["mem_loss"].Value);
+                    string gender = row.Cells["mem_gender"].Value?.ToString();
+                    if (gender == "Nam") totalMale++;
+                    else if (gender == "Nữ") totalFemale++;
                 }
-                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " bản ghi | Tổng HV mới: " + totalNew + " | Tổng HV mất: " + totalLoss;
+                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " hội viên | Nam: " + totalMale + " | Nữ: " + totalFemale;
             }
             else if (cbo_report_type.SelectedIndex == KindRevenue)
             {
                 int rows = dgv_revenue.Rows.Cast<DataGridViewRow>().Count(r => !r.IsNewRow);
-                long totalProfit = 0;
+                long totalAmount = 0;
+                int totalSold = 0;
                 foreach (DataGridViewRow row in dgv_revenue.Rows)
                 {
                     if (row.IsNewRow) continue;
-                    totalProfit += ConvertToInt(row.Cells["rev_profit"].Value);
+                    totalAmount += ConvertToInt(row.Cells["rev_amount"].Value);
+                    totalSold += ConvertToInt(row.Cells["rev_sold"].Value);
                 }
-                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " bản ghi | Tổng lợi nhuận: " + totalProfit.ToString("N0", CultureInfo.InvariantCulture) + " VNĐ";
+                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " gói hoạt động | Tổng lượt bán: " + totalSold + " | Tổng thu: " + totalAmount.ToString("N0", CultureInfo.InvariantCulture) + " VNĐ";
             }
             else
             {
