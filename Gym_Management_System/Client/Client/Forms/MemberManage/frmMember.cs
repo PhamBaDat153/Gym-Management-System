@@ -33,6 +33,86 @@ namespace Client.Forms.MemberManage
             Shown += frmMember_Shown;
         }
 
+        private sealed class MemberDuplicateCheckResult
+        {
+            public bool EmailExists { get; set; }
+            public bool PhoneNumberExists { get; set; }
+            public bool HasAny => EmailExists || PhoneNumberExists;
+        }
+
+        private MemberDuplicateCheckResult CheckMemberDuplicates(string email, string phoneNumber, Guid? excludeMemberId)
+        {
+            var result = new MemberDuplicateCheckResult();
+
+            email = string.IsNullOrWhiteSpace(email) ? null : email.Trim();
+            phoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber.Trim();
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT " +
+                    " SUM(CASE WHEN email = @email THEN 1 ELSE 0 END) AS email_count, " +
+                    " SUM(CASE WHEN phone_number = @phoneNumber THEN 1 ELSE 0 END) AS phone_number_count " +
+                    "FROM dbo.Member " +
+                    "WHERE (@excludeId IS NULL OR member_id <> @excludeId) " +
+                    "AND ( " +
+                    "   (@email IS NOT NULL AND email = @email) " +
+                    "   OR (@phoneNumber IS NOT NULL AND phone_number = @phoneNumber) " +
+                    ")",
+                    conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", (object)email ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@phoneNumber", (object)phoneNumber ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@excludeId", excludeMemberId.HasValue ? (object)excludeMemberId.Value : DBNull.Value);
+
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int emailCount = reader["email_count"] == DBNull.Value ? 0 : Convert.ToInt32(reader["email_count"]);
+                            int phoneCount = reader["phone_number_count"] == DBNull.Value ? 0 : Convert.ToInt32(reader["phone_number_count"]);
+
+                            result.EmailExists = email != null && emailCount > 0;
+                            result.PhoneNumberExists = phoneNumber != null && phoneCount > 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không kiểm tra được dữ liệu trùng.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return result;
+        }
+
+        private bool ValidateMemberUniqueOrShowError(string email, string phoneNumber, Guid? excludeMemberId)
+        {
+            MemberDuplicateCheckResult dup = CheckMemberDuplicates(email, phoneNumber, excludeMemberId);
+            if (!dup.HasAny)
+            {
+                return true;
+            }
+
+            if (dup.PhoneNumberExists)
+            {
+                MessageBox.Show("Số điện thoại đã tồn tại. Vui lòng dùng số khác.", "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhone.Focus();
+                return false;
+            }
+
+            if (dup.EmailExists)
+            {
+                MessageBox.Show("Email đã tồn tại. Vui lòng dùng email khác.", "Trùng dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Form đã hiển thị xong: hiện các thông báo đã xếp hàng (nếu có).
         /// </summary>
@@ -54,6 +134,11 @@ namespace Client.Forms.MemberManage
             // Giới hạn ngày sinh để tuổi >= MinMemberAgeYears (tính theo năm hiện tại - năm sinh).
             dtpDOB.MaxDate = DateTime.Today.AddYears(-MinMemberAgeYears);
             dtpDOB.MinDate = DateTimePicker.MinimumDateTime;
+
+            // Không cho chỉnh sửa trực tiếp các thông tin "gói" trên tab hội viên.
+            // Ngày còn lại và trạng thái "Có HLV kèm" sẽ được cập nhật khi đăng ký/gia hạn gói.
+            numRemaining.Enabled = false;
+            chkHasTrainer.Enabled = false;
 
             LoadPackages();
             LoadPaymentMethods();
@@ -610,12 +695,20 @@ FROM dbo.Member m;
                 return;
             }
 
+            if (!ValidateMemberUniqueOrShowError(
+                email: txtEmail.Text,
+                phoneNumber: txtPhone.Text,
+                excludeMemberId: null))
+            {
+                return;
+            }
+
             Guid id = Guid.NewGuid();
             DateTime dob = dtpDOB.Value.Date;
             int age = ComputeAge(dob);
             bool gender = rdoNam.Checked;
-            int remaining = (int)numRemaining.Value;
-            bool expired = remaining <= 0;
+            int remaining = 0;
+            bool expired = true;
 
             try
             {
@@ -634,7 +727,7 @@ FROM dbo.Member m;
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
                     cmd.Parameters.AddWithValue("@remaining", remaining);
                     cmd.Parameters.AddWithValue("@reg", dtpRegister.Value.Date);
-                    cmd.Parameters.AddWithValue("@hasTrainer", chkHasTrainer.Checked);
+                    cmd.Parameters.AddWithValue("@hasTrainer", false);
                     cmd.Parameters.AddWithValue("@expired", expired);
                     cmd.Parameters.AddWithValue("@active", chkMemberActive.Checked);
 
@@ -669,18 +762,25 @@ FROM dbo.Member m;
             }
 
             Guid id = _selectedMemberId.Value;
+
+            if (!ValidateMemberUniqueOrShowError(
+                email: txtEmail.Text,
+                phoneNumber: txtPhone.Text,
+                excludeMemberId: id))
+            {
+                return;
+            }
+
             DateTime dob = dtpDOB.Value.Date;
             int age = ComputeAge(dob);
             bool gender = rdoNam.Checked;
-            int remaining = (int)numRemaining.Value;
-            bool expired = remaining <= 0;
 
             try
             {
                 using (SqlConnection conn = GymManagementSystemContext.Connect())
                 using (SqlCommand cmd = new SqlCommand(
                     "UPDATE dbo.Member SET member_name = @name, gender = @gender, date_of_birth = @dob, age = @age, phone_number = @phone, email = @email, " +
-                    "remaining_duration = @remaining, register_date = @reg, has_trainer = @hasTrainer, is_expired = @expired, is_active = @active " +
+                    "register_date = @reg, is_active = @active " +
                     "WHERE member_id = @id",
                     conn))
                 {
@@ -691,10 +791,7 @@ FROM dbo.Member m;
                     cmd.Parameters.AddWithValue("@age", age);
                     cmd.Parameters.AddWithValue("@phone", txtPhone.Text.Trim());
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@remaining", remaining);
                     cmd.Parameters.AddWithValue("@reg", dtpRegister.Value.Date);
-                    cmd.Parameters.AddWithValue("@hasTrainer", chkHasTrainer.Checked);
-                    cmd.Parameters.AddWithValue("@expired", expired);
                     cmd.Parameters.AddWithValue("@active", chkMemberActive.Checked);
 
                     conn.Open();
