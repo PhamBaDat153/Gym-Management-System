@@ -26,3 +26,8 @@
 /Gym_Management_System/Client/.vs/Client/CopilotIndices/17.14.1601.40145/SemanticSymbols.db-wal
 /Gym_Management_System/Client/.vs/Client.slnx/FileContentIndex/82378d50-c0e8-4a08-b1d1-6e7926ed815a.vsidx
 /Gym_Management_System/Client/.vs/Client.slnx/FileContentIndex/de8fa839-beed-4ed5-b2a4-52eb310e327b.vsidx
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo

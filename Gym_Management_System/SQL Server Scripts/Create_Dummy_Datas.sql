@@ -3,6 +3,8 @@ GO
 
 -- 1. Delete existing data (in order of dependency - child tables first)
 DELETE FROM [Receipt];
+DELETE FROM [MemberReport];
+DELETE FROM [RevenueReport];
 DELETE FROM [Member];
 DELETE FROM [Package];
 DELETE FROM [PaymentMethod];
@@ -79,6 +81,18 @@ FROM [Member] m
 ORDER BY m.register_date;
 GO
 
+-- 7.1 Báo cáo (MemberReport, RevenueReport — khớp Create_Database.sql)
+INSERT INTO [MemberReport] (report_id, total_member, monthly_new_member, monthly_loss_member, average_age, common_gender, report_date) VALUES
+(NEWID(), 120, 15, 3, 28, 1, '2026-04-01'),
+(NEWID(), 118, 8, 2, 29, 0, '2026-04-10'),
+(NEWID(), 122, 12, 4, 27, 1, '2026-04-18');
+GO
+
+INSERT INTO [RevenueReport] (report_id, best_sell_package, least_sell_package, total_package_sold, total_amount, total_cost, net_profit, report_date) VALUES
+(NEWID(), N'Premium Package', N'Starter Package', 42, 185000000, 95000000, 90000000, '2026-04-01'),
+(NEWID(), N'Elite Package', N'Starter Package', 38, 210000000, 110000000, 100000000, '2026-04-12');
+GO
+
 -- 8. Verification: Check inserted data
 SELECT 'Role Count:' AS [Check], COUNT(*) AS [Count] FROM [Role]
 UNION ALL
@@ -90,5 +104,9 @@ SELECT 'Package Count:', COUNT(*) FROM [Package]
 UNION ALL
 SELECT 'Member Count:', COUNT(*) FROM [Member]
 UNION ALL
-SELECT 'Receipt Count:', COUNT(*) FROM [Receipt];
+SELECT 'Receipt Count:', COUNT(*) FROM [Receipt]
+UNION ALL
+SELECT 'MemberReport Count:', COUNT(*) FROM [MemberReport]
+UNION ALL
+SELECT 'RevenueReport Count:', COUNT(*) FROM [RevenueReport];
 GO
