@@ -245,5 +245,10 @@ namespace Client.Forms.Dashboard
         {
             OpenChildForm(new frmDefault());
         }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
