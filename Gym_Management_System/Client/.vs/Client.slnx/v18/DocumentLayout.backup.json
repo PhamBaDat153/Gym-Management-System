@@ -3,23 +3,38 @@
   "WorkspaceRootPath": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\login\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\login\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\login\\frmlogin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Client||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\login\\frmlogin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\login\\frmlogin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\login\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\login\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\login\\frmforgotpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\login\\frmforgotpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -35,20 +50,16 @@
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\packagemanage\\frmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\employeemanage\\frmemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmdefault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,44 +90,47 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Forms\\Dashboard\\Dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\login\\frmforgotpassword.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\login\\frmforgotpassword.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\login\\frmforgotpassword.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmdefault.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmdefault.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmdefault.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\dashboard\\frmuserinfo.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\dashboard\\frmuserinfo.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\dashboard\\frmuserinfo.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\employeemanage\\frmemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\employeemanage\\frmemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\employeemanage\\frmemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\membermanage\\frmmember.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\membermanage\\frmmember.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\membermanage\\frmmember.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\packagemanage\\frmpackage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\packagemanage\\frmpackage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\packagemanage\\frmpackage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\reportmanage\\frmreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\reportmanage\\frmreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\reportmanage\\frmreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\schedulebrowse\\frmbrowse.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulebrowse\\frmbrowse.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulebrowse\\frmbrowse.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|d:\\documents\\school\\desktopdev\\lt\\gym-management-system\\gym_management_system\\client\\client\\forms\\schedulemanage\\frmschedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\forms\\schedulemanage\\frmschedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\forms\\schedulemanage\\frmschedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\client\\properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DCF1D2D9-7166-4298-93FA-A58875A3742F}|Client\\Client.csproj|solutionrelative:client\\properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\1080153502\\Resources1.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -126,7 +140,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -149,50 +163,27 @@
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "frmMember.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\MemberManage\\frmMember.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\MemberManage\\frmMember.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:23.384Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "frmEmployee.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:23.118Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "frmLogin.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs [Design]*",
-              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.cs [Design]*",
+              "Title": "frmEmployee.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "ViewState": "AgIAAJkBAAAAAAAAAAAAANgBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:24:45.834Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-04-21T10:49:40.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Resources1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\1080153502\\Resources1.Designer.cs",
+              "ToolTip": "C:\\Users\\phamb\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\1080153502\\Resources1.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T10:00:22.232Z"
             },
             {
               "$type": "Document",
@@ -208,257 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "frmSchedule.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:24.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "frmBrowse.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:23.884Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "frmReport.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ReportManage\\frmReport.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\ReportManage\\frmReport.Designer.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:23.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "frmPackage.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T09:03:23.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmLogin.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.Designer.cs*",
-              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.Designer.cs*",
-              "ViewState": "AgIAABcBAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:41:25.937Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Dashboard.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:50:24.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "frmDefault.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:50:55.124Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "frmUserInfo.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:51:27.801Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmForgotPassword.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\Login\\frmForgotPassword.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:28:03.869Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "frmBrowse.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:34:35.981Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "frmForgotPassword.Designer.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
-              "RelativeToolTip": "Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:42:41.587Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frmMember.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\MemberManage\\frmMember.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\MemberManage\\frmMember.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.629Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "frmPackage.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.632Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "frmReport.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\ReportManage\\frmReport.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\ReportManage\\frmReport.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.633Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "frmEmployee.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:31:47.621Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "frmUserInfo.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:30:29.031Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "frmUserInfo.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAgwG8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T08:31:11.645Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Dashboard.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAiwFgAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:52:33.162Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "frmEmployee.resx",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.resx",
-              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.resx",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.resx",
-              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-04-21T07:41:03.819Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "frmDefault.cs [Design]",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
-              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.63Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
               "Title": "Dashboard.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Forms\\Dashboard\\Dashboard.cs",
               "RelativeDocumentMoniker": "Forms\\Dashboard\\Dashboard.cs",
@@ -474,20 +215,319 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "frmLogin.cs",
-              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.cs",
-              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs*",
-              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.cs*",
-              "ViewState": "AgIAABYAAAAAAAAAAAAqwCQAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "frmLogin.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.Designer.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFAAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:27:21.603Z",
+              "WhenOpened": "2026-04-21T08:41:25.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Client",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Client.csproj",
+              "RelativeDocumentMoniker": "Client\\Client.csproj",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Client.csproj*",
+              "RelativeToolTip": "Client\\Client.csproj*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-21T09:43:39.761Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmDefault.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:02:41.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dashboard.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:50:24.474Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "frmMember.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\MemberManage\\frmMember.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\MemberManage\\frmMember.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:23.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Resources.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Properties\\Resources.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Properties\\Resources.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Properties\\Resources.Designer.cs",
+              "RelativeToolTip": "Client\\Properties\\Resources.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:42:36.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "frmEmployee.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:23.118Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "frmLogin.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:24:45.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "frmSchedule.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\ScheduleManage\\frmSchedule.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:24.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "frmBrowse.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:23.884Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "frmReport.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ReportManage\\frmReport.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\ReportManage\\frmReport.Designer.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:23.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "frmPackage.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:23.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "frmDefault.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:50:55.124Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "frmUserInfo.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.Designer.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:51:27.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "frmForgotPassword.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Login\\frmForgotPassword.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:28:03.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "frmBrowse.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\ScheduleBrowse\\frmBrowse.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:34:35.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "frmForgotPassword.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\Login\\frmForgotPassword.Designer.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:42:41.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "frmMember.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\MemberManage\\frmMember.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\MemberManage\\frmMember.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:02:41.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "frmPackage.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\PackageManage\\frmPackage.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\PackageManage\\frmPackage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:02:41.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "frmReport.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\ReportManage\\frmReport.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\ReportManage\\frmReport.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:02:41.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "frmEmployee.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:31:47.621Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "frmUserInfo.cs [Design]",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:30:29.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "frmUserInfo.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\frmUserInfo.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAgwG8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:31:11.645Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 15,
+              "Title": "Dashboard.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\Dashboard.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\Dashboard.cs",
+              "RelativeToolTip": "Client\\Forms\\Dashboard\\Dashboard.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAiwFgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:52:33.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "frmEmployee.resx",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.resx",
+              "RelativeDocumentMoniker": "Client\\Forms\\EmployeeManage\\frmEmployee.resx",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\EmployeeManage\\frmEmployee.resx",
+              "RelativeToolTip": "Client\\Forms\\EmployeeManage\\frmEmployee.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2026-04-21T07:41:03.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "frmLogin.cs",
+              "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\Login\\frmLogin.cs",
+              "ToolTip": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Login\\frmLogin.cs",
+              "RelativeToolTip": "Client\\Forms\\Login\\frmLogin.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAqwCQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:27:21.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "frmReport.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\ReportManage\\frmReport.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\ReportManage\\frmReport.cs",
@@ -495,12 +535,11 @@
               "RelativeToolTip": "Client\\Forms\\ReportManage\\frmReport.cs",
               "ViewState": "AgIAAEgBAAAAAAAAAAAwwMkBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-21T07:02:41.616Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "frmDefault.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\Dashboard\\frmDefault.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\Dashboard\\frmDefault.cs",
@@ -508,12 +547,11 @@
               "RelativeToolTip": "Client\\Forms\\Dashboard\\frmDefault.cs",
               "ViewState": "AgIAAGoAAAAAAAAAAAAUwF0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-21T07:02:41.627Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "frmMember.cs",
               "DocumentMoniker": "D:\\Documents\\School\\DesktopDev\\LT\\Gym-Management-System\\Gym_Management_System\\Client\\Client\\Forms\\MemberManage\\frmMember.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\MemberManage\\frmMember.cs",
@@ -521,8 +559,7 @@
               "RelativeToolTip": "Client\\Forms\\MemberManage\\frmMember.cs",
               "ViewState": "AgIAAJIAAAAAAAAAAAAUwJQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T07:02:41.632Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-21T07:02:41.632Z"
             }
           ]
         }

@@ -7,11 +7,27 @@
     <ProjectGuid>{DCF1D2D9-7166-4298-93FA-A58875A3742F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Client</RootNamespace>
-    <AssemblyName>Client</AssemblyName>
+    <AssemblyName>Gym Managemet System</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Documents\School\DesktopDev\Gym Manegemet System installer\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +47,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8CFD916F2AEF3AE617BCDC4BB86F710E3CE24900</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Client_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>treadmill.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt.Net-Next, Version=4.1.0.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
@@ -165,6 +196,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Services\MemberDurationService.cs" />
     <EmbeddedResource Include="Forms\Dashboard\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -204,6 +236,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Client_TemporaryKey.pfx" />
     <None Include="GymManagementSystemDataSet.xsc">
       <DependentUpon>GymManagementSystemDataSet.xsd</DependentUpon>
     </None>
@@ -220,11 +253,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -249,7 +277,18 @@
   <ItemGroup>
     <None Include="Resources\visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\0684456b-aa2b-4631-86f7-93ceaf33303c.jpg" />
   </ItemGroup>
@@ -291,6 +330,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="treadmill.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
