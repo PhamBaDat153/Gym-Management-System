@@ -106,8 +106,9 @@
             // 
             this.groupBox1.Controls.Add(this.dgvEmployee);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
@@ -136,7 +137,8 @@
             this.colIsActive,
             this.colID});
             this.dgvEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.dgvEmployee.BackgroundColor = System.Drawing.Color.White;
+            this.dgvEmployee.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dgvEmployee.Location = new System.Drawing.Point(3, 29);
             this.dgvEmployee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvEmployee.Name = "dgvEmployee";
@@ -145,7 +147,6 @@
             this.dgvEmployee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEmployee.Size = new System.Drawing.Size(1348, 855);
             this.dgvEmployee.TabIndex = 0;
-          
             this.dgvEmployee.SelectionChanged += new System.EventHandler(this.lvEmployee_SelectedIndexChanged);
             // 
             // colName
@@ -224,7 +225,7 @@
             this.TabsCtr.Controls.Add(this.tabSearch);
             this.TabsCtr.Controls.Add(this.tabInformation);
             this.TabsCtr.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TabsCtr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabsCtr.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.TabsCtr.Location = new System.Drawing.Point(1354, 0);
             this.TabsCtr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TabsCtr.Name = "TabsCtr";
@@ -253,30 +254,39 @@
             this.tabSearch.Size = new System.Drawing.Size(331, 853);
             this.tabSearch.TabIndex = 0;
             this.tabSearch.Text = "Tìm kiếm";
+            this.tabSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tabSearch.UseVisualStyleBackColor = true;
             this.tabSearch.UseWaitCursor = true;
             // 
             // btnClearFilter
             // 
+            this.btnClearFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnClearFilter.FlatAppearance.BorderSize = 0;
+            this.btnClearFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnClearFilter.Location = new System.Drawing.Point(11, 532);
             this.btnClearFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClearFilter.Name = "btnClearFilter";
             this.btnClearFilter.Size = new System.Drawing.Size(317, 48);
             this.btnClearFilter.TabIndex = 10;
             this.btnClearFilter.Text = "Làm mới bộ lọc";
-            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.UseVisualStyleBackColor = false;
             this.btnClearFilter.UseWaitCursor = true;
             this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
             // 
             // btnSearch
             // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
             this.btnSearch.Location = new System.Drawing.Point(11, 478);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(317, 48);
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Tìm kiếm";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.UseWaitCursor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -304,6 +314,8 @@
             // 
             this.groupBox3.Controls.Add(this.cbIsActive);
             this.groupBox3.Controls.Add(this.cbUnActive);
+            this.groupBox3.BackColor = System.Drawing.Color.White;
+            this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox3.Location = new System.Drawing.Point(13, 354);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
@@ -344,6 +356,8 @@
             // 
             this.groupBox2.Controls.Add(this.cbIsAvailable);
             this.groupBox2.Controls.Add(this.cbUnAvailable);
+            this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox2.Location = new System.Drawing.Point(13, 244);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
@@ -383,7 +397,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.label3.Location = new System.Drawing.Point(8, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(239, 29);
@@ -418,7 +433,6 @@
             this.txtEmployeeName.Size = new System.Drawing.Size(253, 27);
             this.txtEmployeeName.TabIndex = 1;
             this.txtEmployeeName.UseWaitCursor = true;
-    
             // 
             // label1
             // 
@@ -447,54 +461,71 @@
             this.tabInformation.Size = new System.Drawing.Size(331, 853);
             this.tabInformation.TabIndex = 1;
             this.tabInformation.Text = "Thông tin";
+            this.tabInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tabInformation.UseVisualStyleBackColor = true;
             this.tabInformation.UseWaitCursor = true;
             // 
             // btnClearInfo
             // 
+            this.btnClearInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnClearInfo.FlatAppearance.BorderSize = 0;
+            this.btnClearInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnClearInfo.Location = new System.Drawing.Point(172, 766);
             this.btnClearInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClearInfo.Name = "btnClearInfo";
             this.btnClearInfo.Size = new System.Drawing.Size(151, 48);
             this.btnClearInfo.TabIndex = 7;
             this.btnClearInfo.Text = "Làm mới";
-            this.btnClearInfo.UseVisualStyleBackColor = true;
+            this.btnClearInfo.UseVisualStyleBackColor = false;
             this.btnClearInfo.UseWaitCursor = true;
             this.btnClearInfo.Click += new System.EventHandler(this.btnClearInfo_Click);
             // 
             // btnUpdate
             // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Location = new System.Drawing.Point(5, 766);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(151, 48);
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Cập nhật";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.UseWaitCursor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.Location = new System.Drawing.Point(172, 711);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(151, 48);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "Xóa";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.UseWaitCursor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(5, 711);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(151, 48);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Thêm";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.UseWaitCursor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -502,6 +533,8 @@
             // 
             this.groupBox6.Controls.Add(this.cbInfoUnActive);
             this.groupBox6.Controls.Add(this.cbInfoIsActive);
+            this.groupBox6.BackColor = System.Drawing.Color.White;
+            this.groupBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox6.Location = new System.Drawing.Point(11, 597);
             this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox6.Name = "groupBox6";
@@ -542,6 +575,8 @@
             // 
             this.groupBox5.Controls.Add(this.cbInfoUnAvailable);
             this.groupBox5.Controls.Add(this.cbInfoIsAvailable);
+            this.groupBox5.BackColor = System.Drawing.Color.White;
+            this.groupBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox5.Location = new System.Drawing.Point(11, 482);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox5.Name = "groupBox5";
@@ -598,6 +633,8 @@
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.txtNameInfo);
             this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.BackColor = System.Drawing.Color.White;
+            this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox4.Location = new System.Drawing.Point(11, 53);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
@@ -682,6 +719,7 @@
             // 
             // pictureEmployee
             // 
+            this.pictureEmployee.BackColor = System.Drawing.Color.White;
             this.pictureEmployee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureEmployee.Image = global::Client.Properties.Resources.defaultUser;
             this.pictureEmployee.Location = new System.Drawing.Point(13, 46);
@@ -792,7 +830,8 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
+            this.lblInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.lblInfo.Location = new System.Drawing.Point(5, 12);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(241, 29);
@@ -805,7 +844,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1693, 886);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.TabsCtr);

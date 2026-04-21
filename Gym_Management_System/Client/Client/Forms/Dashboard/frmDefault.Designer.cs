@@ -65,19 +65,19 @@
             // 
             // tableRoot
             // 
-            this.tableRoot.BackColor = System.Drawing.Color.White;
+            this.tableRoot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tableRoot.ColumnCount = 1;
             this.tableRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableRoot.Controls.Add(this.tableCards, 0, 0);
             this.tableRoot.Controls.Add(this.panelChartHost, 0, 1);
             this.tableRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableRoot.Location = new System.Drawing.Point(0, 0);
-            this.tableRoot.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tableRoot.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableRoot.Name = "tableRoot";
             this.tableRoot.RowCount = 2;
-            this.tableRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableRoot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableRoot.Size = new System.Drawing.Size(804, 432);
+            this.tableRoot.Size = new System.Drawing.Size(1072, 532);
             this.tableRoot.TabIndex = 0;
             // 
             // tableCards
@@ -92,27 +92,27 @@
             this.tableCards.Controls.Add(this.cardExpiringSoon, 2, 0);
             this.tableCards.Controls.Add(this.cardRevenueMonth, 3, 0);
             this.tableCards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableCards.Location = new System.Drawing.Point(9, 10);
-            this.tableCards.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.tableCards.Location = new System.Drawing.Point(12, 12);
+            this.tableCards.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.tableCards.Name = "tableCards";
             this.tableCards.RowCount = 1;
             this.tableCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableCards.Size = new System.Drawing.Size(786, 102);
+            this.tableCards.Size = new System.Drawing.Size(1048, 126);
             this.tableCards.TabIndex = 0;
             // 
             // cardTotalMembers
             // 
-            this.cardTotalMembers.BackColor = System.Drawing.Color.Gold;
+            this.cardTotalMembers.BackColor = System.Drawing.Color.White;
             this.cardTotalMembers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardTotalMembers.Controls.Add(this.pictureBox5);
             this.cardTotalMembers.Controls.Add(this.lblTotalMembersValue);
             this.cardTotalMembers.Controls.Add(this.lblTotalMembersTitle);
             this.cardTotalMembers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardTotalMembers.Location = new System.Drawing.Point(6, 6);
-            this.cardTotalMembers.Margin = new System.Windows.Forms.Padding(6);
+            this.cardTotalMembers.Location = new System.Drawing.Point(8, 7);
+            this.cardTotalMembers.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cardTotalMembers.Name = "cardTotalMembers";
-            this.cardTotalMembers.Padding = new System.Windows.Forms.Padding(10);
-            this.cardTotalMembers.Size = new System.Drawing.Size(184, 90);
+            this.cardTotalMembers.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.cardTotalMembers.Size = new System.Drawing.Size(246, 112);
             this.cardTotalMembers.TabIndex = 0;
             // 
             // pictureBox5
@@ -121,9 +121,10 @@
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.Image = global::Client.Properties.Resources.people_16419568;
             this.pictureBox5.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.InitialImage")));
-            this.pictureBox5.Location = new System.Drawing.Point(133, 36);
+            this.pictureBox5.Location = new System.Drawing.Point(178, 44);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(50, 53);
+            this.pictureBox5.Size = new System.Drawing.Size(67, 65);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 3;
             this.pictureBox5.TabStop = false;
@@ -132,11 +133,10 @@
             // 
             this.lblTotalMembersValue.AutoSize = true;
             this.lblTotalMembersValue.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalMembersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.lblTotalMembersValue.Location = new System.Drawing.Point(9, 36);
-            this.lblTotalMembersValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalMembersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblTotalMembersValue.Location = new System.Drawing.Point(12, 44);
             this.lblTotalMembersValue.Name = "lblTotalMembersValue";
-            this.lblTotalMembersValue.Size = new System.Drawing.Size(35, 41);
+            this.lblTotalMembersValue.Size = new System.Drawing.Size(43, 50);
             this.lblTotalMembersValue.TabIndex = 1;
             this.lblTotalMembersValue.Text = "0";
             // 
@@ -144,27 +144,26 @@
             // 
             this.lblTotalMembersTitle.AutoSize = true;
             this.lblTotalMembersTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalMembersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(64)))), ((int)(((byte)(98)))));
-            this.lblTotalMembersTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblTotalMembersTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalMembersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblTotalMembersTitle.Location = new System.Drawing.Point(13, 12);
             this.lblTotalMembersTitle.Name = "lblTotalMembersTitle";
-            this.lblTotalMembersTitle.Size = new System.Drawing.Size(110, 19);
+            this.lblTotalMembersTitle.Size = new System.Drawing.Size(136, 23);
             this.lblTotalMembersTitle.TabIndex = 0;
             this.lblTotalMembersTitle.Text = "Tổng số hội viên";
             // 
             // cardNewThisMonth
             // 
-            this.cardNewThisMonth.BackColor = System.Drawing.Color.Cyan;
+            this.cardNewThisMonth.BackColor = System.Drawing.Color.White;
             this.cardNewThisMonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardNewThisMonth.Controls.Add(this.pictureBox6);
             this.cardNewThisMonth.Controls.Add(this.lblNewThisMonthValue);
             this.cardNewThisMonth.Controls.Add(this.lblNewThisMonthTitle);
             this.cardNewThisMonth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardNewThisMonth.Location = new System.Drawing.Point(202, 6);
-            this.cardNewThisMonth.Margin = new System.Windows.Forms.Padding(6);
+            this.cardNewThisMonth.Location = new System.Drawing.Point(270, 7);
+            this.cardNewThisMonth.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cardNewThisMonth.Name = "cardNewThisMonth";
-            this.cardNewThisMonth.Padding = new System.Windows.Forms.Padding(10);
-            this.cardNewThisMonth.Size = new System.Drawing.Size(184, 90);
+            this.cardNewThisMonth.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.cardNewThisMonth.Size = new System.Drawing.Size(246, 112);
             this.cardNewThisMonth.TabIndex = 1;
             // 
             // pictureBox6
@@ -173,9 +172,10 @@
             this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.Image = global::Client.Properties.Resources.people_16419568;
             this.pictureBox6.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.InitialImage")));
-            this.pictureBox6.Location = new System.Drawing.Point(133, 36);
+            this.pictureBox6.Location = new System.Drawing.Point(178, 44);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(50, 53);
+            this.pictureBox6.Size = new System.Drawing.Size(67, 65);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 3;
             this.pictureBox6.TabStop = false;
@@ -184,11 +184,10 @@
             // 
             this.lblNewThisMonthValue.AutoSize = true;
             this.lblNewThisMonthValue.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblNewThisMonthValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.lblNewThisMonthValue.Location = new System.Drawing.Point(9, 36);
-            this.lblNewThisMonthValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNewThisMonthValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.lblNewThisMonthValue.Location = new System.Drawing.Point(12, 44);
             this.lblNewThisMonthValue.Name = "lblNewThisMonthValue";
-            this.lblNewThisMonthValue.Size = new System.Drawing.Size(35, 41);
+            this.lblNewThisMonthValue.Size = new System.Drawing.Size(43, 50);
             this.lblNewThisMonthValue.TabIndex = 1;
             this.lblNewThisMonthValue.Text = "0";
             // 
@@ -196,27 +195,26 @@
             // 
             this.lblNewThisMonthTitle.AutoSize = true;
             this.lblNewThisMonthTitle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblNewThisMonthTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(64)))), ((int)(((byte)(98)))));
-            this.lblNewThisMonthTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblNewThisMonthTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNewThisMonthTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblNewThisMonthTitle.Location = new System.Drawing.Point(13, 12);
             this.lblNewThisMonthTitle.Name = "lblNewThisMonthTitle";
-            this.lblNewThisMonthTitle.Size = new System.Drawing.Size(164, 19);
+            this.lblNewThisMonthTitle.Size = new System.Drawing.Size(203, 23);
             this.lblNewThisMonthTitle.TabIndex = 0;
             this.lblNewThisMonthTitle.Text = "Hội viên mới trong tháng";
             // 
             // cardExpiringSoon
             // 
-            this.cardExpiringSoon.BackColor = System.Drawing.Color.Tomato;
+            this.cardExpiringSoon.BackColor = System.Drawing.Color.White;
             this.cardExpiringSoon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardExpiringSoon.Controls.Add(this.pictureBox7);
             this.cardExpiringSoon.Controls.Add(this.lblExpiringSoonValue);
             this.cardExpiringSoon.Controls.Add(this.lblExpiringSoonTitle);
             this.cardExpiringSoon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardExpiringSoon.Location = new System.Drawing.Point(398, 6);
-            this.cardExpiringSoon.Margin = new System.Windows.Forms.Padding(6);
+            this.cardExpiringSoon.Location = new System.Drawing.Point(532, 7);
+            this.cardExpiringSoon.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cardExpiringSoon.Name = "cardExpiringSoon";
-            this.cardExpiringSoon.Padding = new System.Windows.Forms.Padding(10);
-            this.cardExpiringSoon.Size = new System.Drawing.Size(184, 90);
+            this.cardExpiringSoon.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.cardExpiringSoon.Size = new System.Drawing.Size(246, 112);
             this.cardExpiringSoon.TabIndex = 2;
             // 
             // pictureBox7
@@ -225,9 +223,10 @@
             this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox7.Image = global::Client.Properties.Resources.people_16419568;
             this.pictureBox7.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox7.InitialImage")));
-            this.pictureBox7.Location = new System.Drawing.Point(133, 36);
+            this.pictureBox7.Location = new System.Drawing.Point(178, 44);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(50, 53);
+            this.pictureBox7.Size = new System.Drawing.Size(67, 65);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 3;
             this.pictureBox7.TabStop = false;
@@ -236,11 +235,10 @@
             // 
             this.lblExpiringSoonValue.AutoSize = true;
             this.lblExpiringSoonValue.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblExpiringSoonValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.lblExpiringSoonValue.Location = new System.Drawing.Point(9, 36);
-            this.lblExpiringSoonValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblExpiringSoonValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblExpiringSoonValue.Location = new System.Drawing.Point(12, 44);
             this.lblExpiringSoonValue.Name = "lblExpiringSoonValue";
-            this.lblExpiringSoonValue.Size = new System.Drawing.Size(35, 41);
+            this.lblExpiringSoonValue.Size = new System.Drawing.Size(43, 50);
             this.lblExpiringSoonValue.TabIndex = 1;
             this.lblExpiringSoonValue.Text = "0";
             // 
@@ -248,27 +246,26 @@
             // 
             this.lblExpiringSoonTitle.AutoSize = true;
             this.lblExpiringSoonTitle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblExpiringSoonTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(64)))), ((int)(((byte)(98)))));
-            this.lblExpiringSoonTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblExpiringSoonTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblExpiringSoonTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblExpiringSoonTitle.Location = new System.Drawing.Point(13, 12);
             this.lblExpiringSoonTitle.Name = "lblExpiringSoonTitle";
-            this.lblExpiringSoonTitle.Size = new System.Drawing.Size(135, 19);
+            this.lblExpiringSoonTitle.Size = new System.Drawing.Size(167, 23);
             this.lblExpiringSoonTitle.TabIndex = 0;
             this.lblExpiringSoonTitle.Text = "Hội viên sắp hết hạn";
             // 
             // cardRevenueMonth
             // 
-            this.cardRevenueMonth.BackColor = System.Drawing.Color.LightGreen;
+            this.cardRevenueMonth.BackColor = System.Drawing.Color.White;
             this.cardRevenueMonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardRevenueMonth.Controls.Add(this.pictureBox8);
             this.cardRevenueMonth.Controls.Add(this.lblRevenueMonthValue);
             this.cardRevenueMonth.Controls.Add(this.lblRevenueMonthTitle);
             this.cardRevenueMonth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardRevenueMonth.Location = new System.Drawing.Point(594, 6);
-            this.cardRevenueMonth.Margin = new System.Windows.Forms.Padding(6);
+            this.cardRevenueMonth.Location = new System.Drawing.Point(794, 7);
+            this.cardRevenueMonth.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cardRevenueMonth.Name = "cardRevenueMonth";
-            this.cardRevenueMonth.Padding = new System.Windows.Forms.Padding(10);
-            this.cardRevenueMonth.Size = new System.Drawing.Size(186, 90);
+            this.cardRevenueMonth.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.cardRevenueMonth.Size = new System.Drawing.Size(246, 112);
             this.cardRevenueMonth.TabIndex = 3;
             // 
             // pictureBox8
@@ -277,9 +274,10 @@
             this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox8.Image = global::Client.Properties.Resources.money_4322197;
             this.pictureBox8.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.InitialImage")));
-            this.pictureBox8.Location = new System.Drawing.Point(131, 36);
+            this.pictureBox8.Location = new System.Drawing.Point(174, 44);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(50, 53);
+            this.pictureBox8.Size = new System.Drawing.Size(67, 65);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 3;
             this.pictureBox8.TabStop = false;
@@ -288,11 +286,10 @@
             // 
             this.lblRevenueMonthValue.AutoSize = true;
             this.lblRevenueMonthValue.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblRevenueMonthValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.lblRevenueMonthValue.Location = new System.Drawing.Point(9, 36);
-            this.lblRevenueMonthValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRevenueMonthValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.lblRevenueMonthValue.Location = new System.Drawing.Point(12, 44);
             this.lblRevenueMonthValue.Name = "lblRevenueMonthValue";
-            this.lblRevenueMonthValue.Size = new System.Drawing.Size(62, 41);
+            this.lblRevenueMonthValue.Size = new System.Drawing.Size(76, 50);
             this.lblRevenueMonthValue.TabIndex = 1;
             this.lblRevenueMonthValue.Text = "0 đ";
             // 
@@ -300,11 +297,10 @@
             // 
             this.lblRevenueMonthTitle.AutoSize = true;
             this.lblRevenueMonthTitle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblRevenueMonthTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(64)))), ((int)(((byte)(98)))));
-            this.lblRevenueMonthTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblRevenueMonthTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRevenueMonthTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.lblRevenueMonthTitle.Location = new System.Drawing.Point(13, 12);
             this.lblRevenueMonthTitle.Name = "lblRevenueMonthTitle";
-            this.lblRevenueMonthTitle.Size = new System.Drawing.Size(115, 19);
+            this.lblRevenueMonthTitle.Size = new System.Drawing.Size(142, 23);
             this.lblRevenueMonthTitle.TabIndex = 0;
             this.lblRevenueMonthTitle.Text = "Doanh thu tháng";
             // 
@@ -314,31 +310,31 @@
             this.panelChartHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelChartHost.Controls.Add(this.chartRevenueDaily);
             this.panelChartHost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChartHost.Location = new System.Drawing.Point(9, 122);
-            this.panelChartHost.Margin = new System.Windows.Forms.Padding(9, 0, 9, 10);
+            this.panelChartHost.Location = new System.Drawing.Point(12, 150);
+            this.panelChartHost.Margin = new System.Windows.Forms.Padding(12, 0, 12, 12);
             this.panelChartHost.Name = "panelChartHost";
-            this.panelChartHost.Padding = new System.Windows.Forms.Padding(9, 10, 9, 10);
-            this.panelChartHost.Size = new System.Drawing.Size(786, 300);
+            this.panelChartHost.Padding = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.panelChartHost.Size = new System.Drawing.Size(1048, 370);
             this.panelChartHost.TabIndex = 1;
             // 
             // chartRevenueDaily
             // 
-            this.chartRevenueDaily.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chartRevenueDaily.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.chartRevenueDaily.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartRevenueDaily.Location = new System.Drawing.Point(9, 10);
-            this.chartRevenueDaily.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.chartRevenueDaily.Location = new System.Drawing.Point(12, 12);
+            this.chartRevenueDaily.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chartRevenueDaily.Name = "chartRevenueDaily";
-            this.chartRevenueDaily.Size = new System.Drawing.Size(766, 278);
+            this.chartRevenueDaily.Size = new System.Drawing.Size(1022, 344);
             this.chartRevenueDaily.TabIndex = 0;
             this.chartRevenueDaily.Text = "chartRevenueDaily";
             // 
             // frmDefault
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 432);
+            this.ClientSize = new System.Drawing.Size(1072, 532);
             this.Controls.Add(this.tableRoot);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmDefault";
             this.Text = "frmDefault";
             this.Load += new System.EventHandler(this.frmDefault_Load);

@@ -68,6 +68,7 @@ namespace Client.Forms.ScheduleManage
             // 
             // pnlFilter
             // 
+            this.pnlFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.pnlFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.cmbFilterMember);
@@ -83,7 +84,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // btnFilter
             // 
-            this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnFilter.FlatAppearance.BorderSize = 0;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnFilter.ForeColor = System.Drawing.Color.White;
             this.btnFilter.Location = new System.Drawing.Point(850, 5);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(120, 32);
@@ -134,6 +139,7 @@ namespace Client.Forms.ScheduleManage
             // 
             // pnlNavigation
             // 
+            this.pnlNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.pnlNavigation.Controls.Add(this.lblWeekRange);
             this.pnlNavigation.Controls.Add(this.btnNextWeek);
             this.pnlNavigation.Controls.Add(this.btnPrevWeek);
@@ -146,9 +152,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // lblWeekRange
             // 
+            this.lblWeekRange.BackColor = System.Drawing.Color.White;
             this.lblWeekRange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWeekRange.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblWeekRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.lblWeekRange.Location = new System.Drawing.Point(187, 0);
             this.lblWeekRange.Margin = new System.Windows.Forms.Padding(5);
             this.lblWeekRange.Name = "lblWeekRange";
@@ -160,7 +168,11 @@ namespace Client.Forms.ScheduleManage
             // btnNextWeek
             // 
             this.btnNextWeek.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNextWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNextWeek.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnNextWeek.FlatAppearance.BorderSize = 0;
+            this.btnNextWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextWeek.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNextWeek.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnNextWeek.Location = new System.Drawing.Point(1737, 0);
             this.btnNextWeek.Margin = new System.Windows.Forms.Padding(4);
             this.btnNextWeek.Name = "btnNextWeek";
@@ -173,7 +185,11 @@ namespace Client.Forms.ScheduleManage
             // btnPrevWeek
             // 
             this.btnPrevWeek.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPrevWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPrevWeek.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnPrevWeek.FlatAppearance.BorderSize = 0;
+            this.btnPrevWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevWeek.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPrevWeek.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnPrevWeek.Location = new System.Drawing.Point(0, 0);
             this.btnPrevWeek.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrevWeek.Name = "btnPrevWeek";
@@ -190,6 +206,7 @@ namespace Client.Forms.ScheduleManage
             this.dgvTimetable.AllowUserToDeleteRows = false;
             this.dgvTimetable.AllowUserToResizeRows = false;
             this.dgvTimetable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTimetable.BackgroundColor = System.Drawing.Color.White;
             this.dgvTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTimetable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTimetable.Location = new System.Drawing.Point(0, 83);
@@ -206,6 +223,7 @@ namespace Client.Forms.ScheduleManage
             // 
             // pnlInput
             // 
+            this.pnlInput.BackColor = System.Drawing.Color.White;
             this.pnlInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlInput.Controls.Add(this.btnClear);
             this.pnlInput.Controls.Add(this.btnDelete);
@@ -236,7 +254,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // btnClear
             // 
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnClear.Location = new System.Drawing.Point(1399, 55);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
@@ -248,7 +270,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // btnDelete
             // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.Location = new System.Drawing.Point(1399, 4);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
@@ -260,7 +286,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Location = new System.Drawing.Point(1231, 55);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
@@ -272,7 +302,11 @@ namespace Client.Forms.ScheduleManage
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(1231, 4);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
@@ -453,6 +487,7 @@ namespace Client.Forms.ScheduleManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.pnlInput);
             this.Controls.Add(this.dgvTimetable);

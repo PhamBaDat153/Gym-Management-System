@@ -113,6 +113,16 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676 {
+            get {
+                object obj = ResourceManager.GetObject("Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap house_2933360 {
             get {
                 object obj = ResourceManager.GetObject("house_2933360", resourceCulture);

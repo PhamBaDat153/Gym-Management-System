@@ -99,6 +99,18 @@ namespace Client.Forms.Dashboard
                 return;
             }
 
+            if (phoneChanged && !System.Text.RegularExpressions.Regex.IsMatch(newPhone, @"^\d{10,11}$"))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (emailChanged && !System.Text.RegularExpressions.Regex.IsMatch(newEmail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Địa chỉ email không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string newImageUrl = User.ImageUrl;
             if (imageChanged)
             {

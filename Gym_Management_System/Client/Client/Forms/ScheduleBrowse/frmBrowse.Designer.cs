@@ -55,6 +55,7 @@ namespace Client.Forms.ScheduleBrowse
             // dgvTimetable
             // 
             this.dgvTimetable.AllowUserToAddRows = false;
+            this.dgvTimetable.BackgroundColor = System.Drawing.Color.White;
             this.dgvTimetable.AllowUserToDeleteRows = false;
             this.dgvTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -74,7 +75,8 @@ namespace Client.Forms.ScheduleBrowse
             // lblWeekRange
             // 
             this.lblWeekRange.AutoSize = true;
-            this.lblWeekRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblWeekRange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.lblWeekRange.Location = new System.Drawing.Point(628, 60);
             this.lblWeekRange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWeekRange.Name = "lblWeekRange";
@@ -84,6 +86,10 @@ namespace Client.Forms.ScheduleBrowse
             // 
             // btnPrevWeek
             // 
+            this.btnPrevWeek.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnPrevWeek.FlatAppearance.BorderSize = 0;
+            this.btnPrevWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevWeek.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnPrevWeek.Location = new System.Drawing.Point(16, 55);
             this.btnPrevWeek.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrevWeek.Name = "btnPrevWeek";
@@ -95,6 +101,10 @@ namespace Client.Forms.ScheduleBrowse
             // 
             // btnNextWeek
             // 
+            this.btnNextWeek.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btnNextWeek.FlatAppearance.BorderSize = 0;
+            this.btnNextWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextWeek.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btnNextWeek.Location = new System.Drawing.Point(1256, 60);
             this.btnNextWeek.Margin = new System.Windows.Forms.Padding(4);
             this.btnNextWeek.Name = "btnNextWeek";
@@ -106,6 +116,10 @@ namespace Client.Forms.ScheduleBrowse
             // 
             // btnSearch
             // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
             this.btnSearch.Location = new System.Drawing.Point(348, 12);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
@@ -157,6 +171,10 @@ namespace Client.Forms.ScheduleBrowse
             // 
             // btnUpdateStatus
             // 
+            this.btnUpdateStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.btnUpdateStatus.FlatAppearance.BorderSize = 0;
+            this.btnUpdateStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateStatus.ForeColor = System.Drawing.Color.White;
             this.btnUpdateStatus.Location = new System.Drawing.Point(759, 13);
             this.btnUpdateStatus.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateStatus.Name = "btnUpdateStatus";
@@ -170,6 +188,7 @@ namespace Client.Forms.ScheduleBrowse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1312, 690);
             this.Controls.Add(this.btnUpdateStatus);
             this.Controls.Add(this.cmbStatus);

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_find = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.tabCtrl_find_infoP = new System.Windows.Forms.TabControl();
@@ -82,9 +82,10 @@
             // 
             this.btn_find.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_find.BackColor = System.Drawing.Color.Tomato;
-            this.btn_find.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_find.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_find.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btn_find.FlatAppearance.BorderSize = 0;
+            this.btn_find.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_find.ForeColor = System.Drawing.Color.White;
             this.btn_find.Location = new System.Drawing.Point(512, 73);
             this.btn_find.Margin = new System.Windows.Forms.Padding(4);
             this.btn_find.Name = "btn_find";
@@ -98,9 +99,10 @@
             // 
             this.btn_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_refresh.BackColor = System.Drawing.Color.AliceBlue;
-            this.btn_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_refresh.ForeColor = System.Drawing.Color.Coral;
+            this.btn_refresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(211)))), ((int)(((byte)(226)))));
+            this.btn_refresh.FlatAppearance.BorderSize = 0;
+            this.btn_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_refresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.btn_refresh.Location = new System.Drawing.Point(512, 151);
             this.btn_refresh.Margin = new System.Windows.Forms.Padding(4);
             this.btn_refresh.Name = "btn_refresh";
@@ -115,7 +117,7 @@
             this.tabCtrl_find_infoP.Controls.Add(this.TabCtrl_find);
             this.tabCtrl_find_infoP.Controls.Add(this.tabPage2);
             this.tabCtrl_find_infoP.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabCtrl_find_infoP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabCtrl_find_infoP.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.tabCtrl_find_infoP.Location = new System.Drawing.Point(0, 636);
             this.tabCtrl_find_infoP.Margin = new System.Windows.Forms.Padding(4);
             this.tabCtrl_find_infoP.Name = "tabCtrl_find_infoP";
@@ -140,6 +142,7 @@
             this.TabCtrl_find.Size = new System.Drawing.Size(1533, 297);
             this.TabCtrl_find.TabIndex = 0;
             this.TabCtrl_find.Text = "Tìm kiếm ";
+            this.TabCtrl_find.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabCtrl_find.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -239,7 +242,8 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.label9.Location = new System.Drawing.Point(15, 15);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
@@ -261,13 +265,15 @@
             this.tabPage2.Size = new System.Drawing.Size(1533, 297);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Thông tin";
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btn_del
             // 
-            this.btn_del.BackColor = System.Drawing.Color.Red;
-            this.btn_del.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_del.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_del.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.btn_del.FlatAppearance.BorderSize = 0;
+            this.btn_del.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_del.ForeColor = System.Drawing.Color.White;
             this.btn_del.Location = new System.Drawing.Point(551, 259);
             this.btn_del.Margin = new System.Windows.Forms.Padding(4);
             this.btn_del.Name = "btn_del";
@@ -279,8 +285,10 @@
             // 
             // btn_renew
             // 
-            this.btn_renew.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btn_renew.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_renew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btn_renew.FlatAppearance.BorderSize = 0;
+            this.btn_renew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_renew.ForeColor = System.Drawing.Color.White;
             this.btn_renew.Location = new System.Drawing.Point(551, 206);
             this.btn_renew.Margin = new System.Windows.Forms.Padding(4);
             this.btn_renew.Name = "btn_renew";
@@ -292,8 +300,10 @@
             // 
             // btn_add
             // 
-            this.btn_add.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
+            this.btn_add.FlatAppearance.BorderSize = 0;
+            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_add.ForeColor = System.Drawing.Color.White;
             this.btn_add.Location = new System.Drawing.Point(551, 153);
             this.btn_add.Margin = new System.Windows.Forms.Padding(4);
             this.btn_add.Name = "btn_add";
@@ -307,7 +317,9 @@
             // 
             this.groupBox2.Controls.Add(this.cbox_daKH);
             this.groupBox2.Controls.Add(this.cbox_cKH);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox2.Location = new System.Drawing.Point(551, 8);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
@@ -354,7 +366,9 @@
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox1.Location = new System.Drawing.Point(8, 7);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
@@ -463,9 +477,11 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.White;
             this.groupBox3.Controls.Add(this.dgv_package);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
@@ -478,15 +494,16 @@
             // dgv_package
             // 
             this.dgv_package.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_package.BackgroundColor = System.Drawing.Color.White;
             this.dgv_package.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_package.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_package.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_package.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_package.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.package_id,
@@ -544,6 +561,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1541, 970);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.tabCtrl_find_infoP);

@@ -86,6 +86,12 @@ namespace Client.Forms.Dashboard
             btnEmployeeNavigate.Visible = false;
             btnReportNavigate.Visible = false;
             btnScheduleNavigate.Visible = false;
+            pictureBox2.Visible= false;
+            pictureBox3.Visible=false;
+            pictureBox4.Visible=false;
+            pictureBox5.Visible=false;
+            pictureBox6.Visible=false;
+            pictureBox7.Visible=false;
 
             if (User.Roles.Contains("Admin"))
             {
@@ -95,6 +101,12 @@ namespace Client.Forms.Dashboard
                 btnEmployeeNavigate.Visible = true;
                 btnReportNavigate.Visible = true;
                 btnScheduleNavigate.Visible = true;
+                pictureBox2.Visible=true;
+                pictureBox3.Visible=true;
+                pictureBox4.Visible=true;
+                pictureBox5.Visible = true;
+                pictureBox6.Visible=true;
+                pictureBox7.Visible=true;
                 return;
             }
 
@@ -105,17 +117,27 @@ namespace Client.Forms.Dashboard
                 btnReportNavigate.Visible = true;
                 btnScheduleNavigate.Visible = true;
                 btnMemberNavigate.Visible = true;
+                pictureBox2.Visible = true;
+                pictureBox3.Visible = true;
+                pictureBox4.Visible = true;
+                pictureBox5.Visible = true;
+                pictureBox6.Visible = true;
+                pictureBox7.Visible = true;
             }
 
             if (User.Roles.Contains("Receptionist"))
             {
                 btnMemberNavigate.Visible = true;
                 btnPackageNavigate.Visible = true;
+                pictureBox5.Visible = true;
+                pictureBox4.Visible = true;
+
             }
 
             if (User.Roles.Contains("Trainer"))
             {
                 btnBrowseNavigate.Visible = true;
+                pictureBox7.Visible = true;
             }
         }
 

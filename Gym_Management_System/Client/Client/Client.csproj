@@ -249,9 +249,7 @@
   <ItemGroup>
     <None Include="Resources\visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\UserInfo\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\0684456b-aa2b-4631-86f7-93ceaf33303c.jpg" />
   </ItemGroup>
@@ -290,6 +288,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\book_14739729.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
