@@ -1,4 +1,4 @@
-﻿using Client.DataContext;
+using Client.DataContext;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +24,8 @@ namespace Client.Forms.ReportManage
         private const int ChartModeColumn = 1;
         private const int ChartModeLine = 2;
         private const int KeywordDebounceMs = 350;
+        private const string MainChartAreaName = "MainArea";
+        private const string MainLegendName = "MainLegend";
 
         private Label lbl_toolbar_summary;
         private Label lbl_keyword;
@@ -252,6 +254,7 @@ namespace Client.Forms.ReportManage
 
         private DateTime GetFilterFrom()
         {
+            if (dtp_from == null || dtp_to == null) return DateTime.Today;
             int month = dtp_from.Value.Month;
             int year = dtp_to.Value.Year;
             return new DateTime(year, month, 1);
@@ -265,6 +268,7 @@ namespace Client.Forms.ReportManage
 
         private async Task ReloadFromFilterAsync()
         {
+            if (!CanRunReportLogic()) return;
             int requestVersion = Interlocked.Increment(ref reloadRequestVersion);
             DateTime from = GetFilterFrom();
             DateTime toExclusive = GetFilterTo().AddDays(1);
@@ -455,18 +459,22 @@ namespace Client.Forms.ReportManage
 
         private async Task RefreshChartAsync()
         {
+            if (!CanRunReportLogic() || chart_report == null) return;
+
+            var chartArea = EnsureMainChartArea();
+            var legend = EnsureMainLegend();
             chart_report.Series.Clear();
             chart_report.Titles.Clear();
             chart_report.Annotations.Clear();
-            chart_report.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chart_report.ChartAreas[0].AxisX.LabelStyle.Format = "dd/MM/yyyy";
-            chart_report.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-            chart_report.ChartAreas[0].AxisX.IsLabelAutoFit = false;
-            chart_report.ChartAreas[0].AxisX.LabelStyle.IsStaggered = false;
-            chart_report.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
-            chart_report.ChartAreas[0].AxisX.Interval = 1;
-            chart_report.ChartAreas[0].AxisY2.Enabled = AxisEnabled.False;
-            chart_report.ChartAreas[0].AxisY2.Title = string.Empty;
+            chartArea.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            chartArea.AxisX.LabelStyle.Format = "dd/MM/yyyy";
+            chartArea.AxisX.IntervalType = DateTimeIntervalType.Days;
+            chartArea.AxisX.IsLabelAutoFit = false;
+            chartArea.AxisX.LabelStyle.IsStaggered = false;
+            chartArea.AxisX.LabelStyle.Angle = 0;
+            chartArea.AxisX.Interval = 1;
+            chartArea.AxisY2.Enabled = AxisEnabled.False;
+            chartArea.AxisY2.Title = string.Empty;
 
             DateTime from = GetFilterFrom();
             DateTime toExclusive = GetFilterTo().AddDays(1);
@@ -495,10 +503,12 @@ namespace Client.Forms.ReportManage
                             cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
 
                             var chartType = ResolveChartType();
-                            var sNew = new Series("HV mới (tháng)") { ChartType = chartType };
-                            var sLoss = new Series("HV mất (tháng)") { ChartType = chartType };
-                            sNew.ChartArea = chart_report.ChartAreas[0].Name;
-                            sLoss.ChartArea = chart_report.ChartAreas[0].Name;
+                            var sMale = new Series("Đăng ký Nam") { ChartType = chartType };
+                            var sFemale = new Series("Đăng ký Nữ") { ChartType = chartType };
+                            sMale.ChartArea = chartArea.Name;
+                            sFemale.ChartArea = chartArea.Name;
+                            sMale.Legend = legend.Name;
+                            sFemale.Legend = legend.Name;
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
@@ -535,6 +545,7 @@ namespace Client.Forms.ReportManage
 
                             var chartType = ResolveChartType();
                             var sAmount = new Series("Tổng thu") { ChartType = chartType };
+<<<<<<< HEAD
                             var sCost = new Series("Tổng chi") { ChartType = chartType };
                             var sProfit = new Series("Lợi nhuận") { ChartType = chartType };
                             sAmount.ChartArea = chart_report.ChartAreas[0].Name;
@@ -558,6 +569,12 @@ namespace Client.Forms.ReportManage
                             sAmount.ToolTip = "Tổng thu - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
                             sCost.ToolTip = "Tổng chi - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
                             sProfit.ToolTip = "Lợi nhuận - #VALX{dd/MM/yyyy}: #VALY{N0} VNĐ";
+=======
+                            sSold.ChartArea = chartArea.Name;
+                            sAmount.ChartArea = chartArea.Name;
+                            sSold.Legend = legend.Name;
+                            sAmount.Legend = legend.Name;
+>>>>>>> d51a079 (Viet Anh:Sửa lỗi crack ở trang report)
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
@@ -590,6 +607,15 @@ namespace Client.Forms.ReportManage
                                 }
                             }
 
+<<<<<<< HEAD
+=======
+                            sSold.ToolTip = "Số lượng bán - #VALX: #VALY{N0}";
+                            sAmount.ToolTip = "Tổng thu - #VALX: #VALY{N0} VNĐ";
+                            chartArea.AxisY2.Enabled = AxisEnabled.True;
+                            chartArea.AxisY2.Title = "Số lượng bán";
+                            chartArea.AxisY2.LabelStyle.Format = "N0";
+                            chart_report.Series.Add(sSold);
+>>>>>>> d51a079 (Viet Anh:Sửa lỗi crack ở trang report)
                             chart_report.Series.Add(sAmount);
                             chart_report.Series.Add(sCost);
                             chart_report.Series.Add(sProfit);
@@ -617,8 +643,10 @@ namespace Client.Forms.ReportManage
                             var chartType = ResolveChartType();
                             var sCount = new Series("Số hóa đơn") { ChartType = chartType, YAxisType = AxisType.Secondary };
                             var sAmount = new Series("Tổng tiền") { ChartType = chartType };
-                            sCount.ChartArea = chart_report.ChartAreas[0].Name;
-                            sAmount.ChartArea = chart_report.ChartAreas[0].Name;
+                            sCount.ChartArea = chartArea.Name;
+                            sAmount.ChartArea = chartArea.Name;
+                            sCount.Legend = legend.Name;
+                            sAmount.Legend = legend.Name;
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
@@ -638,18 +666,26 @@ namespace Client.Forms.ReportManage
 
                             chart_report.Series.Add(sCount);
                             chart_report.Series.Add(sAmount);
-                            chart_report.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
-                            chart_report.ChartAreas[0].AxisY2.Title = "Số hóa đơn";
-                            chart_report.ChartAreas[0].AxisY2.LabelStyle.Format = "N0";
+                            chartArea.AxisY2.Enabled = AxisEnabled.True;
+                            chartArea.AxisY2.Title = "Số hóa đơn";
+                            chartArea.AxisY2.LabelStyle.Format = "N0";
                         }
                     }
                 }
 
+<<<<<<< HEAD
                 chart_report.ChartAreas[0].AxisX.Title = "Ngày báo cáo";
                 chart_report.ChartAreas[0].AxisY.Title = cbo_report_type.SelectedIndex == KindMember ? "Số lượng" : "VNĐ";
                 chart_report.ChartAreas[0].AxisY.LabelStyle.Format = "N0";
                 chart_report.Legends[0].Enabled = chart_report.Series.Count > 0;
                 chart_report.ChartAreas[0].AxisX.Interval = totalPoints > 40 ? 4 : totalPoints > 20 ? 2 : 1;
+=======
+                chartArea.AxisX.Title = cbo_report_type.SelectedIndex == KindRevenue ? "Gói tập" : "Ngày báo cáo";
+                chartArea.AxisY.Title = cbo_report_type.SelectedIndex == KindMember ? "Số lượng" : "VNĐ";
+                chartArea.AxisY.LabelStyle.Format = "N0";
+                legend.Enabled = chart_report.Series.Count > 0;
+                chartArea.AxisX.Interval = totalPoints > 40 ? 4 : totalPoints > 20 ? 2 : 1;
+>>>>>>> d51a079 (Viet Anh:Sửa lỗi crack ở trang report)
 
                 if (totalPoints == 0)
                 {
@@ -674,9 +710,49 @@ namespace Client.Forms.ReportManage
             return SeriesChartType.Column;
         }
 
+        private ChartArea EnsureMainChartArea()
+        {
+            if (chart_report.ChartAreas.Count == 0)
+            {
+                chart_report.ChartAreas.Add(new ChartArea(MainChartAreaName));
+            }
+
+            var area = chart_report.ChartAreas.FindByName(MainChartAreaName) ?? chart_report.ChartAreas[0];
+            if (string.IsNullOrWhiteSpace(area.Name))
+            {
+                area.Name = MainChartAreaName;
+            }
+
+            return area;
+        }
+
+        private Legend EnsureMainLegend()
+        {
+            if (chart_report.Legends.Count == 0)
+            {
+                chart_report.Legends.Add(new Legend(MainLegendName));
+            }
+
+            var legend = chart_report.Legends.FindByName(MainLegendName) ?? chart_report.Legends[0];
+            if (string.IsNullOrWhiteSpace(legend.Name))
+            {
+                legend.Name = MainLegendName;
+            }
+
+            return legend;
+        }
+
+        private bool CanRunReportLogic()
+        {
+            if (IsDisposed || Disposing) return false;
+            if (cbo_report_type == null || dtp_from == null || dtp_to == null) return false;
+            if (dgv_member == null || dgv_revenue == null || chart_report == null) return false;
+            return true;
+        }
+
         private void UpdateSummary()
         {
-            if (lbl_toolbar_summary == null) return;
+            if (!CanRunReportLogic() || lbl_toolbar_summary == null) return;
 
             DateTime from = GetFilterFrom();
             string period = from.ToString("MM/yyyy", CultureInfo.InvariantCulture);
