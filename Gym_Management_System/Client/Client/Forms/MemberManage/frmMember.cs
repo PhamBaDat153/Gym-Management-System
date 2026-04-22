@@ -14,6 +14,49 @@ namespace Client.Forms.MemberManage
 {
     public partial class frmMember : Form
     {
+        private static void EnsureLastDurationUpdateColumnExists(SqlConnection conn, SqlTransaction tx = null)
+        {
+            // Avoid "Invalid column name" by creating column in a separate command,
+            // then backfill it from latest Receipt.payment_date (or register_date if no receipts).
+            using (SqlCommand existsCmd = new SqlCommand(
+                "SELECT CASE WHEN COL_LENGTH('dbo.Member','last_duration_update') IS NULL THEN 0 ELSE 1 END",
+                conn, tx))
+            {
+                int exists = Convert.ToInt32(existsCmd.ExecuteScalar());
+                if (exists == 1)
+                {
+                    return;
+                }
+            }
+
+            using (SqlCommand alter = new SqlCommand(
+                @"
+ALTER TABLE dbo.Member
+ADD last_duration_update DATE NOT NULL
+    CONSTRAINT DF_Member_last_duration_update DEFAULT (CONVERT(date, GETDATE()));
+",
+                conn, tx))
+            {
+                alter.ExecuteNonQuery();
+            }
+
+            using (SqlCommand backfill = new SqlCommand(
+                @"
+UPDATE m
+SET m.last_duration_update =
+    COALESCE(
+        (SELECT MAX(r.payment_date) FROM dbo.Receipt r WHERE r.member_id = m.member_id),
+        m.register_date,
+        CONVERT(date, GETDATE())
+    )
+FROM dbo.Member m;
+",
+                conn, tx))
+            {
+                backfill.ExecuteNonQuery();
+            }
+        }
+
         private Guid? _selectedMemberId;
         private bool _readyForFilterEvents;
         /// <summary>
@@ -880,10 +923,34 @@ namespace Client.Forms.MemberManage
                 using (SqlConnection conn = GymManagementSystemContext.Connect())
                 {
                     conn.Open();
+
+                    // Điều kiện: chỉ cho đăng ký gói khi ngày còn lại = 0 (đã hết hạn)
+                    using (SqlCommand cmdCheck = new SqlCommand(
+                        "SELECT remaining_duration FROM dbo.Member WHERE member_id = @mid",
+                        conn))
+                    {
+                        cmdCheck.Parameters.AddWithValue("@mid", memberId);
+                        object val = cmdCheck.ExecuteScalar();
+                        int remaining = (val == null || val == DBNull.Value) ? 0 : Convert.ToInt32(val);
+                        if (remaining != 0)
+                        {
+                            MessageBox.Show(
+                                $"Ngày còn lại hiện tại = {remaining}. Chỉ được đăng ký gói khi ngày còn lại = 0.",
+                                "Không thể đăng ký gói",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
                     using (SqlTransaction tx = conn.BeginTransaction())
                     {
                         try
                         {
+                            DateTime paymentDate = DateTime.Today;
+
+                            EnsureLastDurationUpdateColumnExists(conn, tx);
+
                             using (SqlCommand cmd = new SqlCommand(
                                 "INSERT INTO dbo.Receipt (receipt_id, member_id, package_id, total_amount, payment_date, payment_method) " +
                                 "VALUES (@rid, @mid, @pid, @amount, @pdate, @pmethod)",
@@ -893,23 +960,30 @@ namespace Client.Forms.MemberManage
                                 cmd.Parameters.AddWithValue("@mid", memberId);
                                 cmd.Parameters.AddWithValue("@pid", packageId);
                                 cmd.Parameters.AddWithValue("@amount", pkg.Price);
-                                cmd.Parameters.AddWithValue("@pdate", DateTime.Today);
+                                cmd.Parameters.AddWithValue("@pdate", paymentDate);
                                 cmd.Parameters.AddWithValue("@pmethod", paymentMethodId);
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // Package.duration = số ngày;
-                            int addDays = pkg.Duration ;
                             using (SqlCommand cmd = new SqlCommand(
-                                "UPDATE dbo.Member SET " +
-                                "remaining_duration = remaining_duration + @dur, " +
-                                "has_trainer = CASE WHEN @wtrainer = 1 THEN 1 ELSE has_trainer END, " +
-                                "is_expired = 0, is_active = 1 " +
-                                "WHERE member_id = @mid",
+                                @"
+DECLARE @dur INT = (SELECT TOP 1 duration FROM dbo.Package WHERE package_id = @pid);
+IF @dur IS NULL SET @dur = 0;
+
+UPDATE dbo.Member
+SET
+    remaining_duration = @dur,
+    has_trainer = CASE WHEN @wtrainer = 1 THEN 1 ELSE has_trainer END,
+    is_expired = CASE WHEN @dur <= 0 THEN 1 ELSE 0 END,
+    is_active = 1,
+    last_duration_update = @payDate
+WHERE member_id = @mid;
+",
                                 conn, tx))
                             {
-                                cmd.Parameters.AddWithValue("@dur", addDays);
                                 cmd.Parameters.AddWithValue("@wtrainer", pkg.WithTrainer);
+                                cmd.Parameters.AddWithValue("@pid", packageId);
+                                cmd.Parameters.AddWithValue("@payDate", paymentDate.Date);
                                 cmd.Parameters.AddWithValue("@mid", memberId);
                                 cmd.ExecuteNonQuery();
                             }
@@ -931,6 +1005,147 @@ namespace Client.Forms.MemberManage
             catch (Exception ex)
             {
                 MessageBox.Show("Không đăng ký gói được.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Hủy gói vừa mua (chỉ cho phép nếu chưa dùng ngày nào: remaining_duration == duration và mua trong hôm nay).
+        /// Khi hủy: xóa Receipt tương ứng và reset remaining_duration về 0.
+        /// </summary>
+        private void btnCancelPackage_Click(object sender, EventArgs e)
+        {
+            if (_selectedMemberId == null)
+            {
+                MessageBox.Show("Chọn hội viên trong danh sách trước khi hủy gói.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Guid memberId = _selectedMemberId.Value;
+            // Hủy theo tiêu chí nghiệp vụ: chỉ cần "ngày còn lại == thời hạn gói"
+            // (không bắt buộc chọn đúng gói trên combobox vì combobox là danh sách gói đang bán, không phải gói đã mua).
+
+            try
+            {
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                {
+                    conn.Open();
+                    using (SqlTransaction tx = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            EnsureLastDurationUpdateColumnExists(conn, tx);
+
+                            // Lấy hóa đơn mới nhất của hội viên
+                            Guid receiptId = Guid.Empty;
+                            DateTime paymentDate = DateTime.MinValue;
+                            int packageDuration = 0;
+                            int remaining = 0;
+                            string packageName = "";
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                @"
+SELECT TOP 1 
+    r.receipt_id,
+    r.payment_date,
+    p.duration AS package_duration,
+    p.package_name,
+    m.remaining_duration
+FROM dbo.Receipt r
+JOIN dbo.Package p ON p.package_id = r.package_id
+JOIN dbo.Member  m ON m.member_id  = r.member_id
+WHERE r.member_id = @mid
+ORDER BY r.payment_date DESC, r.receipt_id DESC;
+",
+                                conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@mid", memberId);
+                                using (var r = cmd.ExecuteReader())
+                                {
+                                    if (!r.Read())
+                                    {
+                                        MessageBox.Show("Không tìm thấy hóa đơn nào của hội viên này để hủy.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+
+                                    receiptId = (Guid)r["receipt_id"];
+                                    paymentDate = Convert.ToDateTime(r["payment_date"]).Date;
+                                    packageDuration = Convert.ToInt32(r["package_duration"]);
+                                    packageName = r["package_name"] != DBNull.Value ? r["package_name"].ToString() : "";
+                                    remaining = Convert.ToInt32(r["remaining_duration"]);
+                                }
+                            }
+
+                            int daysSincePurchase = (DateTime.Today - paymentDate).Days;
+
+                            // Điều kiện hủy:
+                            // - Hủy trong 1 ngày (DB chỉ lưu DATE): cho phép hôm nay hoặc hôm qua
+                            bool inCancelWindow = daysSincePurchase >= 0 && daysSincePurchase <= 1;
+
+                            if (!inCancelWindow)
+                            {
+                                MessageBox.Show(
+                                    $"Không thể hủy gói.\nQuá hạn hủy (chỉ cho hủy trong 1 ngày kể từ ngày mua).\n\n" +
+                                    $"- Gói: {packageName}\n" +
+                                    $"- Thời hạn gói: {packageDuration} ngày\n" +
+                                    $"- Ngày còn lại hiện tại: {remaining} ngày\n" +
+                                    $"- Ngày mua (payment_date): {paymentDate:dd/MM/yyyy}\n" +
+                                    $"- Số ngày từ lúc mua: {daysSincePurchase} (hủy trong 1 ngày)",
+                                    "Từ chối",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            if (MessageBox.Show(
+                                $"Hủy gói \"{packageName}\" và xóa hóa đơn?\nNgày mua: {paymentDate:dd/MM/yyyy}",
+                                "Xác nhận",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) != DialogResult.Yes)
+                            {
+                                return;
+                            }
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                "DELETE FROM dbo.Receipt WHERE receipt_id = @rid",
+                                conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@rid", receiptId);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                @"
+UPDATE dbo.Member
+SET
+    remaining_duration = 0,
+    is_expired = 1,
+    has_trainer = 0,
+    last_duration_update = CONVERT(date, GETDATE())
+WHERE member_id = @mid;
+",
+                                conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@mid", memberId);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            tx.Commit();
+                        }
+                        catch
+                        {
+                            tx.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show("Đã hủy gói và xóa hóa đơn.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadMembers();
+                LoadMemberToForm(memberId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không hủy gói được.\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

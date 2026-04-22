@@ -7,60 +7,56 @@ namespace Client.Services
     internal static class MemberDurationService
     {
         /// <summary>
-        /// Tự động trừ remaining_duration theo số ngày đã qua.
-        /// Mỗi ngày chỉ trừ đúng 1 lần dựa trên cột last_duration_update.
+        /// Tự động cập nhật remaining_duration theo hóa đơn mới nhất của hội viên:
+        /// remaining = duration - số ngày đã qua từ payment_date (>= 0).
+        /// Không phụ thuộc register_date.
         /// </summary>
         public static void UpdateRemainingDurationsOncePerDay()
         {
             try
             {
                 using (SqlConnection conn = GymManagementSystemContext.Connect())
-                using (SqlCommand cmd = new SqlCommand(
-                    @"
-IF COL_LENGTH('dbo.Member', 'last_duration_update') IS NULL
-BEGIN
-    ALTER TABLE dbo.Member
-    ADD last_duration_update DATE NOT NULL
-        CONSTRAINT DF_Member_last_duration_update DEFAULT (CONVERT(date, GETDATE()));
-END;
-
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(
+                        @"
 DECLARE @today DATE = CONVERT(date, GETDATE());
 
+;WITH LatestReceipt AS (
+    SELECT
+        r.member_id,
+        r.package_id,
+        r.payment_date,
+        ROW_NUMBER() OVER (PARTITION BY r.member_id ORDER BY r.payment_date DESC, r.receipt_id DESC) AS rn
+    FROM dbo.Receipt r
+)
 UPDATE m
 SET
     m.remaining_duration =
         CASE
-            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
-            ELSE
+            WHEN lr.rn = 1 THEN
                 CASE
-                    WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
-                    ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
+                    WHEN p.duration - DATEDIFF(day, lr.payment_date, @today) < 0 THEN 0
+                    ELSE p.duration - DATEDIFF(day, lr.payment_date, @today)
                 END
-        END,
-    m.last_duration_update =
-        CASE
-            WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.last_duration_update
-            ELSE @today
+            ELSE 0
         END,
     m.is_expired =
         CASE
-            WHEN
-                (CASE
-                    WHEN DATEDIFF(day, m.last_duration_update, @today) <= 0 THEN m.remaining_duration
-                    ELSE
-                        CASE
-                            WHEN m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today) < 0 THEN 0
-                            ELSE m.remaining_duration - DATEDIFF(day, m.last_duration_update, @today)
-                        END
-                END) <= 0
-            THEN 1 ELSE 0
+            WHEN lr.rn = 1 THEN
+                CASE
+                    WHEN p.duration - DATEDIFF(day, lr.payment_date, @today) <= 0 THEN 1 ELSE 0
+                END
+            ELSE 1
         END
-FROM dbo.Member m;
+FROM dbo.Member m
+LEFT JOIN LatestReceipt lr ON lr.member_id = m.member_id AND lr.rn = 1
+LEFT JOIN dbo.Package p ON p.package_id = lr.package_id;
 ",
-                    conn))
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                        conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch

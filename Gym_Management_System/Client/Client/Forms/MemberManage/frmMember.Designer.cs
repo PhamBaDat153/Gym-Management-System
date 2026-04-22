@@ -54,6 +54,7 @@
             this.lblName = new System.Windows.Forms.Label();
             this.grpPackage = new System.Windows.Forms.GroupBox();
             this.btnRegisterPackage = new System.Windows.Forms.Button();
+            this.btnCancelPackage = new System.Windows.Forms.Button();
             this.cmbPayment = new System.Windows.Forms.ComboBox();
             this.lblPayment = new System.Windows.Forms.Label();
             this.cmbPackage = new System.Windows.Forms.ComboBox();
@@ -376,6 +377,7 @@
             // grpPackage
             // 
             this.grpPackage.Controls.Add(this.btnRegisterPackage);
+            this.grpPackage.Controls.Add(this.btnCancelPackage);
             this.grpPackage.Controls.Add(this.cmbPayment);
             this.grpPackage.Controls.Add(this.lblPayment);
             this.grpPackage.Controls.Add(this.cmbPackage);
@@ -406,6 +408,21 @@
             this.btnRegisterPackage.Text = "Đăng ký / gia hạn gói";
             this.btnRegisterPackage.UseVisualStyleBackColor = true;
             this.btnRegisterPackage.Click += new System.EventHandler(this.btnRegisterPackage_Click);
+            // 
+            // btnCancelPackage
+            // 
+            this.btnCancelPackage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
+            this.btnCancelPackage.FlatAppearance.BorderSize = 0;
+            this.btnCancelPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelPackage.ForeColor = System.Drawing.Color.White;
+            this.btnCancelPackage.Location = new System.Drawing.Point(152, 166);
+            this.btnCancelPackage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancelPackage.Name = "btnCancelPackage";
+            this.btnCancelPackage.Size = new System.Drawing.Size(200, 32);
+            this.btnCancelPackage.TabIndex = 5;
+            this.btnCancelPackage.Text = "Hủy gói";
+            this.btnCancelPackage.UseVisualStyleBackColor = true;
+            this.btnCancelPackage.Click += new System.EventHandler(this.btnCancelPackage_Click);
             // 
             // cmbPayment
             // 
@@ -631,6 +648,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox grpPackage;
         private System.Windows.Forms.Button btnRegisterPackage;
+        private System.Windows.Forms.Button btnCancelPackage;
         private System.Windows.Forms.ComboBox cmbPayment;
         private System.Windows.Forms.Label lblPayment;
         private System.Windows.Forms.ComboBox cmbPackage;
