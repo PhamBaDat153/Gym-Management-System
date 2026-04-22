@@ -1178,6 +1178,22 @@ namespace Client.Forms.EmployeeManage
 
                 MessageBox.Show("Cập nhật nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loadData(new SqlCommand("SELECT * FROM dbo.Employee"));
+
+                // Nếu đang cập nhật chính mình, đồng bộ lại header trên Dashboard
+                if (employeeId == User.EmployeeId)
+                {
+                    User.EmployeeName = txtNameInfo.Text.Trim();
+
+                    // Role hiển thị trên header lấy từ User.Roles (từ lúc đăng nhập).
+                    // Ở đây role có thể đã được đổi khi update, nên refresh lại từ combobox.
+                    if (cbxRoleInfo.SelectedItem != null)
+                    {
+                        User.Roles.Clear();
+                        User.Roles.Add(cbxRoleInfo.SelectedItem.ToString());
+                    }
+
+                    User.NotifyChanged();
+                }
             }
             catch (Exception ex)
             {

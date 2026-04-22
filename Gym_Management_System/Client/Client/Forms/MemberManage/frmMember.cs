@@ -898,8 +898,8 @@ namespace Client.Forms.MemberManage
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // Package.duration = số tháng; Member.remaining_duration = số ngày (ước lượng 30 ngày/tháng)
-                            int addDays = pkg.Duration * 30;
+                            // Package.duration = số ngày;
+                            int addDays = pkg.Duration ;
                             using (SqlCommand cmd = new SqlCommand(
                                 "UPDATE dbo.Member SET " +
                                 "remaining_duration = remaining_duration + @dur, " +

@@ -21,6 +21,17 @@ namespace Client.Forms.Dashboard
 {
     public partial class Dashboard : Form
     {
+        private void RefreshUserHeader()
+        {
+            if (lb_tenDangNhapvaChucVu == null) return;
+
+            string displayName = string.IsNullOrWhiteSpace(User.EmployeeName)
+                ? (string.IsNullOrWhiteSpace(User.LoginKey) ? "-" : User.LoginKey.Trim())
+                : User.EmployeeName.Trim();
+            string role = (User.Roles == null || User.Roles.Count == 0) ? "-" : string.Join(", ", User.Roles.Distinct());
+            lb_tenDangNhapvaChucVu.Text = "Người dùng: " + displayName + " | Chức vụ: " + role;
+        }
+
         private static bool IsHttpUrl(string value)
         {
             return Uri.TryCreate(value, UriKind.Absolute, out Uri uri) &&
@@ -30,6 +41,22 @@ namespace Client.Forms.Dashboard
         public Dashboard()
         {
             InitializeComponent();
+            User.Changed += (_, __) =>
+            {
+                if (!IsHandleCreated) return;
+                try
+                {
+                    BeginInvoke((Action)(() =>
+                    {
+                        RefreshUserHeader();
+                        RefreshUserImage();
+                    }));
+                }
+                catch
+                {
+                    // best-effort
+                }
+            };
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -40,14 +67,7 @@ namespace Client.Forms.Dashboard
             OpenChildForm(new frmDefault());
             pictureUser.SizeMode = PictureBoxSizeMode.Zoom;
 
-            if (lb_tenDangNhapvaChucVu != null)
-            {
-                string displayName = string.IsNullOrWhiteSpace(User.EmployeeName)
-                    ? (string.IsNullOrWhiteSpace(User.LoginKey) ? "-" : User.LoginKey.Trim())
-                    : User.EmployeeName.Trim();
-                string role = (User.Roles == null || User.Roles.Count == 0) ? "-" : string.Join(", ", User.Roles.Distinct());
-                lb_tenDangNhapvaChucVu.Text = "Người dùng: " + displayName + " | Chức vụ: " + role;
-            }
+            RefreshUserHeader();
 
             string imageUrl = User.ImageUrl;
             if (string.IsNullOrWhiteSpace(imageUrl))
@@ -226,6 +246,7 @@ namespace Client.Forms.Dashboard
             {
                 form.ShowDialog(this);
             }
+            RefreshUserHeader();
             RefreshUserImage();
         }
 

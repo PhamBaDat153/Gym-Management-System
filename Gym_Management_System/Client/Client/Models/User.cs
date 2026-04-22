@@ -9,6 +9,8 @@ namespace Client.Models
     // Lớp để đăng nhập
     public static class User
     {
+        public static event EventHandler Changed;
+
         public static Guid EmployeeId { get; set; }
         public static string LoginKey { get; set; }
         public static string Password { get; set; }
@@ -23,6 +25,18 @@ namespace Client.Models
         public static bool IsActive { get; set; }
 
         public static List<string> Roles { get; set; } = new List<string>();
+
+        public static void NotifyChanged()
+        {
+            try
+            {
+                Changed?.Invoke(null, EventArgs.Empty);
+            }
+            catch
+            {
+                // best-effort
+            }
+        }
 
         public static void Clear()
         {
@@ -39,6 +53,8 @@ namespace Client.Models
             Status = false;
             IsActive = false;
             Roles.Clear();
+
+            NotifyChanged();
         }
     }
 }

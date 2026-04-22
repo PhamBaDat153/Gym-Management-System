@@ -103,6 +103,8 @@ namespace Client
                         }
                     }
 
+                    User.NotifyChanged();
+
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Dashboard frm = new Dashboard();
                     this.Hide();

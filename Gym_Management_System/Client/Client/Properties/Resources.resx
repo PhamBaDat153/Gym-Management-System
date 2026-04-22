@@ -127,6 +127,9 @@
   <data name="0684456b-aa2b-4631-86f7-93ceaf33303c" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\0684456b-aa2b-4631-86f7-93ceaf33303c.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="list_8021012" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list_8021012.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="people_16419568" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\people_16419568.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,20 +139,35 @@
   <data name="Screenshot 2026-04-20 223302" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Screenshot 2026-04-20 223302.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="statistics_4197942" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\statistics_4197942.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="user_9196300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user_9196300.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="book_14739729" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book_14739729.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="statistics_4197942" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\statistics_4197942.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pngtree-indoor-fashion-gym-background-illustration-picture-image_1594422" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngtree-indoor-fashion-gym-background-illustration-picture-image_1594422.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="images (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calendar_5007786" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calendar_5007786.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_8236906" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user_8236906.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="home_17633460" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home_17633460.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="house_2933360" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\house_2933360.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,7 +190,10 @@
   <data name="businessman_11323168" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\businessman_11323168.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="box_7993315" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_7993315.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calendar_5790889" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calendar_5790889.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

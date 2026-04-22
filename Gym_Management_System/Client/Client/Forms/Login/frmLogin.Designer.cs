@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.panelBrand = new System.Windows.Forms.Panel();
+            this.lblBrandSubtitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelContent = new System.Windows.Forms.Panel();
@@ -44,7 +45,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblLoginHint = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblBrandSubtitle = new System.Windows.Forms.Label();
             this.panelBrand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelContent.SuspendLayout();
@@ -64,14 +64,26 @@
             this.panelBrand.Size = new System.Drawing.Size(360, 540);
             this.panelBrand.TabIndex = 0;
             // 
+            // lblBrandSubtitle
+            // 
+            this.lblBrandSubtitle.AutoSize = true;
+            this.lblBrandSubtitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBrandSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.lblBrandSubtitle.Location = new System.Drawing.Point(15, 152);
+            this.lblBrandSubtitle.Name = "lblBrandSubtitle";
+            this.lblBrandSubtitle.Size = new System.Drawing.Size(216, 57);
+            this.lblBrandSubtitle.TabIndex = 2;
+            this.lblBrandSubtitle.Text = "Quản lý hội viên, nhân sự, lịch tập\r\nvà báo cáo trong một không gian\r\nlàm việc hi" +
+    "ện đại, rõ ràng.";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(35, 332);
+            this.label1.Location = new System.Drawing.Point(12, 75);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 50);
+            this.label1.Size = new System.Drawing.Size(213, 40);
             this.label1.TabIndex = 1;
             this.label1.Text = "Gym Manager";
             // 
@@ -79,10 +91,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::Client.Properties.Resources.Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676;
-            this.pictureBox1.Location = new System.Drawing.Point(39, 78);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 277);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(280, 220);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(360, 263);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -158,7 +170,7 @@
             this.lblForgotPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
             this.lblForgotPassword.Location = new System.Drawing.Point(41, 238);
             this.lblForgotPassword.Name = "lblForgotPassword";
-            this.lblForgotPassword.Size = new System.Drawing.Size(212, 20);
+            this.lblForgotPassword.Size = new System.Drawing.Size(170, 15);
             this.lblForgotPassword.TabIndex = 3;
             this.lblForgotPassword.Text = "Quên mật khẩu? Nhấp vào đây";
             this.lblForgotPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,14 +178,14 @@
             // 
             // btnShowPassword
             // 
-            this.btnShowPassword.BackColor = System.Drawing.Color.White;
+            this.btnShowPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
             this.btnShowPassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnShowPassword.FlatAppearance.BorderSize = 0;
             this.btnShowPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowPassword.Image = global::Client.Properties.Resources.visibility_16dp_000000_FILL0_wght400_GRAD0_opsz20;
             this.btnShowPassword.Location = new System.Drawing.Point(286, 189);
             this.btnShowPassword.Name = "btnShowPassword";
-            this.btnShowPassword.Size = new System.Drawing.Size(32, 28);
+            this.btnShowPassword.Size = new System.Drawing.Size(32, 26);
             this.btnShowPassword.TabIndex = 2;
             this.btnShowPassword.UseVisualStyleBackColor = false;
             this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
@@ -187,7 +199,7 @@
             this.txtPassword.Location = new System.Drawing.Point(40, 189);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(240, 30);
+            this.txtPassword.Size = new System.Drawing.Size(240, 26);
             this.txtPassword.TabIndex = 1;
             // 
             // label2
@@ -197,7 +209,7 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.label2.Location = new System.Drawing.Point(36, 164);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 23);
+            this.label2.Size = new System.Drawing.Size(66, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mật khẩu";
             // 
@@ -209,7 +221,7 @@
             this.txtLoginKey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.txtLoginKey.Location = new System.Drawing.Point(40, 122);
             this.txtLoginKey.Name = "txtLoginKey";
-            this.txtLoginKey.Size = new System.Drawing.Size(278, 30);
+            this.txtLoginKey.Size = new System.Drawing.Size(278, 26);
             this.txtLoginKey.TabIndex = 0;
             // 
             // label3
@@ -219,7 +231,7 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.label3.Location = new System.Drawing.Point(36, 97);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 23);
+            this.label3.Size = new System.Drawing.Size(97, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Mã đăng nhập";
             // 
@@ -230,7 +242,7 @@
             this.lblLoginHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.lblLoginHint.Location = new System.Drawing.Point(36, 56);
             this.lblLoginHint.Name = "lblLoginHint";
-            this.lblLoginHint.Size = new System.Drawing.Size(209, 20);
+            this.lblLoginHint.Size = new System.Drawing.Size(166, 15);
             this.lblLoginHint.TabIndex = 0;
             this.lblLoginHint.Text = "Đăng nhập để tiếp tục quản lý";
             // 
@@ -241,26 +253,14 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.label4.Location = new System.Drawing.Point(34, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(172, 41);
+            this.label4.Size = new System.Drawing.Size(139, 32);
             this.label4.TabIndex = 0;
             this.label4.Text = "Đăng nhập";
-            // 
-            // lblBrandSubtitle
-            // 
-            this.lblBrandSubtitle.AutoSize = true;
-            this.lblBrandSubtitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBrandSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.lblBrandSubtitle.Location = new System.Drawing.Point(39, 393);
-            this.lblBrandSubtitle.Name = "lblBrandSubtitle";
-            this.lblBrandSubtitle.Size = new System.Drawing.Size(269, 69);
-            this.lblBrandSubtitle.TabIndex = 2;
-            this.lblBrandSubtitle.Text = "Quản lý hội viên, nhân sự, lịch tập\r\nvà báo cáo trong một không gian\r\nlàm việc hi" +
-    "ện đại, rõ ràng.";
             // 
             // frmLogin
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(860, 540);
