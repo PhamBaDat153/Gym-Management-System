@@ -30,6 +30,10 @@ namespace Client.Forms.ReportManage
         private Label lbl_toolbar_summary;
         private Label lbl_keyword;
         private TextBox txt_keyword;
+        private Label lbl_invoice_member_keyword;
+        private TextBox txt_invoice_member_keyword;
+        private Label lbl_invoice_package_keyword;
+        private TextBox txt_invoice_package_keyword;
         private Label lbl_chart_mode;
         private ComboBox cbo_chart_mode;
         private System.Windows.Forms.Timer keywordDebounceTimer;
@@ -62,6 +66,7 @@ namespace Client.Forms.ReportManage
             var today = DateTime.Today;
             dtp_from.Value = new DateTime(today.Year, today.Month, 1);
             dtp_to.Value = new DateTime(today.Year, 1, 1);
+            dtp_to.MaxDate = today;
 
             rdo_mem_nam.Checked = true;
             ApplyReportTypeUi();
@@ -93,14 +98,47 @@ namespace Client.Forms.ReportManage
             lbl_keyword.AutoSize = true;
             lbl_keyword.Font = new Font("Segoe UI", 10F);
             lbl_keyword.Text = "Từ khóa:";
-            lbl_keyword.Location = new Point(17, 181);
+            lbl_keyword.Location = new Point(17, 169);
 
             txt_keyword = new TextBox();
             txt_keyword.Name = "txt_keyword";
             txt_keyword.Font = new Font("Segoe UI", 10F);
-            txt_keyword.Location = new Point(147, 178);
+            txt_keyword.Location = new Point(147, 166);
             txt_keyword.Size = new Size(300, 30);
             txt_keyword.TextChanged += txt_keyword_TextChanged;
+
+            lbl_invoice_member_keyword = new Label();
+            lbl_invoice_member_keyword.Name = "lbl_invoice_member_keyword";
+            lbl_invoice_member_keyword.AutoSize = true;
+            lbl_invoice_member_keyword.Font = new Font("Segoe UI", 10F);
+            lbl_invoice_member_keyword.Text = "Tên hội viên:";
+            lbl_invoice_member_keyword.Location = new Point(17, 205);
+            lbl_invoice_member_keyword.Visible = false;
+
+            txt_invoice_member_keyword = new TextBox();
+            txt_invoice_member_keyword.Name = "txt_invoice_member_keyword";
+            txt_invoice_member_keyword.Font = new Font("Segoe UI", 10F);
+            txt_invoice_member_keyword.Location = new Point(147, 202);
+            txt_invoice_member_keyword.Size = new Size(300, 30);
+            txt_invoice_member_keyword.TextChanged += txt_keyword_TextChanged;
+            txt_invoice_member_keyword.Visible = false;
+
+            lbl_invoice_package_keyword = new Label();
+            lbl_invoice_package_keyword.Name = "lbl_invoice_package_keyword";
+            lbl_invoice_package_keyword.AutoSize = true;
+            lbl_invoice_package_keyword.Font = new Font("Segoe UI", 10F);
+            lbl_invoice_package_keyword.Text = "Tên gói:";
+            lbl_invoice_package_keyword.Location = new Point(17, 241);
+            lbl_invoice_package_keyword.Visible = false;
+
+            txt_invoice_package_keyword = new TextBox();
+            txt_invoice_package_keyword.Name = "txt_invoice_package_keyword";
+            txt_invoice_package_keyword.Font = new Font("Segoe UI", 10F);
+            txt_invoice_package_keyword.Location = new Point(147, 238);
+            txt_invoice_package_keyword.Size = new Size(300, 30);
+            txt_invoice_package_keyword.TextChanged += txt_keyword_TextChanged;
+            txt_invoice_package_keyword.Visible = false;
+
             keywordDebounceTimer = new System.Windows.Forms.Timer();
             keywordDebounceTimer.Interval = KeywordDebounceMs;
             keywordDebounceTimer.Tick += keywordDebounceTimer_Tick;
@@ -110,7 +148,7 @@ namespace Client.Forms.ReportManage
             lbl_chart_mode.AutoSize = true;
             lbl_chart_mode.Font = new Font("Segoe UI", 10F);
             lbl_chart_mode.Text = "Biểu đồ:";
-            lbl_chart_mode.Location = new Point(17, 223);
+            lbl_chart_mode.Location = new Point(17, 205);
 
             cbo_chart_mode = new ComboBox();
             cbo_chart_mode.Name = "cbo_chart_mode";
@@ -118,12 +156,16 @@ namespace Client.Forms.ReportManage
             cbo_chart_mode.Font = new Font("Segoe UI", 10F);
             cbo_chart_mode.Items.AddRange(new object[] { "Tự động", "Biểu đồ cột", "Biểu đồ đường" });
             cbo_chart_mode.SelectedIndex = ChartModeLine;
-            cbo_chart_mode.Location = new Point(147, 220);
+            cbo_chart_mode.Location = new Point(147, 202);
             cbo_chart_mode.Size = new Size(300, 30);
             cbo_chart_mode.SelectedIndexChanged += cbo_chart_mode_SelectedIndexChanged;
 
             tab_search.Controls.Add(lbl_keyword);
             tab_search.Controls.Add(txt_keyword);
+            tab_search.Controls.Add(lbl_invoice_member_keyword);
+            tab_search.Controls.Add(txt_invoice_member_keyword);
+            tab_search.Controls.Add(lbl_invoice_package_keyword);
+            tab_search.Controls.Add(txt_invoice_package_keyword);
             tab_search.Controls.Add(lbl_chart_mode);
             tab_search.Controls.Add(cbo_chart_mode);
 
@@ -149,6 +191,7 @@ namespace Client.Forms.ReportManage
             if (mem_new != null) mem_new.HeaderText = "Số điện thoại";
             if (mem_loss != null) mem_loss.HeaderText = "Email";
             if (mem_age != null) mem_age.HeaderText = "Tuổi";
+            if (mem_package_days != null) mem_package_days.HeaderText = "Thời hạn gói (ngày)";
             if (mem_gender != null) mem_gender.HeaderText = "Giới tính";
             if (mem_date != null) mem_date.HeaderText = "Ngày đăng ký";
         }
@@ -269,6 +312,37 @@ namespace Client.Forms.ReportManage
             else if (invoice && groupBox_invoice != null)
                 groupBox_invoice.BringToFront();
 
+            bool allowYearlyAggregate = member || revenue || invoice;
+            if (chk_yearly_aggregate != null)
+            {
+                chk_yearly_aggregate.Visible = allowYearlyAggregate;
+                if (!allowYearlyAggregate) chk_yearly_aggregate.Checked = false;
+            }
+            if (lbl_keyword != null) lbl_keyword.Text = invoice ? "Mã/Phương thức:" : "Từ khóa:";
+            if (lbl_invoice_member_keyword != null)
+            {
+                lbl_invoice_member_keyword.Visible = invoice;
+                lbl_invoice_member_keyword.Location = new Point(17, 197);
+            }
+            if (txt_invoice_member_keyword != null)
+            {
+                txt_invoice_member_keyword.Visible = invoice;
+                txt_invoice_member_keyword.Location = new Point(147, 194);
+            }
+            if (lbl_invoice_package_keyword != null)
+            {
+                lbl_invoice_package_keyword.Visible = invoice;
+                lbl_invoice_package_keyword.Location = new Point(17, 229);
+            }
+            if (txt_invoice_package_keyword != null)
+            {
+                txt_invoice_package_keyword.Visible = invoice;
+                txt_invoice_package_keyword.Location = new Point(147, 226);
+            }
+            if (lbl_chart_mode != null) lbl_chart_mode.Location = invoice ? new Point(17, 261) : new Point(17, 205);
+            if (cbo_chart_mode != null) cbo_chart_mode.Location = invoice ? new Point(147, 258) : new Point(147, 202);
+            ApplyTimeFilterUiState();
+
         }
 
         private async void cbo_report_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,6 +367,10 @@ namespace Client.Forms.ReportManage
             var today = DateTime.Today;
             dtp_from.Value = new DateTime(today.Year, today.Month, 1);
             dtp_to.Value = new DateTime(today.Year, 1, 1);
+            if (chk_yearly_aggregate != null) chk_yearly_aggregate.Checked = false;
+            if (txt_keyword != null) txt_keyword.Clear();
+            if (txt_invoice_member_keyword != null) txt_invoice_member_keyword.Clear();
+            if (txt_invoice_package_keyword != null) txt_invoice_package_keyword.Clear();
             await ReloadFromFilterAsync();
         }
 
@@ -300,30 +378,59 @@ namespace Client.Forms.ReportManage
         {
             if (dtp_from == null || dtp_to == null) return DateTime.Today;
             int month = dtp_from.Value.Month;
-            int year = dtp_to.Value.Year;
+            int year = Math.Min(dtp_to.Value.Year, DateTime.Today.Year);
+            if (IsYearlyAggregateEnabled()) return new DateTime(year, 1, 1);
             return new DateTime(year, month, 1);
         }
 
         private DateTime GetFilterTo()
         {
             DateTime from = GetFilterFrom();
+            if (IsYearlyAggregateEnabled()) return from.AddYears(1).AddDays(-1);
             return from.AddMonths(1).AddDays(-1);
+        }
+
+        private bool IsYearlyAggregateEnabled()
+        {
+            if (chk_yearly_aggregate == null || !chk_yearly_aggregate.Checked) return false;
+            return cbo_report_type != null && (cbo_report_type.SelectedIndex == KindMember || cbo_report_type.SelectedIndex == KindRevenue || cbo_report_type.SelectedIndex == KindInvoice);
+        }
+
+        private void ApplyTimeFilterUiState()
+        {
+            bool aggregateByYear = IsYearlyAggregateEnabled();
+            if (dtp_from != null) dtp_from.Enabled = !aggregateByYear;
+            if (lbl_from != null) lbl_from.Enabled = !aggregateByYear;
         }
 
         private async Task ReloadFromFilterAsync()
         {
             if (!CanRunReportLogic()) return;
+            if (dtp_to != null && dtp_to.Value.Year > DateTime.Today.Year)
+                dtp_to.Value = DateTime.Today;
             int requestVersion = Interlocked.Increment(ref reloadRequestVersion);
             DateTime from = GetFilterFrom();
             DateTime toExclusive = GetFilterTo().AddDays(1);
             string keyword = (txt_keyword == null ? string.Empty : txt_keyword.Text.Trim());
             string likeKeyword = "%" + keyword + "%";
+            string invoiceMemberKeyword = (txt_invoice_member_keyword == null ? string.Empty : txt_invoice_member_keyword.Text.Trim());
+            string invoicePackageKeyword = (txt_invoice_package_keyword == null ? string.Empty : txt_invoice_package_keyword.Text.Trim());
+            string likeInvoiceMemberKeyword = "%" + invoiceMemberKeyword + "%";
+            string likeInvoicePackageKeyword = "%" + invoicePackageKeyword + "%";
 
             if (cbo_report_type.SelectedIndex == KindMember)
             {
                 var cmd = new SqlCommand(
-                    "SELECT m.member_id, m.member_name, m.phone_number, m.email, m.age, m.gender, m.register_date " +
+                    "SELECT m.member_id, m.member_name, m.phone_number, m.email, m.age, " +
+                    "ISNULL(last_pkg.package_duration_days, 0) AS package_duration_days, m.gender, m.register_date " +
                     "FROM dbo.Member m " +
+                    "OUTER APPLY ( " +
+                    "    SELECT TOP 1 p.duration * 30 AS package_duration_days " +
+                    "    FROM dbo.Receipt r " +
+                    "    INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
+                    "    WHERE r.member_id = m.member_id " +
+                    "    ORDER BY r.payment_date DESC " +
+                    ") last_pkg " +
                     "WHERE m.register_date >= @from AND m.register_date < @toExclusive " +
                     "AND (@kw = '' OR CONVERT(NVARCHAR(36), m.member_id) LIKE @kwLike " +
                     "OR m.member_name LIKE @kwLike OR m.phone_number LIKE @kwLike OR m.email LIKE @kwLike) " +
@@ -360,12 +467,18 @@ namespace Client.Forms.ReportManage
                     "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
                     "INNER JOIN dbo.PaymentMethod pm ON pm.method_id = r.payment_method " +
                     "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
-                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), r.receipt_id) LIKE @kwLike OR m.member_name LIKE @kwLike OR p.package_name LIKE @kwLike OR pm.method_name LIKE @kwLike) " +
+                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), r.receipt_id) LIKE @kwLike OR pm.method_name LIKE @kwLike) " +
+                    "AND (@memberKw = '' OR m.member_name LIKE @memberKwLike) " +
+                    "AND (@packageKw = '' OR p.package_name LIKE @packageKwLike) " +
                     "ORDER BY r.payment_date DESC");
                 cmd.Parameters.AddWithValue("@from", from);
                 cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                 cmd.Parameters.AddWithValue("@kw", keyword);
                 cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
+                cmd.Parameters.AddWithValue("@memberKw", invoiceMemberKeyword);
+                cmd.Parameters.AddWithValue("@memberKwLike", likeInvoiceMemberKeyword);
+                cmd.Parameters.AddWithValue("@packageKw", invoicePackageKeyword);
+                cmd.Parameters.AddWithValue("@packageKwLike", likeInvoicePackageKeyword);
                 await LoadInvoiceGridAsync(cmd);
             }
 
@@ -391,6 +504,7 @@ namespace Client.Forms.ReportManage
                         int ordPhone = reader.GetOrdinal("phone_number");
                         int ordEmail = reader.GetOrdinal("email");
                         int ordAge = reader.GetOrdinal("age");
+                        int ordPackageDays = reader.GetOrdinal("package_duration_days");
                         int ordGender = reader.GetOrdinal("gender");
                         int ordDate = reader.GetOrdinal("register_date");
 
@@ -404,6 +518,7 @@ namespace Client.Forms.ReportManage
                             row.Cells["mem_new"].Value = reader.IsDBNull(ordPhone) ? string.Empty : reader.GetString(ordPhone);
                             row.Cells["mem_loss"].Value = reader.IsDBNull(ordEmail) ? string.Empty : reader.GetString(ordEmail);
                             row.Cells["mem_age"].Value = reader.GetInt32(ordAge);
+                            row.Cells["mem_package_days"].Value = reader.IsDBNull(ordPackageDays) ? 0 : reader.GetInt32(ordPackageDays);
                             bool g = !reader.IsDBNull(ordGender) && reader.GetBoolean(ordGender);
                             row.Cells["mem_gender"].Value = g ? "Nam" : "Nữ";
                             row.Cells["mem_date"].Value = reader.GetDateTime(ordDate).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -531,6 +646,10 @@ namespace Client.Forms.ReportManage
             DateTime toExclusive = GetFilterTo().AddDays(1);
             string keyword = (txt_keyword == null ? string.Empty : txt_keyword.Text.Trim());
             string likeKeyword = "%" + keyword + "%";
+            string invoiceMemberKeyword = (txt_invoice_member_keyword == null ? string.Empty : txt_invoice_member_keyword.Text.Trim());
+            string invoicePackageKeyword = (txt_invoice_package_keyword == null ? string.Empty : txt_invoice_package_keyword.Text.Trim());
+            string likeInvoiceMemberKeyword = "%" + invoiceMemberKeyword + "%";
+            string likeInvoicePackageKeyword = "%" + invoicePackageKeyword + "%";
 
             try
             {
@@ -542,59 +661,94 @@ namespace Client.Forms.ReportManage
                     {
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText =
-                                "SELECT CAST(m.register_date AS DATE) AS report_date, " +
-                                "SUM(CASE WHEN m.gender = 1 THEN 1 ELSE 0 END) AS male_count, " +
-                                "SUM(CASE WHEN m.gender = 0 THEN 1 ELSE 0 END) AS female_count " +
-                                "FROM dbo.Member m " +
-                                "WHERE m.register_date >= @from AND m.register_date < @toExclusive " +
-                                "AND (@kw = '' OR CONVERT(NVARCHAR(36), m.member_id) LIKE @kwLike " +
-                                "OR m.member_name LIKE @kwLike OR m.phone_number LIKE @kwLike OR m.email LIKE @kwLike) " +
-                                "GROUP BY CAST(m.register_date AS DATE) " +
-                                "ORDER BY CAST(m.register_date AS DATE)";
+                            bool aggregateByYear = IsYearlyAggregateEnabled();
+                            if (aggregateByYear)
+                            {
+                                cmd.CommandText =
+                                    "SELECT DATEPART(MONTH, m.register_date) AS report_month, COUNT(*) AS total_member " +
+                                    "FROM dbo.Member m " +
+                                    "WHERE m.register_date >= @from AND m.register_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), m.member_id) LIKE @kwLike " +
+                                    "OR m.member_name LIKE @kwLike OR m.phone_number LIKE @kwLike OR m.email LIKE @kwLike) " +
+                                    "GROUP BY DATEPART(MONTH, m.register_date) " +
+                                    "ORDER BY DATEPART(MONTH, m.register_date)";
+                            }
+                            else
+                            {
+                                cmd.CommandText =
+                                    "SELECT CAST(m.register_date AS DATE) AS report_date, COUNT(*) AS total_member " +
+                                    "FROM dbo.Member m " +
+                                    "WHERE m.register_date >= @from AND m.register_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), m.member_id) LIKE @kwLike " +
+                                    "OR m.member_name LIKE @kwLike OR m.phone_number LIKE @kwLike OR m.email LIKE @kwLike) " +
+                                    "GROUP BY CAST(m.register_date AS DATE) " +
+                                    "ORDER BY CAST(m.register_date AS DATE)";
+                            }
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                             cmd.Parameters.AddWithValue("@kw", keyword);
                             cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
 
                             var chartType = ResolveChartType();
-                            var sMale = new Series("Hội viên nam") { ChartType = chartType };
-                            var sFemale = new Series("Hội viên nữ") { ChartType = chartType };
-                            sMale.ChartArea = chartArea.Name;
-                            sFemale.ChartArea = chartArea.Name;
-                            sMale.Legend = legend.Name;
-                            sFemale.Legend = legend.Name;
+                            var sTotal = new Series("Tổng hội viên") { ChartType = chartType };
+                            sTotal.ChartArea = chartArea.Name;
+                            sTotal.Legend = legend.Name;
 
                             using (var r = await cmd.ExecuteReaderAsync())
                             {
                                 while (await r.ReadAsync())
                                 {
-                                    var d = r.GetDateTime(0).Date;
-                                    int pMale = sMale.Points.AddXY(d, r.GetInt32(1));
-                                    int pFemale = sFemale.Points.AddXY(d, r.GetInt32(2));
-                                    string axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                    sMale.Points[pMale].AxisLabel = axisLabel;
-                                    sFemale.Points[pFemale].AxisLabel = axisLabel;
+                                    string axisLabel;
+                                    object xValue;
+                                    if (aggregateByYear)
+                                    {
+                                        int monthNumber = r.GetInt32(0);
+                                        axisLabel = "Tháng " + monthNumber.ToString(CultureInfo.InvariantCulture);
+                                        xValue = axisLabel;
+                                    }
+                                    else
+                                    {
+                                        var d = r.GetDateTime(0).Date;
+                                        axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                        xValue = d;
+                                    }
+
+                                    int pTotal = sTotal.Points.AddXY(xValue, r.GetInt32(1));
+                                    sTotal.Points[pTotal].AxisLabel = axisLabel;
                                     totalPoints++;
                                 }
                             }
 
-                            chart_report.Series.Add(sMale);
-                            chart_report.Series.Add(sFemale);
+                            chart_report.Series.Add(sTotal);
                         }
                     }
                     else if (cbo_report_type.SelectedIndex == KindRevenue)
                     {
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText =
-                                "SELECT p.package_name, COUNT(r.receipt_id) AS sold_count, ISNULL(SUM(r.total_amount), 0) AS total_amount " +
-                                "FROM dbo.Package p " +
-                                "LEFT JOIN dbo.Receipt r ON r.package_id = p.package_id " +
-                                "AND r.payment_date >= @from AND r.payment_date < @toExclusive " +
-                                "WHERE (@kw = '' OR CONVERT(NVARCHAR(36), p.package_id) LIKE @kwLike OR p.package_name LIKE @kwLike) " +
-                                "GROUP BY p.package_name " +
-                                "ORDER BY sold_count DESC, p.package_name ASC";
+                            bool aggregateByYear = IsYearlyAggregateEnabled();
+                            if (aggregateByYear)
+                            {
+                                cmd.CommandText =
+                                    "SELECT DATEPART(MONTH, r.payment_date) AS report_month, COUNT(*) AS sold_count, ISNULL(SUM(r.total_amount), 0) AS total_amount " +
+                                    "FROM dbo.Receipt r " +
+                                    "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
+                                    "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), p.package_id) LIKE @kwLike OR p.package_name LIKE @kwLike) " +
+                                    "GROUP BY DATEPART(MONTH, r.payment_date) " +
+                                    "ORDER BY DATEPART(MONTH, r.payment_date)";
+                            }
+                            else
+                            {
+                                cmd.CommandText =
+                                    "SELECT CAST(r.payment_date AS DATE) AS report_date, COUNT(*) AS sold_count, ISNULL(SUM(r.total_amount), 0) AS total_amount " +
+                                    "FROM dbo.Receipt r " +
+                                    "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
+                                    "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), p.package_id) LIKE @kwLike OR p.package_name LIKE @kwLike) " +
+                                    "GROUP BY CAST(r.payment_date AS DATE) " +
+                                    "ORDER BY CAST(r.payment_date AS DATE)";
+                            }
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                             cmd.Parameters.AddWithValue("@kw", keyword);
@@ -625,7 +779,20 @@ namespace Client.Forms.ReportManage
                             {
                                 while (await r.ReadAsync())
                                 {
-                                    string packageName = r.GetString(0);
+                                    string axisLabel;
+                                    object xValue;
+                                    if (aggregateByYear)
+                                    {
+                                        int monthNumber = r.GetInt32(0);
+                                        axisLabel = "Tháng " + monthNumber.ToString(CultureInfo.InvariantCulture);
+                                        xValue = axisLabel;
+                                    }
+                                    else
+                                    {
+                                        DateTime reportDate = r.GetDateTime(0).Date;
+                                        axisLabel = reportDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                        xValue = reportDate;
+                                    }
                                     int soldCount = r.GetInt32(1);
                                     double totalAmount = Convert.ToDouble(r.GetValue(2), CultureInfo.InvariantCulture);
                                     if (soldCount <= 0)
@@ -634,10 +801,8 @@ namespace Client.Forms.ReportManage
                                         continue;
                                     }
 
-                                    int pAmount = sAmount.Points.AddXY(packageName, totalAmount);
-                                    int pSold = sSold.Points.AddXY(packageName, soldCount);
-
-                                    string axisLabel = packageName;
+                                    int pAmount = sAmount.Points.AddXY(xValue, totalAmount);
+                                    int pSold = sSold.Points.AddXY(xValue, soldCount);
                                     sAmount.Points[pAmount].AxisLabel = axisLabel;
                                     sSold.Points[pSold].AxisLabel = axisLabel;
                                     sAmount.Points[pAmount].Label = FormatCompactValue(totalAmount);
@@ -660,20 +825,45 @@ namespace Client.Forms.ReportManage
                     {
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText =
-                                "SELECT r.payment_date, COUNT(*) AS invoice_count, SUM(r.total_amount) AS total_amount " +
-                                "FROM dbo.Receipt r " +
-                                "INNER JOIN dbo.Member m ON m.member_id = r.member_id " +
-                                "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
-                                "INNER JOIN dbo.PaymentMethod pm ON pm.method_id = r.payment_method " +
-                                "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
-                                "AND (@kw = '' OR CONVERT(NVARCHAR(36), r.receipt_id) LIKE @kwLike OR m.member_name LIKE @kwLike OR p.package_name LIKE @kwLike OR pm.method_name LIKE @kwLike) " +
-                                "GROUP BY r.payment_date " +
-                                "ORDER BY r.payment_date";
+                            bool aggregateByYear = IsYearlyAggregateEnabled();
+                            if (aggregateByYear)
+                            {
+                                cmd.CommandText =
+                                    "SELECT DATEPART(MONTH, r.payment_date) AS report_month, COUNT(*) AS invoice_count, SUM(r.total_amount) AS total_amount " +
+                                    "FROM dbo.Receipt r " +
+                                    "INNER JOIN dbo.Member m ON m.member_id = r.member_id " +
+                                    "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
+                                    "INNER JOIN dbo.PaymentMethod pm ON pm.method_id = r.payment_method " +
+                                    "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), r.receipt_id) LIKE @kwLike OR pm.method_name LIKE @kwLike) " +
+                                    "AND (@memberKw = '' OR m.member_name LIKE @memberKwLike) " +
+                                    "AND (@packageKw = '' OR p.package_name LIKE @packageKwLike) " +
+                                    "GROUP BY DATEPART(MONTH, r.payment_date) " +
+                                    "ORDER BY DATEPART(MONTH, r.payment_date)";
+                            }
+                            else
+                            {
+                                cmd.CommandText =
+                                    "SELECT r.payment_date, COUNT(*) AS invoice_count, SUM(r.total_amount) AS total_amount " +
+                                    "FROM dbo.Receipt r " +
+                                    "INNER JOIN dbo.Member m ON m.member_id = r.member_id " +
+                                    "INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
+                                    "INNER JOIN dbo.PaymentMethod pm ON pm.method_id = r.payment_method " +
+                                    "WHERE r.payment_date >= @from AND r.payment_date < @toExclusive " +
+                                    "AND (@kw = '' OR CONVERT(NVARCHAR(36), r.receipt_id) LIKE @kwLike OR pm.method_name LIKE @kwLike) " +
+                                    "AND (@memberKw = '' OR m.member_name LIKE @memberKwLike) " +
+                                    "AND (@packageKw = '' OR p.package_name LIKE @packageKwLike) " +
+                                    "GROUP BY r.payment_date " +
+                                    "ORDER BY r.payment_date";
+                            }
                             cmd.Parameters.AddWithValue("@from", from);
                             cmd.Parameters.AddWithValue("@toExclusive", toExclusive);
                             cmd.Parameters.AddWithValue("@kw", keyword);
                             cmd.Parameters.AddWithValue("@kwLike", likeKeyword);
+                            cmd.Parameters.AddWithValue("@memberKw", invoiceMemberKeyword);
+                            cmd.Parameters.AddWithValue("@memberKwLike", likeInvoiceMemberKeyword);
+                            cmd.Parameters.AddWithValue("@packageKw", invoicePackageKeyword);
+                            cmd.Parameters.AddWithValue("@packageKwLike", likeInvoicePackageKeyword);
 
                             var chartType = ResolveChartType();
                             var sCount = new Series("Số hóa đơn") { ChartType = chartType, YAxisType = AxisType.Secondary };
@@ -687,12 +877,24 @@ namespace Client.Forms.ReportManage
                             {
                                 while (await r.ReadAsync())
                                 {
-                                    var d = r.GetDateTime(0).Date;
+                                    string axisLabel;
+                                    object xValue;
+                                    if (aggregateByYear)
+                                    {
+                                        int monthNumber = r.GetInt32(0);
+                                        axisLabel = "Tháng " + monthNumber.ToString(CultureInfo.InvariantCulture);
+                                        xValue = axisLabel;
+                                    }
+                                    else
+                                    {
+                                        var d = r.GetDateTime(0).Date;
+                                        axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                        xValue = d;
+                                    }
                                     int count = r.GetInt32(1);
                                     double amount = Convert.ToDouble(r.GetValue(2), CultureInfo.InvariantCulture);
-                                    int pCount = sCount.Points.AddXY(d, count);
-                                    int pAmount = sAmount.Points.AddXY(d, amount);
-                                    string axisLabel = d.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    int pCount = sCount.Points.AddXY(xValue, count);
+                                    int pAmount = sAmount.Points.AddXY(xValue, amount);
                                     sCount.Points[pCount].AxisLabel = axisLabel;
                                     sAmount.Points[pAmount].AxisLabel = axisLabel;
                                     totalPoints++;
@@ -708,7 +910,7 @@ namespace Client.Forms.ReportManage
                     }
                 }
 
-                chartArea.AxisX.Title = cbo_report_type.SelectedIndex == KindRevenue ? "Gói tập" : "Ngày báo cáo";
+                chartArea.AxisX.Title = IsYearlyAggregateEnabled() ? "Tháng" : "Ngày báo cáo";
                 chartArea.AxisY.Title = cbo_report_type.SelectedIndex == KindMember ? "Số lượng" : "VNĐ";
                 chartArea.AxisY.LabelStyle.Format = "N0";
                 legend.Enabled = chart_report.Series.Count > 0;
@@ -783,22 +985,19 @@ namespace Client.Forms.ReportManage
 
             DateTime from = GetFilterFrom();
             string period = from.ToString("MM/yyyy", CultureInfo.InvariantCulture);
+            if (IsYearlyAggregateEnabled())
+                period = "Năm " + from.ToString("yyyy", CultureInfo.InvariantCulture);
 
             if (cbo_report_type.SelectedIndex == KindMember)
             {
                 int rows = dgv_member.Rows.Cast<DataGridViewRow>().Count(r => !r.IsNewRow);
-                int maleCount = 0;
-                int femaleCount = 0;
-                int totalAge = 0;
+                int totalPackageDays = 0;
                 foreach (DataGridViewRow row in dgv_member.Rows)
                 {
                     if (row.IsNewRow) continue;
-                    if (string.Equals(row.Cells["mem_gender"].Value?.ToString(), "Nam", StringComparison.OrdinalIgnoreCase)) maleCount++;
-                    else femaleCount++;
-                    totalAge += ConvertToInt(row.Cells["mem_age"].Value);
+                    totalPackageDays += ConvertToInt(row.Cells["mem_package_days"].Value);
                 }
-                int avgAge = rows > 0 ? (int)Math.Round((double)totalAge / rows, MidpointRounding.AwayFromZero) : 0;
-                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " hội viên | Nam: " + maleCount + " | Nữ: " + femaleCount + " | Tuổi TB: " + avgAge;
+                lbl_toolbar_summary.Text = "Kỳ: " + period + " | Tổng hội viên: " + rows.ToString("N0", CultureInfo.InvariantCulture) + " | Tổng thời hạn gói: " + totalPackageDays.ToString("N0", CultureInfo.InvariantCulture) + " ngày";
             }
             else if (cbo_report_type.SelectedIndex == KindRevenue)
             {
@@ -811,7 +1010,7 @@ namespace Client.Forms.ReportManage
                     totalSold += ConvertToInt(row.Cells["rev_sold"].Value);
                     totalRevenue += ConvertToInt(row.Cells["rev_amount"].Value);
                 }
-                lbl_toolbar_summary.Text = "Kỳ: " + period + " | " + rows + " gói tập | Tổng lượng bán: " + totalSold.ToString("N0", CultureInfo.InvariantCulture) + " | Tổng doanh thu: " + totalRevenue.ToString("N0", CultureInfo.InvariantCulture) + " VNĐ";
+                lbl_toolbar_summary.Text = "Kỳ: " + period + " | Tổng gói trong kỳ: " + rows.ToString("N0", CultureInfo.InvariantCulture) + " | Tổng lượt bán: " + totalSold.ToString("N0", CultureInfo.InvariantCulture) + " | Tổng doanh thu: " + totalRevenue.ToString("N0", CultureInfo.InvariantCulture) + " VNĐ";
             }
             else
             {
@@ -1157,6 +1356,12 @@ namespace Client.Forms.ReportManage
         private async void cbo_chart_mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             await RefreshChartAsync();
+        }
+
+        private async void chk_yearly_aggregate_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyTimeFilterUiState();
+            await ReloadFromFilterAsync();
         }
 
         private void btn_export_Click(object sender, EventArgs e)
