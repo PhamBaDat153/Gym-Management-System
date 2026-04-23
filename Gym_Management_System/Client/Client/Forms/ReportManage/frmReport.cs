@@ -425,7 +425,7 @@ namespace Client.Forms.ReportManage
                     "ISNULL(last_pkg.package_duration_days, 0) AS package_duration_days, m.gender, m.register_date " +
                     "FROM dbo.Member m " +
                     "OUTER APPLY ( " +
-                    "    SELECT TOP 1 p.duration * 30 AS package_duration_days " +
+                    "    SELECT TOP 1 p.duration AS package_duration_days " +
                     "    FROM dbo.Receipt r " +
                     "    INNER JOIN dbo.Package p ON p.package_id = r.package_id " +
                     "    WHERE r.member_id = m.member_id " +
