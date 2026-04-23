@@ -45,6 +45,9 @@ Create TABLE [Package] (
     is_active BIT NOT NULL
 );
 
+-- Prevent duplicate package names
+CREATE UNIQUE INDEX UX_Package_PackageName ON dbo.Package (package_name);
+
 CREATE TABLE [Member] (
     member_id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     member_name NVARCHAR(255) NOT NULL,

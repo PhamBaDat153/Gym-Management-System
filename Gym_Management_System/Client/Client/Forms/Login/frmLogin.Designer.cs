@@ -61,7 +61,7 @@
             this.panelBrand.Location = new System.Drawing.Point(0, 0);
             this.panelBrand.Name = "panelBrand";
             this.panelBrand.Padding = new System.Windows.Forms.Padding(36, 40, 36, 40);
-            this.panelBrand.Size = new System.Drawing.Size(360, 540);
+            this.panelBrand.Size = new System.Drawing.Size(348, 540);
             this.panelBrand.TabIndex = 0;
             // 
             // lblBrandSubtitle
@@ -69,7 +69,7 @@
             this.lblBrandSubtitle.AutoSize = true;
             this.lblBrandSubtitle.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBrandSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.lblBrandSubtitle.Location = new System.Drawing.Point(15, 152);
+            this.lblBrandSubtitle.Location = new System.Drawing.Point(15, 97);
             this.lblBrandSubtitle.Name = "lblBrandSubtitle";
             this.lblBrandSubtitle.Size = new System.Drawing.Size(216, 57);
             this.lblBrandSubtitle.TabIndex = 2;
@@ -81,7 +81,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 75);
+            this.label1.Location = new System.Drawing.Point(12, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 40);
             this.label1.TabIndex = 1;
@@ -93,7 +93,7 @@
             this.pictureBox1.Image = global::Client.Properties.Resources.Gym_Interior_Flat_Cartoon_Background_high_resolution_preview_1322676;
             this.pictureBox1.Location = new System.Drawing.Point(0, 277);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(360, 263);
+            this.pictureBox1.Size = new System.Drawing.Size(348, 263);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -103,10 +103,10 @@
             this.panelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.panelContent.Controls.Add(this.panelCard);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(360, 0);
+            this.panelContent.Location = new System.Drawing.Point(348, 0);
             this.panelContent.Name = "panelContent";
             this.panelContent.Padding = new System.Windows.Forms.Padding(70, 60, 70, 60);
-            this.panelContent.Size = new System.Drawing.Size(500, 540);
+            this.panelContent.Size = new System.Drawing.Size(490, 540);
             this.panelContent.TabIndex = 1;
             // 
             // panelCard
@@ -127,7 +127,7 @@
             this.panelCard.Location = new System.Drawing.Point(70, 60);
             this.panelCard.Name = "panelCard";
             this.panelCard.Padding = new System.Windows.Forms.Padding(38, 34, 38, 34);
-            this.panelCard.Size = new System.Drawing.Size(360, 420);
+            this.panelCard.Size = new System.Drawing.Size(350, 420);
             this.panelCard.TabIndex = 0;
             // 
             // btnExitApplication
@@ -263,7 +263,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(860, 540);
+            this.ClientSize = new System.Drawing.Size(838, 540);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelBrand);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

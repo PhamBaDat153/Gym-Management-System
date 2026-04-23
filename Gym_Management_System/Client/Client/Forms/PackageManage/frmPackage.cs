@@ -21,6 +21,36 @@ namespace Client.Forms.PackageManage
             InitializeComponent();
         }
 
+        private bool PackageNameExists(string packageName, Guid? excludePackageId = null)
+        {
+            if (string.IsNullOrWhiteSpace(packageName)) return false;
+
+            try
+            {
+                using (var conn = GymManagementSystemContext.Connect())
+                using (var cmd = conn.CreateCommand())
+                {
+                    // Compare trimmed values to avoid duplicates that differ only by spaces
+                    cmd.CommandText =
+                        "SELECT COUNT(1) FROM dbo.Package " +
+                        "WHERE LTRIM(RTRIM(package_name)) = @name " +
+                        (excludePackageId.HasValue ? "AND package_id <> @excludeId" : "");
+
+                    cmd.Parameters.AddWithValue("@name", packageName.Trim());
+                    if (excludePackageId.HasValue)
+                        cmd.Parameters.AddWithValue("@excludeId", excludePackageId.Value);
+
+                    conn.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+            catch
+            {
+                // If DB check fails, do not block user here; DB-level unique constraint (if present) will still protect
+                return false;
+            }
+        }
+
         // Determine with_trainer filter from either radio buttons or checkboxes
         private bool? GetWithTrainerFilter()
         {
@@ -335,6 +365,12 @@ namespace Client.Forms.PackageManage
                 return;
             }
 
+            if (PackageNameExists(name))
+            {
+                MessageBox.Show("Tên gói tập đã tồn tại. Vui lòng nhập tên khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!int.TryParse(txtbox_duration.Text.Trim(), out int duration))
             {
                 MessageBox.Show("Thời hạn không hợp lệ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -398,6 +434,12 @@ namespace Client.Forms.PackageManage
             if (string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("Vui lòng nhập tên gói tập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (PackageNameExists(name, excludePackageId: selectedId))
+            {
+                MessageBox.Show("Tên gói tập đã tồn tại. Vui lòng nhập tên khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
