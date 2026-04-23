@@ -43,6 +43,7 @@
             this.mem_new = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mem_loss = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mem_age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mem_package_days = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mem_gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mem_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chart_report = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -55,6 +56,7 @@
             this.lbl_to = new System.Windows.Forms.Label();
             this.lbl_from = new System.Windows.Forms.Label();
             this.lbl_search_title = new System.Windows.Forms.Label();
+            this.chk_yearly_aggregate = new System.Windows.Forms.CheckBox();
             this.tab_info = new System.Windows.Forms.TabPage();
             this.panel_info_body = new System.Windows.Forms.Panel();
             this.groupBox_revenue = new System.Windows.Forms.GroupBox();
@@ -133,8 +135,8 @@
             this.btn_export.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(167)))), ((int)(((byte)(206)))));
             this.btn_export.FlatAppearance.BorderSize = 0;
             this.btn_export.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_export.ForeColor = System.Drawing.Color.White;
             this.btn_export.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btn_export.ForeColor = System.Drawing.Color.White;
             this.btn_export.Location = new System.Drawing.Point(1358, 8);
             this.btn_export.Name = "btn_export";
             this.btn_export.Size = new System.Drawing.Size(196, 34);
@@ -210,6 +212,7 @@
             this.dgv_revenue.AllowUserToAddRows = false;
             this.dgv_revenue.AllowUserToDeleteRows = false;
             this.dgv_revenue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_revenue.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
@@ -218,7 +221,6 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_revenue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_revenue.BackgroundColor = System.Drawing.Color.White;
             this.dgv_revenue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_revenue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.rev_report_id,
@@ -304,6 +306,7 @@
             this.dgv_member.AllowUserToAddRows = false;
             this.dgv_member.AllowUserToDeleteRows = false;
             this.dgv_member.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_member.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
@@ -312,7 +315,6 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_member.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgv_member.BackgroundColor = System.Drawing.Color.White;
             this.dgv_member.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_member.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mem_report_id,
@@ -320,6 +322,7 @@
             this.mem_new,
             this.mem_loss,
             this.mem_age,
+            this.mem_package_days,
             this.mem_gender,
             this.mem_date});
             this.dgv_member.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -370,6 +373,13 @@
             this.mem_age.Name = "mem_age";
             this.mem_age.ReadOnly = true;
             // 
+            // mem_package_days
+            // 
+            this.mem_package_days.HeaderText = "Thời hạn gói (ngày)";
+            this.mem_package_days.MinimumWidth = 130;
+            this.mem_package_days.Name = "mem_package_days";
+            this.mem_package_days.ReadOnly = true;
+            // 
             // mem_gender
             // 
             this.mem_gender.HeaderText = "Giới tính chủ yếu";
@@ -388,7 +398,6 @@
             // 
             chartArea1.Name = "MainArea";
             this.chart_report.ChartAreas.Add(chartArea1);
-            this.chart_report.BackColor = System.Drawing.Color.White;
             this.chart_report.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chart_report.Legends.Add(legend1);
@@ -413,6 +422,7 @@
             // 
             // tab_search
             // 
+            this.tab_search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tab_search.Controls.Add(this.btn_refresh);
             this.tab_search.Controls.Add(this.btn_find);
             this.tab_search.Controls.Add(this.dtp_to);
@@ -420,13 +430,13 @@
             this.tab_search.Controls.Add(this.lbl_to);
             this.tab_search.Controls.Add(this.lbl_from);
             this.tab_search.Controls.Add(this.lbl_search_title);
+            this.tab_search.Controls.Add(this.chk_yearly_aggregate);
             this.tab_search.Location = new System.Drawing.Point(4, 32);
             this.tab_search.Name = "tab_search";
             this.tab_search.Padding = new System.Windows.Forms.Padding(4);
             this.tab_search.Size = new System.Drawing.Size(774, 325);
             this.tab_search.TabIndex = 0;
             this.tab_search.Text = "Tìm kiếm";
-            this.tab_search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tab_search.UseVisualStyleBackColor = true;
             // 
             // btn_refresh
@@ -466,7 +476,7 @@
             this.dtp_to.CustomFormat = "yyyy";
             this.dtp_to.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtp_to.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_to.Location = new System.Drawing.Point(147, 130);
+            this.dtp_to.Location = new System.Drawing.Point(95, 129);
             this.dtp_to.Name = "dtp_to";
             this.dtp_to.ShowUpDown = true;
             this.dtp_to.Size = new System.Drawing.Size(180, 30);
@@ -477,7 +487,7 @@
             this.dtp_from.CustomFormat = "MM";
             this.dtp_from.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtp_from.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_from.Location = new System.Drawing.Point(147, 82);
+            this.dtp_from.Location = new System.Drawing.Point(95, 81);
             this.dtp_from.Name = "dtp_from";
             this.dtp_from.ShowUpDown = true;
             this.dtp_from.Size = new System.Drawing.Size(120, 30);
@@ -513,17 +523,29 @@
             this.lbl_search_title.TabIndex = 0;
             this.lbl_search_title.Text = "Lọc theo kỳ báo cáo";
             // 
+            // chk_yearly_aggregate
+            // 
+            this.chk_yearly_aggregate.AutoSize = true;
+            this.chk_yearly_aggregate.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.chk_yearly_aggregate.Location = new System.Drawing.Point(221, 81);
+            this.chk_yearly_aggregate.Name = "chk_yearly_aggregate";
+            this.chk_yearly_aggregate.Size = new System.Drawing.Size(185, 27);
+            this.chk_yearly_aggregate.TabIndex = 7;
+            this.chk_yearly_aggregate.Text = "Tổng hợp theo năm";
+            this.chk_yearly_aggregate.UseVisualStyleBackColor = true;
+            this.chk_yearly_aggregate.CheckedChanged += new System.EventHandler(this.chk_yearly_aggregate_CheckedChanged);
+            // 
             // tab_info
             // 
+            this.tab_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tab_info.Controls.Add(this.panel_info_body);
             this.tab_info.Controls.Add(this.panel_btns);
             this.tab_info.Location = new System.Drawing.Point(4, 32);
             this.tab_info.Name = "tab_info";
             this.tab_info.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_info.Size = new System.Drawing.Size(775, 325);
+            this.tab_info.Size = new System.Drawing.Size(774, 325);
             this.tab_info.TabIndex = 1;
             this.tab_info.Text = "Thông tin";
-            this.tab_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.tab_info.UseVisualStyleBackColor = true;
             // 
             // panel_info_body
@@ -533,13 +555,12 @@
             this.panel_info_body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_info_body.Location = new System.Drawing.Point(4, 4);
             this.panel_info_body.Name = "panel_info_body";
-            this.panel_info_body.Size = new System.Drawing.Size(767, 261);
+            this.panel_info_body.Size = new System.Drawing.Size(766, 261);
             this.panel_info_body.TabIndex = 3;
             // 
             // groupBox_revenue
             // 
             this.groupBox_revenue.BackColor = System.Drawing.Color.White;
-            this.groupBox_revenue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox_revenue.Controls.Add(this.dtp_rev_date);
             this.groupBox_revenue.Controls.Add(this.txt_rev_profit);
             this.groupBox_revenue.Controls.Add(this.txt_rev_cost);
@@ -556,9 +577,10 @@
             this.groupBox_revenue.Controls.Add(this.lbl_rev_best);
             this.groupBox_revenue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_revenue.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
+            this.groupBox_revenue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox_revenue.Location = new System.Drawing.Point(0, 0);
             this.groupBox_revenue.Name = "groupBox_revenue";
-            this.groupBox_revenue.Size = new System.Drawing.Size(767, 261);
+            this.groupBox_revenue.Size = new System.Drawing.Size(766, 261);
             this.groupBox_revenue.TabIndex = 1;
             this.groupBox_revenue.TabStop = false;
             this.groupBox_revenue.Text = "Báo cáo doanh thu (Revenue Report)";
@@ -694,7 +716,6 @@
             // groupBox_member
             // 
             this.groupBox_member.BackColor = System.Drawing.Color.White;
-            this.groupBox_member.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox_member.Controls.Add(this.grp_gender_common);
             this.groupBox_member.Controls.Add(this.dtp_mem_date);
             this.groupBox_member.Controls.Add(this.txt_mem_avg_age);
@@ -708,9 +729,10 @@
             this.groupBox_member.Controls.Add(this.lbl_mem_total);
             this.groupBox_member.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_member.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
+            this.groupBox_member.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(108)))), ((int)(((byte)(148)))));
             this.groupBox_member.Location = new System.Drawing.Point(0, 0);
             this.groupBox_member.Name = "groupBox_member";
-            this.groupBox_member.Size = new System.Drawing.Size(767, 261);
+            this.groupBox_member.Size = new System.Drawing.Size(766, 261);
             this.groupBox_member.TabIndex = 0;
             this.groupBox_member.TabStop = false;
             this.groupBox_member.Text = "Báo cáo hội viên (MemberReport)";
@@ -849,7 +871,7 @@
             this.panel_btns.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_btns.Location = new System.Drawing.Point(4, 265);
             this.panel_btns.Name = "panel_btns";
-            this.panel_btns.Size = new System.Drawing.Size(767, 56);
+            this.panel_btns.Size = new System.Drawing.Size(766, 56);
             this.panel_btns.TabIndex = 2;
             // 
             // btn_del
@@ -859,7 +881,7 @@
             this.btn_del.FlatAppearance.BorderSize = 0;
             this.btn_del.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_del.ForeColor = System.Drawing.Color.White;
-            this.btn_del.Location = new System.Drawing.Point(571, 9);
+            this.btn_del.Location = new System.Drawing.Point(570, 9);
             this.btn_del.Name = "btn_del";
             this.btn_del.Size = new System.Drawing.Size(180, 38);
             this.btn_del.TabIndex = 2;
@@ -874,7 +896,7 @@
             this.btn_renew.FlatAppearance.BorderSize = 0;
             this.btn_renew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_renew.ForeColor = System.Drawing.Color.White;
-            this.btn_renew.Location = new System.Drawing.Point(375, 9);
+            this.btn_renew.Location = new System.Drawing.Point(374, 9);
             this.btn_renew.Name = "btn_renew";
             this.btn_renew.Size = new System.Drawing.Size(180, 38);
             this.btn_renew.TabIndex = 1;
@@ -889,7 +911,7 @@
             this.btn_add.FlatAppearance.BorderSize = 0;
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add.ForeColor = System.Drawing.Color.White;
-            this.btn_add.Location = new System.Drawing.Point(179, 9);
+            this.btn_add.Location = new System.Drawing.Point(178, 9);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(180, 38);
             this.btn_add.TabIndex = 0;
@@ -981,6 +1003,7 @@
         private System.Windows.Forms.Label lbl_to;
         private System.Windows.Forms.Label lbl_from;
         private System.Windows.Forms.Label lbl_search_title;
+        private System.Windows.Forms.CheckBox chk_yearly_aggregate;
         private System.Windows.Forms.SplitContainer splitContainer_bottom;
         private System.Windows.Forms.Panel panel_btns;
         private System.Windows.Forms.Button btn_del;
@@ -1020,6 +1043,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn mem_new;
         private System.Windows.Forms.DataGridViewTextBoxColumn mem_loss;
         private System.Windows.Forms.DataGridViewTextBoxColumn mem_age;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mem_package_days;
         private System.Windows.Forms.DataGridViewTextBoxColumn mem_gender;
         private System.Windows.Forms.DataGridViewTextBoxColumn mem_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn rev_report_id;
