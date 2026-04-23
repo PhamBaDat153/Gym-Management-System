@@ -101,7 +101,10 @@ namespace Client.Forms.ScheduleManage
 
                 // Filter Member combo
                 using (SqlDataAdapter da = new SqlDataAdapter(
-                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
+                    "SELECT member_id, member_name " +
+                    "FROM dbo.Member " +
+                    "WHERE is_active = 1 AND is_expired = 0 AND remaining_duration > 0 AND has_trainer = 1 " +
+                    "ORDER BY member_name", conn))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -152,7 +155,10 @@ namespace Client.Forms.ScheduleManage
             using (SqlConnection conn = GymManagementSystemContext.Connect())
             {
                 using (SqlDataAdapter da = new SqlDataAdapter(
-                    "SELECT member_id, member_name FROM Member ORDER BY member_name", conn))
+                    "SELECT member_id, member_name " +
+                    "FROM dbo.Member " +
+                    "WHERE is_active = 1 AND is_expired = 0 AND remaining_duration > 0 AND has_trainer = 1 " +
+                    "ORDER BY member_name", conn))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -548,6 +554,13 @@ namespace Client.Forms.ScheduleManage
                 return false;
             }
 
+            if (!IsSelectedMemberEligible())
+            {
+                MessageBox.Show("Hội viên đã chọn không còn hợp lệ (hết hạn / ngưng hoạt động / không có gói kèm HLV). Vui lòng chọn hội viên khác.");
+                LoadMemberCombo();
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(txtTime.Text) ||
                 string.IsNullOrWhiteSpace(txtEndTime.Text))
             {
@@ -575,6 +588,45 @@ namespace Client.Forms.ScheduleManage
             }
 
             return true;
+        }
+
+        private bool IsSelectedMemberEligible()
+        {
+            try
+            {
+                if (cmbMember.SelectedValue == null || cmbMember.SelectedValue == DBNull.Value)
+                {
+                    return false;
+                }
+
+                Guid memberId;
+                if (cmbMember.SelectedValue is Guid g)
+                {
+                    memberId = g;
+                }
+                else if (!Guid.TryParse(cmbMember.SelectedValue.ToString(), out memberId))
+                {
+                    return false;
+                }
+
+                using (SqlConnection conn = GymManagementSystemContext.Connect())
+                using (SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(1) " +
+                    "FROM dbo.Member " +
+                    "WHERE member_id = @id " +
+                    "AND is_active = 1 AND is_expired = 0 AND remaining_duration > 0 AND has_trainer = 1",
+                    conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", memberId);
+                    conn.Open();
+                    int ok = Convert.ToInt32(cmd.ExecuteScalar());
+                    return ok == 1;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

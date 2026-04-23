@@ -426,7 +426,7 @@ FROM dbo.Member m;
                 { "remaining_duration", "Ngày còn lại" },
                 { "register_date", "Ngày đăng ký" },
                 { "has_trainer_display", "HLV kèm" },
-                { "expired_display", "Hết hạn" },
+                { "expired_display", "Trạng thái" },
                 { "active_display", "Hoạt động" }
             };
 
